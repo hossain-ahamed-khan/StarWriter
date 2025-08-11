@@ -5,7 +5,7 @@ import mainLogo from '@/resources/images/main-logo.png'
 export const Navbar = () => {
     return (
         <div className='w-full bg-[#010006] py-4'>
-            <div className='w-1/2 mx-auto flex items-center justify-between border border-[#3B3131] px-8 py-2 rounded-full [&>button]:text-xs'>
+            <div className='w-1/2 mx-auto flex items-center justify-between border border-[#3B3131] px-8 py-4 rounded-full [&>button]:text-xs'>
                 <div>
                     <Image
                         src={mainLogo}
