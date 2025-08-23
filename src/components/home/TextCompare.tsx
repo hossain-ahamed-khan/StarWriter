@@ -25,7 +25,7 @@ export const TextCompare = () => {
                             </div>
                             <p className='text-[#F35555] px-4 py-1 bg-[#FFFFFF1A] border border-[#524F4F] rounded-full'>100% Al</p>
                         </div>
-                        <div className='h-[420px] bg-black border border-[#524F4F] rounded-2xl p-4'>
+                        <div className='h-[420px] bg-black border border-[#524F4F] rounded-2xl p-8'>
                             <p>Becoming successful in life requires setting clear goals, maintaining a strong work ethic, and continuously learning from experiences. It is important to stay focused and motivated, even when faced with challenges or setbacks. Building good habits, such as time management and effective communication, can help you make steady progress toward your objectives. Surrounding yourself with supportive and positive people also plays a crucial role in personal growth. Ultimately, success comes from perseverance, adaptability, and a willingness to keep improving yourself over time.</p>
                         </div>
                         <div className='flex gap-8'>
@@ -47,7 +47,7 @@ export const TextCompare = () => {
                             </div>
                             <p className='text-[#51E688] px-4 py-1 bg-[#FFFFFF1A] border border-[#524F4F] rounded-full'>1% Al</p>
                         </div>
-                        <div className='h-[420px] bg-black border border-[#524F4F] rounded-2xl p-4'>
+                        <div className='h-[420px] bg-black border border-[#524F4F] rounded-2xl p-8'>
                             <p>Achieving success in life involves establishing clear goals, upholding a strong work ethic, and consistently learning from your experiences. Staying focused and motivated is essential, especially when encountering obstacles or setbacks. Developing positive habits like managing your time well and communicating effectively can help you steadily move toward your goals. Additionally, having supportive and positive people around you is vital for personal growth. In the end, success is the result of perseverance, adaptability, and a continuous commitment to self-improvement.</p>
                         </div>
                     </div>

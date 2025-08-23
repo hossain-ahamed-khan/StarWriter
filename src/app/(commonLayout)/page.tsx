@@ -1,14 +1,15 @@
 import { Hero } from "@/components/home/Hero";
 import { Platforms } from "@/components/home/Platforms";
 import { TextCompare } from "@/components/home/TextCompare";
-import { Navbar } from "@/components/shared/Navbar";
+import { WhyChoose } from "@/components/home/WhyChoose";
 
 const App = () => {
   return (
-    <div>
+    <div className="bg-[#020107]">
       <Hero />
       <Platforms />
       <TextCompare />
+      <WhyChoose />
     </div>
   );
 };

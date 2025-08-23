@@ -1,0 +1,61 @@
+import { RiPoliceBadgeLine } from "react-icons/ri";
+import { PiShootingStarThin } from "react-icons/pi";
+import { MdOutlineLock } from "react-icons/md";
+import { BiBrain } from "react-icons/bi";
+import { GoClock } from "react-icons/go";
+
+export const WhyChoose = () => {
+    return (
+        <div className="w-full">
+            <div className="w-4/5 mx-auto pb-8">
+                <div className="pb-8">
+                    <h1 className="text-5xl font-bold pb-4">Why Choose our ai Humanizer?</h1>
+                    <p className="text-[#676665] text-lg">Discover what makes us stand out from robotic rewriters — crafted for clarity, tone, and real human connection.</p>
+                </div>
+                <div className="flex gap-4">
+                    <div className="w-2/5 space-y-4">
+                        <div className="border border-[#7B7B7B] rounded-md p-2">
+                            <div className="border border-[#7B7B7B] rounded-md p-4">
+                                <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><RiPoliceBadgeLine /></div>
+                                <h2 className="text-2xl font-bold my-4">Academic Integrity Safe</h2>
+                                <p className="text-xs">Transform AI-generated drafts into polished academic content while maintaining ethical guidelines and original ideas.</p>
+                            </div>
+                        </div>
+                        <div className="border border-[#7B7B7B] rounded-md p-2">
+                            <div className="border border-[#7B7B7B] rounded-md p-4">
+                                <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><PiShootingStarThin /></div>
+                                <h2 className="text-2xl font-bold my-4">Semantic Pattern Randomization</h2>
+                                <p className="text-xs">Our Al Tuumanizer boaks Al pattams while preserving meaning, malong content completely undetectable by all detection took</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-1/5 border border-[#7B7B7B] rounded-md p-2">
+                        <div className="h-full border border-[#7B7B7B] rounded-md p-4 flex flex-col justify-between">
+                            <div className="border border-[#7B7B7B] rounded-md p-1 block w-6.5"><MdOutlineLock /></div>
+                            <div>
+                                <h2 className="text-2xl font-bold my-4">99.9% Bypass Success Rate</h2>
+                                <p className="text-xs">Transform AI-generated drafts into polished academic content while maintaining ethical guidelines and original ideas.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-2/5 space-y-4">
+                        <div className="border border-[#7B7B7B] rounded-md p-2">
+                            <div className="border border-[#7B7B7B] rounded-md p-4">
+                                <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><BiBrain /></div>
+                                <h2 className="text-2xl font-bold my-4">Human-like Variability</h2>
+                                <p className="text-xs">We introduce natural inconsistencies in writing style Uhat mimit, authentic humant writing <br /> patterns</p>
+                            </div>
+                        </div>
+                        <div className="border border-[#7B7B7B] rounded-md p-2">
+                            <div className="border border-[#7B7B7B] rounded-md p-4">
+                                <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><GoClock /></div>
+                                <h2 className="text-2xl font-bold my-4">Lightning-Fast Processing</h2>
+                                <p className="text-xs">Procese thousands of words in seconds with our optimized Al humanizing technology, saving you time and effort.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
