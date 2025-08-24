@@ -1,0 +1,2 @@
+// framer-motion is required for smooth and attractive mouse-following animation
+// Install with: npm install framer-motion
