@@ -20,7 +20,7 @@ export const Platforms = () => {
         <div data-aos="fade-down"
             data-aos-easing="linear"
             data-aos-duration="1500">
-            <div className="relative bg-gradient-to-r from-[#1a1e2e]/30 via-[#1f2134]/20 to-[#23243a]/0 py-12 px-2 md:px-8 overflow-hidden">
+            <div className="relative bg-[#010006] py-12 px-2 md:px-8 overflow-hidden">
                 {/* Soft blurred accent background for extra depth */}
                 <div className="absolute -top-24 -left-24 w-96 h-96 blur-3xl opacity-70 pointer-events-none z-0"></div>
                 <div className="absolute -bottom-24 -right-24 w-96 h-96 opacity-70 pointer-events-none z-0"></div>

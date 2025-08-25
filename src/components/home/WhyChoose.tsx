@@ -1,12 +1,22 @@
 import { RiPoliceBadgeLine } from "react-icons/ri";
 import { PiShootingStarThin } from "react-icons/pi";
+import circleBg from "../../../public/resources/images/circle-bg.png";
 import { MdOutlineLock } from "react-icons/md";
 import { BiBrain } from "react-icons/bi";
 import { GoClock } from "react-icons/go";
+import Image from "next/image";
 
 export const WhyChoose = () => {
     return (
-        <div className="w-full">
+        <div className="w-full relative">
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src={circleBg}
+                    fill
+                    alt="circle background"
+                    className="object-center"
+                />
+            </div>
             <div className="w-4/5 mx-auto pb-8">
                 <div className="pb-8">
                     <h1 className="text-5xl font-bold pb-4">Why Choose our ai Humanizer?</h1>
@@ -14,18 +24,22 @@ export const WhyChoose = () => {
                 </div>
                 <div className="flex gap-4">
                     <div className="w-2/5 space-y-4">
-                        <div className="border border-[#7B7B7B] rounded-md p-2">
-                            <div className="border border-[#7B7B7B] rounded-md p-4">
-                                <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><RiPoliceBadgeLine /></div>
-                                <h2 className="text-2xl font-bold my-4">Academic Integrity Safe</h2>
-                                <p className="text-xs">Transform AI-generated drafts into polished academic content while maintaining ethical guidelines and original ideas.</p>
+                        <div data-aos="fade-down-right">
+                            <div className="border border-[#7B7B7B] rounded-md p-2">
+                                <div className="border border-[#7B7B7B] rounded-md p-4">
+                                    <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><RiPoliceBadgeLine /></div>
+                                    <h2 className="text-2xl font-bold my-4">Academic Integrity Safe</h2>
+                                    <p className="text-xs">Transform AI-generated drafts into polished academic content while maintaining ethical guidelines and original ideas.</p>
+                                </div>
                             </div>
                         </div>
-                        <div className="border border-[#7B7B7B] rounded-md p-2">
-                            <div className="border border-[#7B7B7B] rounded-md p-4">
-                                <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><PiShootingStarThin /></div>
-                                <h2 className="text-2xl font-bold my-4">Semantic Pattern Randomization</h2>
-                                <p className="text-xs">Our Al Tuumanizer boaks Al pattams while preserving meaning, malong content completely undetectable by all detection took</p>
+                        <div data-aos="fade-up-right">
+                            <div className="border border-[#7B7B7B] rounded-md p-2">
+                                <div className="border border-[#7B7B7B] rounded-md p-4">
+                                    <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><PiShootingStarThin /></div>
+                                    <h2 className="text-2xl font-bold my-4">Semantic Pattern Randomization</h2>
+                                    <p className="text-xs">Our AI Tuumanizer boaks Al pattams while preserving meaning, malong content completely undetectable by all detection took</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -39,18 +53,22 @@ export const WhyChoose = () => {
                         </div>
                     </div>
                     <div className="w-2/5 space-y-4">
-                        <div className="border border-[#7B7B7B] rounded-md p-2">
-                            <div className="border border-[#7B7B7B] rounded-md p-4">
-                                <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><BiBrain /></div>
-                                <h2 className="text-2xl font-bold my-4">Human-like Variability</h2>
-                                <p className="text-xs">We introduce natural inconsistencies in writing style Uhat mimit, authentic humant writing <br /> patterns</p>
+                        <div data-aos="fade-down-left">
+                            <div className="border border-[#7B7B7B] rounded-md p-2">
+                                <div className="border border-[#7B7B7B] rounded-md p-4">
+                                    <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><BiBrain /></div>
+                                    <h2 className="text-2xl font-bold my-4">Human-like Variability</h2>
+                                    <p className="text-xs">We introduce natural inconsistencies in writing style Uhat mimit, authentic humant writing <br /> patterns</p>
+                                </div>
                             </div>
                         </div>
-                        <div className="border border-[#7B7B7B] rounded-md p-2">
-                            <div className="border border-[#7B7B7B] rounded-md p-4">
-                                <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><GoClock /></div>
-                                <h2 className="text-2xl font-bold my-4">Lightning-Fast Processing</h2>
-                                <p className="text-xs">Procese thousands of words in seconds with our optimized Al humanizing technology, saving you time and effort.</p>
+                        <div data-aos="fade-up-left">
+                            <div className="border border-[#7B7B7B] rounded-md p-2">
+                                <div className="border border-[#7B7B7B] rounded-md p-4">
+                                    <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><GoClock /></div>
+                                    <h2 className="text-2xl font-bold my-4">Lightning-Fast Processing</h2>
+                                    <p className="text-xs">Procese thousands of words in seconds with our optimized Al humanizing technology, saving you time and effort.</p>
+                                </div>
                             </div>
                         </div>
                     </div>

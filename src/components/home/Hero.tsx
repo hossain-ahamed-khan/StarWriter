@@ -1,9 +1,6 @@
 "use client";
-
 import Image from "next/image";
 import { BsStars } from "react-icons/bs";
-import { motion } from "framer-motion";
-import { JSX, useEffect, useState } from "react";
 
 import gridBg from "../../../public/resources/images/grid-bg.png";
 import mainLogo from "../../../public/resources/images/main-logo.png";
@@ -12,56 +9,10 @@ import circleBg from "../../../public/resources/images/circle-bg.png";
 import thunder from "../../../public/resources/images/thunder.png";
 import greenLeaf from "../../../public/resources/images/green-leaf.png";
 
-// Generate stars client-side only
-const useStars = (count = 30) => {
-    const [stars, setStars] = useState<JSX.Element[]>([]);
-
-    useEffect(() => {
-        const generated = Array.from({ length: count }).map((_, i) => {
-            const left = Math.random() * 100;
-            const size = Math.random() * 2 + 1.5;
-            const duration = Math.random() * 2 + 4.5;
-            const delay = Math.random() * 3;
-            const opacity = Math.random() * 0.5 + 0.5;
-
-            return (
-                <motion.span
-                    key={i}
-                    initial={{ y: -40, opacity: 0 }}
-                    animate={{ y: "110vh", opacity: [0, opacity, 0] }}
-                    transition={{
-                        duration,
-                        delay,
-                        repeat: Infinity,
-                        repeatType: "loop",
-                        ease: "easeInOut",
-                    }}
-                    style={{
-                        left: `${left}%`,
-                        width: size,
-                        height: size * 4,
-                        opacity,
-                    }}
-                    className="absolute top-0 bg-gradient-to-b from-white/90 to-blue-300/0 rounded-full pointer-events-none shadow-lg"
-                />
-            );
-        });
-
-        setStars(generated);
-    }, [count]);
-
-    return stars;
-};
 
 export const Hero = () => {
-    const stars = useStars(40);
-
     return (
-        <div className="relative h-[920px] flex flex-col justify-center items-center overflow-hidden bg-gradient-to-br from-[#0a0f1a] via-[#1a1e2e] to-[#23243a] dark:bg-gradient-to-br dark:from-[#0a0f1a] dark:via-[#1a1e2e] dark:to-[#23243a]">
-            {/* Animated Falling Stars */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none z-10">
-                {stars}
-            </div>
+        <div className="relative h-[840px] flex flex-col justify-center items-center overflow-hidden bg-[#010006]">
 
             {/* Background Images */}
             <div className="absolute inset-0 z-0">
@@ -124,7 +75,7 @@ export const Hero = () => {
                     />
                 </div>
 
-                <p className="mt-8 mb-4 text-lg md:text-xl text-[#b7d6ef] font-medium drop-shadow-[0_2px_8px_rgba(183,214,239,0.2)]">
+                <p className="mt-8 mb-4 text-lg md:text-xl text-white font-medium drop-shadow-[0_2px_8px_rgba(183,214,239,0.2)]">
                     Level Up Your Writing with{" "}
                     <span className="text-[#8ca6db]">Undetectable AI Text</span> and{" "}
                     <span className="text-[#b993d6]">High-Quality Grammar</span> — Built
@@ -145,7 +96,7 @@ export const Hero = () => {
                 </div>
 
                 <div>
-                    <button className="flex gap-2 items-center mt-24 px-10 py-4 rounded-full bg-gradient-to-r from-[#b993d6] via-[#8ca6db] to-[#2e335a] border-4 border-[#8ca6db] shadow-2xl hover:scale-105 hover:shadow-[0_0_32px_8px_rgba(137,166,219,0.3)] transition-transform duration-300 text-lg font-bold text-white tracking-wide">
+                    <button className="flex gap-2 items-center mt-28 px-10 py-4 rounded-full bg-gradient-to-r from-[#b993d6] via-[#8ca6db] to-[#2e335a] border-4 border-[#8ca6db] shadow-2xl hover:scale-105 hover:shadow-[0_0_32px_8px_rgba(137,166,219,0.3)] transition-transform duration-300 text-lg font-bold text-white tracking-wide">
                         <BsStars className="text-[#f9fafb] drop-shadow-[0_2px_8px_rgba(202,169,211,0.5)]" />
                         Try Me, I'm Free
                     </button>

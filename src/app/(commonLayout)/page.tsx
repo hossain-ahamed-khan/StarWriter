@@ -28,7 +28,7 @@ const App = () => {
 
   return (
     <div
-      className="bg-gradient-to-b from-[#23243a] via-[#1a1e2e] to-[#0a1026] relative overflow-hidden min-h-screen"
+      className="bg-[#010006] relative overflow-hidden min-h-screen"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >

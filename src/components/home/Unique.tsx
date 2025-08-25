@@ -43,7 +43,7 @@ export const Unique = () => {
                     </div>
                 </div>
                 <div className="flex-1">
-                    <div className="p-8 border border-[#343434] rounded-md bg-black">
+                    <div className="p-8 border border-[#343434] rounded-md bg-[#010006]">
                         <p>Unlike simple paraphrasers or tone changers, our Humanizer goes deeper. It understands the emotion, intent, and natural flow of human language — transforming robotic or AI-generated text into something that sounds like it was written by a real person. Whether it's for emails, blogs, or social media captions, we make sure your words feel authentic, relatable, and truly human.</p>
                         <button className="w-full mt-8 py-2 text-white bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF]">Unlock The Magic!</button>
                     </div>
