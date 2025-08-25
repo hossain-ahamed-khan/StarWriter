@@ -1,0 +1,38 @@
+/* WhyChoose Spotlight & Gradient Border Effects */
+
+.whychoose-card {
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.3s, border 0.3s;
+    z-index: 1;
+}
+
+
+
+.whychoose-card {
+    border: 2px solid #7B7B7B;
+    border-radius: 1rem;
+    background-clip: padding-box;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+
+.whychoose-card:hover {
+    border: 2px solid transparent;
+    box-shadow: 0 8px 32px 0 rgba(0, 255, 200, 0.10), 0 1.5px 16px 0 rgba(127, 95, 255, 0.10);
+}
+
+.whychoose-card .icon-glow {
+    transition: box-shadow 0.3s;
+}
+
+.whychoose-card:hover .icon-glow {
+    box-shadow: 0 0 24px 6px #00ffd0, 0 0 48px 12px #7f5fff66;
+}
+
+@media (max-width: 900px) {
+    .whychoose-card::before {
+        width: 200px !important;
+        height: 200px !important;
+    }
+}

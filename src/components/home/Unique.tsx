@@ -5,7 +5,7 @@ import colorfulRing from '../../../public/resources/images/color-ring.png';
 
 export const Unique = () => {
     return (
-        <div className="w-4/5 mx-auto h-[320px] flex flex-col justify-center items-center relative overflow-hidden mt-24">
+        <div className="w-4/5 mx-auto h-[320px] flex flex-col justify-center items-center relative overflow-hidden my-36">
             {/* Background Images - Layered */}
             <div className="absolute inset-0">
                 <Image

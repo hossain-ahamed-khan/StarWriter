@@ -5,6 +5,7 @@ import { MdOutlineLock } from "react-icons/md";
 import { BiBrain } from "react-icons/bi";
 import { GoClock } from "react-icons/go";
 import Image from "next/image";
+import styles from "./WhyChoose.module.css";
 
 export const WhyChoose = () => {
     return (
@@ -25,27 +26,27 @@ export const WhyChoose = () => {
                 <div className="flex gap-4">
                     <div className="w-2/5 space-y-4">
                         <div data-aos="fade-down-right">
-                            <div className="border border-[#7B7B7B] rounded-md p-2">
-                                <div className="border border-[#7B7B7B] rounded-md p-4">
-                                    <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><RiPoliceBadgeLine /></div>
+                            <div className={styles["whychoose-card"] + " p-2"}>
+                                <div className={styles["whychoose-card"] + " p-4"}>
+                                    <div className={styles["icon-glow"] + " inline-block p-1"}><RiPoliceBadgeLine /></div>
                                     <h2 className="text-2xl font-bold my-4">Academic Integrity Safe</h2>
                                     <p className="text-xs">Transform AI-generated drafts into polished academic content while maintaining ethical guidelines and original ideas.</p>
                                 </div>
                             </div>
                         </div>
                         <div data-aos="fade-up-right">
-                            <div className="border border-[#7B7B7B] rounded-md p-2">
-                                <div className="border border-[#7B7B7B] rounded-md p-4">
-                                    <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><PiShootingStarThin /></div>
+                            <div className={styles["whychoose-card"] + " p-2"}>
+                                <div className={styles["whychoose-card"] + " p-4"}>
+                                    <div className={styles["icon-glow"] + " inline-block p-1"}><PiShootingStarThin /></div>
                                     <h2 className="text-2xl font-bold my-4">Semantic Pattern Randomization</h2>
                                     <p className="text-xs">Our AI Tuumanizer boaks Al pattams while preserving meaning, malong content completely undetectable by all detection took</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="w-1/5 border border-[#7B7B7B] rounded-md p-2">
-                        <div className="h-full border border-[#7B7B7B] rounded-md p-4 flex flex-col justify-between">
-                            <div className="border border-[#7B7B7B] rounded-md p-1 block w-6.5"><MdOutlineLock /></div>
+                    <div className={"w-1/5 " + styles["whychoose-card"] + " p-2"}>
+                        <div className={styles["whychoose-card"] + " h-full p-4 flex flex-col justify-between"}>
+                            <div className={styles["icon-glow"] + " block w-6.5 p-1"}><MdOutlineLock /></div>
                             <div>
                                 <h2 className="text-2xl font-bold my-4">99.9% Bypass Success Rate</h2>
                                 <p className="text-xs">Transform AI-generated drafts into polished academic content while maintaining ethical guidelines and original ideas.</p>
@@ -54,18 +55,18 @@ export const WhyChoose = () => {
                     </div>
                     <div className="w-2/5 space-y-4">
                         <div data-aos="fade-down-left">
-                            <div className="border border-[#7B7B7B] rounded-md p-2">
-                                <div className="border border-[#7B7B7B] rounded-md p-4">
-                                    <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><BiBrain /></div>
+                            <div className={styles["whychoose-card"] + " p-2"}>
+                                <div className={styles["whychoose-card"] + " p-4"}>
+                                    <div className={styles["icon-glow"] + " inline-block p-1"}><BiBrain /></div>
                                     <h2 className="text-2xl font-bold my-4">Human-like Variability</h2>
                                     <p className="text-xs">We introduce natural inconsistencies in writing style Uhat mimit, authentic humant writing <br /> patterns</p>
                                 </div>
                             </div>
                         </div>
                         <div data-aos="fade-up-left">
-                            <div className="border border-[#7B7B7B] rounded-md p-2">
-                                <div className="border border-[#7B7B7B] rounded-md p-4">
-                                    <div className="border border-[#7B7B7B] rounded-md inline-block p-1"><GoClock /></div>
+                            <div className={styles["whychoose-card"] + " p-2"}>
+                                <div className={styles["whychoose-card"] + " p-4"}>
+                                    <div className={styles["icon-glow"] + " inline-block p-1"}><GoClock /></div>
                                     <h2 className="text-2xl font-bold my-4">Lightning-Fast Processing</h2>
                                     <p className="text-xs">Procese thousands of words in seconds with our optimized Al humanizing technology, saving you time and effort.</p>
                                 </div>
