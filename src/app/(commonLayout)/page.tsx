@@ -9,6 +9,7 @@ import { WhyChoose } from "@/components/home/WhyChoose";
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { BsStars } from "react-icons/bs";
+import { Agnostic } from "@/components/home/Agnostic";
 
 
 const App = () => {
@@ -84,6 +85,7 @@ const App = () => {
       <TextCompare />
       <WhyChoose />
       <Unique />
+      <Agnostic />
       <Packages />
       <style jsx global>{`
         body {

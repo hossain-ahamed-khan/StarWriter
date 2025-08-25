@@ -36,7 +36,7 @@ export const Hero = () => {
                     src={circleBg}
                     fill
                     alt="circle background"
-                    className="object-center"
+                    className="object-center opacity-40"
                 />
             </div>
 

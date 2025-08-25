@@ -32,20 +32,20 @@ export const Unique = () => {
                     <div className="relative">
                         <h1 className="text-8xl font-black bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] bg-clip-text text-transparent">WE ARE <br />UNIQUE</h1>
                     </div>
-                    <div className="absolute top-0 left-1/2 inset-0">
+                    <div className="absolute -top-28 left-1/3 inset-0">
                         <Image
                             src={colorfulRing}
-                            width={50}
+                            width={300}
                             height={50}
                             alt="thunder image"
-                            className="h-52 w-44"
+
                         />
                     </div>
                 </div>
                 <div className="flex-1">
-                    <div className="p-8 border border-[#343434] rounded-md bg-[#010006]">
+                    <div className="w-4/5 float-end p-8 border border-[#343434] rounded-xl bg-[#010006] transition-all duration-200 hover:border-[#B7D6EF] group">
                         <p>Unlike simple paraphrasers or tone changers, our Humanizer goes deeper. It understands the emotion, intent, and natural flow of human language — transforming robotic or AI-generated text into something that sounds like it was written by a real person. Whether it's for emails, blogs, or social media captions, we make sure your words feel authentic, relatable, and truly human.</p>
-                        <button className="w-full mt-8 py-2 text-white bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF]">Unlock The Magic!</button>
+                        <button className="w-full mt-8 py-2 text-white bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] rounded-lg transition-all duration-200 hover:from-[#828ED6] hover:to-[#B7D6EF] hover:brightness-105 hover:scale-105">Unlock The Magic!</button>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ export const WhyChoose = () => {
                     src={circleBg}
                     fill
                     alt="circle background"
-                    className="object-center"
+                    className="object-center opacity-40"
                 />
             </div>
             <div className="w-4/5 mx-auto pb-8">
