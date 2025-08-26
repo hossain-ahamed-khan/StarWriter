@@ -29,7 +29,11 @@ export const Agnostic = () => {
 
             <div className="relative h-[600px] mt-16 flex items-center justify-center">
                 {/* Animated Ball */}
-                <div className={`absolute inset-0 z-70 pointer-events-none ${styles["agnostic-ball-float"]}`}>
+                <div
+                    className={`absolute inset-0 z-70 pointer-events-auto ${styles["agnostic-ball-float"]}`}
+                    title="Hover to animate"
+                    tabIndex={0}
+                >
                     <Image
                         src={agnosticBall}
                         fill

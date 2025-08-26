@@ -1,6 +1,5 @@
 "use client"
 import { Hero } from "@/components/home/Hero";
-import Packages from "@/components/home/Packages";
 import { Platforms } from "@/components/home/Platforms";
 import { TextCompare } from "@/components/home/TextCompare";
 import { Unique } from "@/components/home/Unique";
@@ -10,6 +9,8 @@ import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { BsStars } from "react-icons/bs";
 import { Agnostic } from "@/components/home/Agnostic";
+import { Packages } from "@/components/home/Packages";
+import TestimonialsScroll from "@/components/home/Reviews";
 
 
 const App = () => {
@@ -87,6 +88,7 @@ const App = () => {
       <Unique />
       <Agnostic />
       <Packages />
+      <TestimonialsScroll />
       <style jsx global>{`
         body {
           cursor: pointer;
