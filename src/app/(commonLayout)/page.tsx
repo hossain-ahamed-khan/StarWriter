@@ -11,6 +11,7 @@ import { BsStars } from "react-icons/bs";
 import { Agnostic } from "@/components/home/Agnostic";
 import { Packages } from "@/components/home/Packages";
 import TestimonialsScroll from "@/components/home/Reviews";
+import { SingleClick } from "@/components/home/SingleClick";
 
 
 const App = () => {
@@ -89,6 +90,7 @@ const App = () => {
       <Agnostic />
       <Packages />
       <TestimonialsScroll />
+      <SingleClick />
       <style jsx global>{`
         body {
           cursor: pointer;

@@ -40,7 +40,7 @@ const TestimonialsScroll = () => {
         {
             name: "Isabella Nguyen",
             university: "University of British Columbia, Canada",
-            text: "Even complex reports sound natural with Zulio. It’s a game changer for professionals.",
+            text: "Even complex reports sound natural with Zulio. It is a game changer for professionals.",
             avatar: "IN"
         },
         {
@@ -81,9 +81,9 @@ const TestimonialsScroll = () => {
         testimonial: Testimonial;
         index: number;
     }) => (
-        <div className="flex-shrink-0 w-80 mx-4">
+        <div className="flex-shrink-0 w-96 mx-4">
             <div className="bg-black border border-white/20 rounded-xl p-6 backdrop-blur-sm hover:bg-gray-900/70 transition-all duration-300">
-                <p className="text-gray-300 text-sm leading-relaxed mb-6">
+                <p className="text-gray-300 text-sm leading-relaxed mb-8">
                     "{testimonial.text}"
                 </p>
                 <hr className='border border-white/10 mb-4' />
