@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Check } from 'lucide-react';
+import { useTheme } from 'next-themes';
 
 export const Packages = () => {
+    const { theme } = useTheme();
     const [billingType, setBillingType] = useState('Monthly');
 
     const plans = [
@@ -51,37 +53,19 @@ export const Packages = () => {
         }
     ];
 
-    const getCardStyles = (color: string, isPopular: boolean) => {
-        const baseStyles = "relative rounded-2xl border p-6 backdrop-blur-sm transition-all duration-300 hover:scale-105";
-
-        if (isPopular) {
-            return `${baseStyles} border border-gradient-to-br from-purple-500/20 via-blue-500/20 to-purple-600/20 border-purple-500/30 shadow-xl py-16 shadow-purple-500/10`;
-        }
-
-        return `${baseStyles} bg-black/40 border-gray-800/50 hover:border-gray-700/50`;
-    };
-
-    const getButtonStyles = (isPopular: boolean) => {
-        if (isPopular) {
-            return "w-full py-3 rounded-lg bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] text-white font-semibold hover:from-purple-500 hover:to-blue-500 transition-all duration-300 shadow-lg";
-        }
-        return "w-full py-3 rounded-lg bg-transparent border border-gray-600 text-gray-300 font-semibold hover:bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] hover:border-gray-500 transition-all duration-300";
-    };
-
     return (
-        <div className="bg-black text-white p-8 mt-24 mber-300">
+        <div className={`p-8 mt-24 mb-24 ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
             <div className="max-w-7xl mx-auto">
                 {/* Billing Toggle */}
                 <div className="flex justify-center mb-12">
-                    <div className="inline-flex rounded-full border border-gray-700 bg-black/60 p-1">
+                    <div className={`inline-flex rounded-full border   p-1 ${theme === 'light' ? 'bg-white text-black' : 'bg-black/60 text-white border-gray-700'}`}>
                         {['Monthly', 'Yearly'].map((type) => (
                             <button
                                 key={type}
                                 onClick={() => setBillingType(type)}
                                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${billingType === type
-                                    ? 'bg-white/20 text-white shadow-lg'
-                                    : 'text-gray-400 hover:text-gray-200'
-                                    }`}
+                                    ? ` shadow-lg ${theme === 'light' ? 'bg-white text-black' : 'bg-white/20 text-white'}`
+                                    : `text-gray-400 hover:text-gray-200`}`}
                             >
                                 {type}
                             </button>
@@ -94,39 +78,40 @@ export const Packages = () => {
                     {plans.map((plan, index) => (
                         <div
                             key={plan.name}
-                            className={getCardStyles(plan.color, plan.isPopular)}
+                            className={`relative border-gray-800/50 hover:border-gray-700/50 rounded-2xl border px-6 py-12 backdrop-blur-sm transition-all duration-300 hover:scale-105 ${theme === 'light' ? 'text-black' : 'text-white'}
+                                group overflow-hidden
+                            `}
                         >
-                            {/* Popular Badge */}
-                            {plan.isPopular && (
-                                <div className="absolute -top-3 left-6">
-                                    <div className="bg-[#828ED6] text-white px-4 py-1 rounded-full text-sm font-semibold shadow-lg">
-                                        Most Popular
-                                    </div>
-                                </div>
-                            )}
+                            {/* Creative Hover Effect */}
+                            <div
+                                className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                            >
+                                <div className={`absolute -top-10 -left-10 w-40 h-40 rounded-full blur-2xl ${theme === 'light' ? 'bg-gradient-to-br from-purple-300/40 via-blue-200/40 to-pink-200/40' : 'bg-gradient-to-br from-purple-700/40 via-blue-800/40 to-pink-800/40'}`}></div>
+                                <div className={`absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-2xl ${theme === 'light' ? 'bg-gradient-to-br from-blue-200/40 via-purple-200/40 to-pink-200/40' : 'bg-gradient-to-br from-blue-900/40 via-purple-900/40 to-pink-900/40'}`}></div>
+                            </div>
 
                             {/* Plan Header */}
                             <div className="mb-6">
-                                <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                                <h3 className="text-2xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                                     {plan.name}
                                 </h3>
 
                                 <div className="mb-4">
-                                    <div className="text-sm text-gray-400 mb-1">
+                                    <div className={`text-sm mb-1 ${theme === 'light' ? 'text-black' : 'text-gray-400'}`}>
                                         Regular Price{' '}
-                                        <span className="line-through text-gray-500">
+                                        <span className={`line-through ${theme === 'light' ? 'text-black' : 'text-gray-500'}`}>
                                             ${plan.regularPrice}
                                         </span>
                                     </div>
                                     <div className="flex items-baseline">
-                                        <span className="text-4xl font-bold text-white">
+                                        <span className={`text-4xl font-bold ${theme === 'light' ? 'text-black' : 'text-white'}`}>
                                             ${plan.offerPrice}
                                         </span>
-                                        <span className="text-gray-400 ml-2">Offer Price</span>
+                                        <span className={`ml-2 ${theme === 'light' ? 'text-black' : 'text-gray-400'}`}>Offer Price</span>
                                     </div>
                                 </div>
 
-                                <button className={getButtonStyles(plan.isPopular)}>
+                                <button className={`w-full py-2 rounded-lg bg-transparent border border-gray-600 font-semibold hover:bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] hover:border-gray-500 transition-all duration-300 ${theme === 'light' ? 'text-black' : 'text-white'}`}>
                                     GET STARTED
                                 </button>
                             </div>
@@ -136,11 +121,11 @@ export const Packages = () => {
                                 {plan.features.map((feature, featureIndex) => (
                                     <div key={featureIndex} className="flex items-start space-x-3">
                                         <div className="flex-shrink-0 mt-0.5">
-                                            <div className="w-5 h-5 rounded-full bg-gradient-to-r from-purple-400 to-blue-400 flex items-center justify-center">
+                                            <div className="w-5 h-5 rounded-full flex items-center justify-center bg-gradient-to-r from-purple-400 to-blue-400">
                                                 <Check className="w-3 h-3 text-white" />
                                             </div>
                                         </div>
-                                        <span className="text-gray-300 text-sm leading-relaxed">
+                                        <span className={`text-sm leading-relaxed ${theme === 'light' ? 'text-black' : 'text-white'}`}>
                                             {feature}
                                         </span>
                                     </div>

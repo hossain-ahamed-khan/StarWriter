@@ -6,6 +6,7 @@ import { Unique } from "@/components/home/Unique";
 import { WhyChoose } from "@/components/home/WhyChoose";
 
 import { useRef, useState } from "react";
+import { useTheme } from "next-themes";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { BsStars } from "react-icons/bs";
 import { Agnostic } from "@/components/home/Agnostic";
@@ -15,11 +16,13 @@ import { SingleClick } from "@/components/home/SingleClick";
 
 
 const App = () => {
+
   const [isHovering, setIsHovering] = useState(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const springX = useSpring(mouseX, { stiffness: 80, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 80, damping: 20 });
+  const { theme } = useTheme();
 
   // Mouse move handler
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -31,7 +34,7 @@ const App = () => {
 
   return (
     <div
-      className="bg-[#010006] relative overflow-hidden min-h-screen"
+      className={`relative overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >

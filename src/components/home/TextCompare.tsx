@@ -3,10 +3,12 @@ import React from 'react';
 import { BsStars } from 'react-icons/bs';
 import Image from 'next/image';
 import circleBg from "../../../public/resources/images/circle-bg.png";
+import { useTheme } from 'next-themes';
 
 export const TextCompare = () => {
+    const { theme } = useTheme();
     return (
-        <div className="relative w-4/5 mx-auto py-20 px-4 md:px-8 min-h-[700px] flex flex-col items-center justify-center">
+        <div className={`relative w-full lg:w-4/5 mx-auto py-10 lg:py-20 px-4 md:px-8 min-h-[700px] flex flex-col items-center justify-center ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
             <div className="absolute inset-0 z-0">
                 <Image
                     src={circleBg}
@@ -22,17 +24,17 @@ export const TextCompare = () => {
                         data-aos-easing="ease-in-back"
                         data-aos-delay="300"
                         data-aos-offset="0">
-                        <div className="flex-1 bg-black backdrop-blur-lg border border-[#524F4F]/40 rounded-2xl shadow-xl p-8 flex flex-col justify-between gap-4 min-h-[480px]">
+                        <div className={`flex-1 border border-[#524F4F]/40 rounded-2xl shadow-xl p-8 flex flex-col justify-between gap-4 min-h-[480px] ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
                             <div>
                                 <div className="flex items-center justify-between mb-6">
                                     <div className="flex items-center gap-2">
                                         <span className="inline-block w-3 h-3 rounded-full bg-red-500 shadow-md"></span>
-                                        <span className="text-white font-semibold tracking-wide">Original Text</span>
+                                        <span className={`font-semibold tracking-wide ${theme === 'light' ? 'text-black' : 'text-white'}`}>Original Text</span>
                                     </div>
                                     <span className="text-[#F35555] px-4 py-1 bg-[#FFFFFF1A] border border-[#524F4F]/40 rounded-full text-xs font-medium">100% AI</span>
                                 </div>
                                 <div className="flex items-center">
-                                    <p className="text-white text-base leading-relaxed">
+                                    <p className={`text-base leading-relaxed ${theme === 'light' ? 'text-black' : 'text-white'}`}>
                                         Becoming successful in life requires setting clear goals, maintaining a strong work ethic, and continuously learning from experiences. It is important to stay focused and motivated, even when faced with challenges or setbacks. Building good habits, such as time management and effective communication, can help you make steady progress toward your objectives. Surrounding yourself with supportive and positive people also plays a crucial role in personal growth. Ultimately, success comes from perseverance, adaptability, and a willingness to keep improving yourself over time.
                                     </p>
                                 </div>
@@ -47,16 +49,16 @@ export const TextCompare = () => {
                     <div data-aos="flip-left"
                         data-aos-easing="ease-out-cubic"
                         data-aos-duration="2000">
-                        <div className="flex-1 bg-black backdrop-blur-lg border border-[#51E688]/30 rounded-2xl shadow-xl p-8 flex flex-col gap-4 min-h-[480px]">
+                        <div className={`flex-1 border border-[#51E688]/30 rounded-2xl shadow-xl p-8 flex flex-col gap-4 min-h-[480px] ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
                             <div className="flex items-center justify-between mb-2">
                                 <div className="flex items-center gap-2">
                                     <span className="inline-block w-3 h-3 rounded-full bg-green-400 shadow-md"></span>
-                                    <span className="text-white font-semibold tracking-wide">Humanized Text</span>
+                                    <span className={`font-semibold tracking-wide ${theme === 'light' ? 'text-black' : 'text-white'}`}>Humanized Text</span>
                                 </div>
                                 <span className="text-[#51E688] px-4 py-1 bg-[#FFFFFF1A] border border-[#51E688]/40 rounded-full text-xs font-medium">1% AI</span>
                             </div>
                             <div className="flex items-center">
-                                <p className="text-white text-base leading-relaxed">
+                                <p className={`text-base leading-relaxed ${theme === 'light' ? 'text-black' : 'text-white'}`}>
                                     Achieving success in life involves establishing clear goals, upholding a strong work ethic, and consistently learning from your experiences. Staying focused and motivated is essential, especially when encountering obstacles or setbacks. Developing positive habits like managing your time well and communicating effectively can help you steadily move toward your goals. Additionally, having supportive and positive people around you is vital for personal growth. In the end, success is the result of perseverance, adaptability, and a continuous commitment to self-improvement.
                                 </p>
                             </div>

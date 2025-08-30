@@ -1,6 +1,8 @@
+import { useTheme } from 'next-themes';
 import React from 'react';
 
 const TestimonialsScroll = () => {
+    const { theme } = useTheme();
     // Upper row testimonials (scrolling left to right)
     const upperTestimonials = [
         {
@@ -82,17 +84,17 @@ const TestimonialsScroll = () => {
         index: number;
     }) => (
         <div className="flex-shrink-0 w-96 mx-4">
-            <div className="bg-black border border-white/20 rounded-xl p-6 backdrop-blur-sm hover:bg-gray-900/70 transition-all duration-300">
-                <p className="text-gray-300 text-sm leading-relaxed mb-8">
+            <div className={` rounded-xl p-6 backdrop-blur-sm transition-all duration-300 ${theme === 'light' ? 'bg-white text-black border border-black/30' : 'bg-[#010006] text-white border border-white/20'}`}>
+                <p className={` text-sm leading-relaxed mb-8 ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-gray-300'}`}>
                     "{testimonial.text}"
                 </p>
                 <hr className='border border-white/10 mb-4' />
                 <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white text-sm font-semibold">
+                    <div className={`w-10 h-10 rounded-full  flex items-center justify-center text-sm font-semibold ${theme === 'light' ? 'bg-white text-black' : 'bg-white/20 text-white'}`}>
                         {testimonial.avatar}
                     </div>
                     <div>
-                        <div className="text-white font-medium text-sm">{testimonial.name}</div>
+                        <div className={`font-medium text-sm ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>{testimonial.name}</div>
                         <div className="text-gray-400 text-xs">{testimonial.university}</div>
                     </div>
                 </div>
@@ -101,7 +103,7 @@ const TestimonialsScroll = () => {
     );
 
     return (
-        <div className="bg-black text-white py-20 my-16 overflow-hidden">
+        <div className={`py-20 my-16 overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
             <div className="max-w-7xl mx-auto px-8 mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold text-center mb-4">
                     Discover the Power of Zulio with Real Stories
