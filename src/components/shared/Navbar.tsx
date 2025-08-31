@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import mainLogo from '../../../public/resources/images/main-logo.png';
 import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 
 export const Navbar = () => {
     const { theme } = useTheme();
@@ -31,7 +32,6 @@ export const Navbar = () => {
                         repeat: Infinity,
                         ease: 'easeInOut',
                     }}
-                    className="cursor-pointer"
                     whileHover={{ scale: .75, rotate: 15, filter: 'drop-shadow(0 0 30px #fff)' }}
                 >
                     <Image
@@ -42,37 +42,53 @@ export const Navbar = () => {
                         className="select-none hidden lg:block"
                     />
                 </motion.div>
-                <button
-                    className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none"
-                >
-                    <span className="absolute inset-0 bg-gradient-to-r from-[#CAA9D3]/0 via-[#828ED6]/20 to-[#B7D6EF]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
-                    <span className="relative z-10">HOME</span>
-                </button>
-                <button
-                    className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none"
-                >
-                    <span className="absolute inset-0 bg-gradient-to-r from-[#B7D6EF]/0 via-[#CAA9D3]/20 to-[#828ED6]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
-                    <span className="relative z-10">AI HUMANIZER</span>
-                </button>
-                <button
-                    className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none"
-                >
-                    <span className="absolute inset-0 bg-gradient-to-r from-[#828ED6]/0 via-[#B7D6EF]/20 to-[#CAA9D3]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
-                    <span className="relative z-10">AI CHAT</span>
-                </button>
-                <button
-                    className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none"
-                >
-                    <span className="absolute inset-0 bg-gradient-to-r from-[#CAA9D3]/0 via-[#828ED6]/20 to-[#B7D6EF]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
-                    <span className="relative z-10">PRICING</span>
-                </button>
-                <button
-                    className="relative border border-white bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] rounded-full px-2 lg:px-8 py-1 lg:py-2 transition-all duration-300 overflow-hidden group hover:scale-110 hover:shadow-xl focus:outline-none"
-                >
-                    <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
-                    <span className="relative z-10">JOIN</span>
-                </button>
-                <ThemeSwitch />
+                <Link href="/">
+                    <button
+                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none cursor-pointer"
+                    >
+                        <span className="absolute inset-0 bg-gradient-to-r from-[#CAA9D3]/0 via-[#828ED6]/20 to-[#B7D6EF]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
+                        <span className="relative z-10">HOME</span>
+                    </button>
+                </Link>
+
+                <Link href="/ai-humanizer">
+                    <button
+                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none cursor-pointer"
+                    >
+                        <span className="absolute inset-0 bg-gradient-to-r from-[#B7D6EF]/0 via-[#CAA9D3]/20 to-[#828ED6]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
+                        <span className="relative z-10">AI HUMANIZER</span>
+                    </button>
+                </Link>
+
+                <Link href="/ai-chat">
+                    <button
+                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none cursor-pointer"
+                    >
+                        <span className="absolute inset-0 bg-gradient-to-r from-[#828ED6]/0 via-[#B7D6EF]/20 to-[#CAA9D3]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
+                        <span className="relative z-10">AI CHAT</span>
+                    </button>
+                </Link>
+
+                <Link href="/pricing">
+                    <button
+                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none cursor-pointer"
+                    >
+                        <span className="absolute inset-0 bg-gradient-to-r from-[#CAA9D3]/0 via-[#828ED6]/20 to-[#B7D6EF]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
+                        <span className="relative z-10">PRICING</span>
+                    </button>
+                </Link>
+
+                <Link href="/signup">
+                    <button
+                        className="relative border border-white bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] rounded-full px-2 lg:px-8 py-1 lg:py-2 transition-all duration-300 overflow-hidden group hover:scale-110 hover:shadow-xl focus:outline-none cursor-pointer"
+                    >
+                        <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
+                        <span className="relative z-10">JOIN</span>
+                    </button>
+                </Link>
+                <div className='cursor-pointer'>
+                    <ThemeSwitch />
+                </div>
             </div>
         </div>
     );

@@ -54,7 +54,7 @@ export const Packages = () => {
     ];
 
     return (
-        <div className={`p-8 mt-24 mb-24 ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
+        <div className={`p-8 py-24 ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
             <div className="max-w-7xl mx-auto">
                 {/* Billing Toggle */}
                 <div className="flex justify-center mb-12">

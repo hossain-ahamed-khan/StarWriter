@@ -94,14 +94,6 @@ const App = () => {
       <Packages />
       <TestimonialsScroll />
       <SingleClick />
-      <style jsx global>{`
-        body {
-          cursor: pointer;
-        }
-        .mouse-glow {
-          pointer-events: none;
-        }
-      `}</style>
     </div>
   );
 };
