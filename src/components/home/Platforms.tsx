@@ -12,16 +12,14 @@ import hubSpot from '../../../public/resources/images/companiesLogo/hubspot.png'
 import originality from '../../../public/resources/images/companiesLogo/originality ai.png';
 import turnitin from '../../../public/resources/images/companiesLogo/turnitin.png';
 import winstone from '../../../public/resources/images/companiesLogo/winston.png';
-import { useTheme } from "next-themes";
 
 
 export const Platforms = () => {
-    const { theme } = useTheme();
     return (
         <div data-aos="fade-down"
             data-aos-easing="linear"
             data-aos-duration="1500">
-            <div className={`relative pt-8 pb-24 px-2 md:px-8 overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
+            <div className="relative bg-[#010006] pt-0 pb-24 px-2 md:px-8 w-full lg:w-4/5 mx-auto">
                 <div className="absolute inset-0 z-0">
                     <Image
                         src={circleBg}
@@ -31,84 +29,84 @@ export const Platforms = () => {
                     />
                 </div>
 
-                <div className="relative z-10">
-                    <p className="text-center font-semibold text-white text-xl tracking-wide">Featured On</p>
-                    <div className="flex gap-2 lg:gap-8 justify-center items-center py-4">
+                <div className="w-full relative z-10">
+                    <p className="text-center font-semibold text-white text-lg tracking-wide">Featured On</p>
+                    <div className="flex gap-2 lg:gap-8 justify-center py-4">
                         <Image
                             src={businessInsider}
-                            width={120}
+                            width={100}
                             height={80}
                             alt="business insider logo"
-                            className="hover:scale-110 transition-transform duration-200 w-20 h-10 lg:w-30 lg:h-15"
+                            className="hover:scale-110 transition-transform duration-200"
                         />
                         <Image
                             src={fiverr}
-                            width={120}
+                            width={100}
                             height={80}
                             alt="Fiverr logo"
-                            className="hover:scale-110 transition-transform duration-200 w-20 h-10 lg:w-30 lg:h-15"
+                            className="hover:scale-110 transition-transform duration-200"
                         />
                         <Image
                             src={hubSpot}
-                            width={120}
+                            width={100}
                             height={80}
                             alt="HubSpot logo"
-                            className="hover:scale-110 transition-transform duration-200 w-20 h-10 lg:w-30 lg:h-15"
+                            className="hover:scale-110 transition-transform duration-200"
                         />
                         <Image
                             src={buzzFeed}
-                            width={120}
+                            width={100}
                             height={80}
                             alt="BuzzFeed logo"
-                            className="hover:scale-110 transition-transform duration-200 w-20 h-10 lg:w-30 lg:h-15"
+                            className="hover:scale-110 transition-transform duration-200"
                         />
                     </div>
                 </div>
 
                 <div className="relative z-10">
-                    <p className="text-center text-xl font-semibold mt-12 bg-gradient-to-r from-[#b993d6] to-[#8ca6db] text-transparent bg-clip-text drop-shadow-[0_2px_12px_rgba(185,147,214,0.3)]">Guaranteed To Bypass Every AI Detectors</p>
-                    <div className="grid grid-cols-3 lg:flex gap-2 lg:gap-8 justify-center items-center py-4">
+                    <p className="text-center text-white text-lg font-semibold mt-8">Guaranteed To Bypass Every AI Detectors</p>
+                    <div className="w-4/5 mx-auto grid grid-cols-3 lg:flex items-center justify-between gap-2 lg:gap-8 pt-8">
                         <Image
                             src={winstone}
                             width={150}
                             height={80}
                             alt="Winston logo"
-                            className="hover:scale-110 transition-transform duration-200 w-20 h-10 lg:w-40 lg:h-20"
+                            className="hover:scale-110 transition-transform duration-200 border"
                         />
                         <Image
                             src={originality}
                             width={150}
                             height={80}
                             alt="Originality logo"
-                            className="hover:scale-110 transition-transform duration-200 w-20 h-10 lg:w-40 lg:h-20"
+                            className="hover:scale-110 transition-transform duration-200 border"
                         />
                         <Image
                             src={aiseo}
                             width={150}
                             height={80}
                             alt="AISEO logo"
-                            className="hover:scale-110 transition-transform duration-200 w-20 h-10 lg:w-40 lg:h-20"
+                            className="hover:scale-110 transition-transform duration-200 border"
                         />
                         <Image
                             src={chatgptZero}
                             width={150}
                             height={80}
                             alt="ChatGPT Zero logo"
-                            className="hover:scale-110 transition-transform duration-200 w-20 h-10 lg:w-40 lg:h-20"
+                            className="hover:scale-110 transition-transform duration-200 border"
                         />
                         <Image
                             src={crossplage}
                             width={150}
                             height={80}
                             alt="Crossplag logo"
-                            className="hover:scale-110 transition-transform duration-200 w-20 h-10 lg:w-40 lg:h-20"
+                            className="hover:scale-110 transition-transform duration-200"
                         />
                         <Image
                             src={turnitin}
                             width={150}
                             height={80}
                             alt="Turnitin logo"
-                            className="hover:scale-110 transition-transform duration-200 w-20 h-10 lg:w-40 lg:h-20"
+                            className="hover:scale-110 transition-transform duration-200"
                         />
                     </div>
                 </div>

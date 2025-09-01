@@ -1,6 +1,5 @@
 "use client"
 import { Hero } from "@/components/home/Hero";
-import { Platforms } from "@/components/home/Platforms";
 import { TextCompare } from "@/components/home/TextCompare";
 import { Unique } from "@/components/home/Unique";
 import { WhyChoose } from "@/components/home/WhyChoose";
@@ -13,6 +12,7 @@ import { Agnostic } from "@/components/home/Agnostic";
 import { Packages } from "@/components/home/Packages";
 import TestimonialsScroll from "@/components/home/Reviews";
 import { SingleClick } from "@/components/home/SingleClick";
+import { Platforms } from "@/components/home/Platforms";
 
 
 const App = () => {
@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <div
-      className={`relative overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}
+      className={`relative overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >

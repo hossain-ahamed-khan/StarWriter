@@ -14,19 +14,19 @@ const AiHumanizer = () => {
                 <p className='text-lg'>Type your text below, and watch it transform into a more natural, human-like version.</p>
             </div>
             <div className='w-full lg:w-1/2 space-x-4 mx-auto text-center py-8'>
-                <label className="select w-44">
+                <label className={`select w-44 ${theme === 'light' ? 'bg-white text-black border border-black' : 'bg-[#010006] text-white'}`}>
                     <select>
                         <option>History</option>
                         <option>Business</option>
                     </select>
                 </label>
-                <label className="select w-44">
+                <label className={`select w-44 ${theme === 'light' ? 'bg-white text-black border border-black' : 'bg-[#010006] text-white'}`}>
                     <select>
                         <option>Writing Style</option>
                         <option>Business</option>
                     </select>
                 </label>
-                <label className="select w-44">
+                <label className={`select w-44 ${theme === 'light' ? 'bg-white text-black border border-black' : 'bg-[#010006] text-white'}`}>
                     <select>
                         <option>Content Type</option>
                         <option>Business</option>

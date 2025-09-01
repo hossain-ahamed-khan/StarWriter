@@ -5,8 +5,10 @@ import Image from 'next/image';
 import mainLogo from '../../../public/resources/images/main-logo.png';
 import circleBg from "../../../public/resources/images/circle-bg.png";
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 
 const LoginPage = () => {
+    const { theme } = useTheme();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +20,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
+        <div className={`min-h-screen flex items-center justify-center p-4 relative overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>
             <div className="w-full max-w-md">
 
                 <div className="absolute inset-0 z-0">
@@ -42,13 +44,13 @@ const LoginPage = () => {
                     </div>
 
                     {/* Title */}
-                    <h1 className="text-3xl font-bold text-white text-center mb-8">
+                    <h1 className="text-3xl font-bold text-center mb-8">
                         Sign in to your account
                     </h1>
 
                     {/* Email Field */}
                     <div className="space-y-2">
-                        <label htmlFor="email" className="text-sm font-medium text-gray-300 block">
+                        <label htmlFor="email" className="text-sm font-medium block">
                             Email Address
                         </label>
                         <input
@@ -57,14 +59,14 @@ const LoginPage = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Enter your email address here"
-                            className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
                             required
                         />
                     </div>
 
                     {/* Password Field */}
                     <div className="space-y-2">
-                        <label htmlFor="password" className="text-sm font-medium text-gray-300 block">
+                        <label htmlFor="password" className="text-sm font-medium block">
                             Password
                         </label>
                         <div className="relative">
@@ -74,13 +76,13 @@ const LoginPage = () => {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="Enter your password"
-                                className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 pr-12"
+                                className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 pr-12"
                                 required
                             />
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-300 transition-colors"
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 transition-colors"
                             >
                                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                             </button>
@@ -89,12 +91,12 @@ const LoginPage = () => {
 
                     {/* Remember Password & Forgot Password */}
                     <div className="flex items-center justify-between text-sm">
-                        <label className="flex items-center text-gray-300 cursor-pointer">
+                        <label className="flex items-center cursor-pointer">
                             <input
                                 type="checkbox"
                                 checked={rememberPassword}
                                 onChange={(e) => setRememberPassword(e.target.checked)}
-                                className="w-4 h-4 text-purple-600 bg-gray-900 border-gray-600 rounded focus:ring-purple-500 focus:ring-2 mr-2"
+                                className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500 focus:ring-2 mr-2"
                             />
                             Remember Password
                         </label>
@@ -106,7 +108,7 @@ const LoginPage = () => {
                     {/* Login Button */}
                     <button
                         type="submit"
-                        className="w-full bg-white hover:bg-gray-100 text-gray-900 font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+                        className={`w-full hover font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg ${theme === 'light' ? 'bg-black text-white' : 'bg-white text-black'}`}
                     >
                         Log in
                     </button>
@@ -117,14 +119,14 @@ const LoginPage = () => {
                             <div className="w-full border-t border-gray-700"></div>
                         </div>
                         <div className="relative flex justify-center text-sm">
-                            <span className="px-2 bg-black text-gray-400">or</span>
+                            <span className="px-2">or</span>
                         </div>
                     </div>
 
                     {/* Sign Up Link */}
-                    <div className="text-center text-sm text-gray-400">
+                    <div className="text-center text-sm">
                         Don't have an account?{' '}
-                        <Link href="/signup" className="text-purple-400 hover:text-purple-300 transition-colors underline">
+                        <Link href="/signup" className="text-purple-400 hover transition-colors underline">
                             Sign up
                         </Link>
                     </div>
@@ -132,7 +134,7 @@ const LoginPage = () => {
                     {/* Google Sign In */}
                     <button
                         type="button"
-                        className="w-full bg-transparent hover:bg-gray-800 text-white font-medium py-3 px-4 rounded-lg border border-gray-600 hover:border-gray-500 transition-all duration-200 flex items-center justify-center space-x-3"
+                        className="w-full bg-transparent hover font-medium py-3 px-4 rounded-lg border transition-all duration-200 flex items-center justify-center space-x-3"
                     >
                         <svg className="w-5 h-5" viewBox="0 0 24 24">
                             <path
