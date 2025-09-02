@@ -84,7 +84,7 @@ const TestimonialsScroll = () => {
         index: number;
     }) => (
         <div className="flex-shrink-0 w-64 sm:w-80 md:w-96 mx-1 sm:mx-2 md:mx-4">
-            <div className={`h-32 lg:h-40 sm:h-52 rounded-xl p-2 sm:p-4 md:p-6 backdrop-blur-sm transition-all duration-300 ${theme === 'light' ? 'bg-white text-black border border-black/30' : 'bg-[#010006] text-white border border-white/20'}`}>
+            <div className={`h-32 lg:h-52 rounded-xl p-2 sm:p-4 md:p-6 backdrop-blur-sm transition-all duration-300 ${theme === 'light' ? 'bg-white text-black border border-black/30' : 'bg-[#010006] text-white border border-white/20'}`}>
                 <p className={`text-[11px] sm:text-xs md:text-sm leading-relaxed mb-4 sm:mb-6 md:mb-8 ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-gray-300'}`}>
                     "{testimonial.text}"
                 </p>
@@ -115,7 +115,7 @@ const TestimonialsScroll = () => {
 
             <div className="space-y-6 sm:space-y-8">
                 {/* Upper row - Left to Right */}
-                <div className="relative overflow-x-auto overflow-hidden">
+                <div className="relative overflow-hidden">
                     <div
                         className="flex flex-row sm:flex-row animate-scroll-left"
                         style={{
@@ -132,7 +132,7 @@ const TestimonialsScroll = () => {
                 </div>
 
                 {/* Lower row - Right to Left */}
-                <div className="relative overflow-x-auto overflow-hidden">
+                <div className="relative overflow-hidden">
                     <div
                         className="flex flex-row sm:flex-row animate-scroll-right"
                         style={{

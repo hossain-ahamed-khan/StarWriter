@@ -32,7 +32,7 @@ export const Navbar = () => {
                         repeat: Infinity,
                         ease: 'easeInOut',
                     }}
-                    whileHover={{ scale: .75, rotate: 15, filter: 'drop-shadow(0 0 30px #fff)' }}
+                    whileHover={{ scale: .75, rotate: 15, }}
                 >
                     <Image
                         src={mainLogo}
@@ -44,7 +44,7 @@ export const Navbar = () => {
                 </motion.div>
                 <Link href="/">
                     <button
-                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none cursor-pointer"
+                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer"
                     >
                         <span className="absolute inset-0 bg-gradient-to-r from-[#CAA9D3]/0 via-[#828ED6]/20 to-[#B7D6EF]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
                         <span className="relative z-10 text-xs lg:text-sm">HOME</span>
@@ -53,7 +53,7 @@ export const Navbar = () => {
 
                 <Link href="/ai-humanizer">
                     <button
-                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none cursor-pointer"
+                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer"
                     >
                         <span className="absolute inset-0 bg-gradient-to-r from-[#B7D6EF]/0 via-[#CAA9D3]/20 to-[#828ED6]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
                         <span className="relative z-10 text-xs lg:text-sm">AI HUMANIZER</span>
@@ -62,7 +62,7 @@ export const Navbar = () => {
 
                 <Link href="/ai-chat">
                     <button
-                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none cursor-pointer"
+                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer"
                     >
                         <span className="absolute inset-0 bg-gradient-to-r from-[#828ED6]/0 via-[#B7D6EF]/20 to-[#CAA9D3]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
                         <span className="relative z-10 text-xs lg:text-sm">AI CHAT</span>
@@ -71,7 +71,7 @@ export const Navbar = () => {
 
                 <Link href="/pricing">
                     <button
-                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:text-white hover:scale-105 focus:outline-none cursor-pointer"
+                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer"
                     >
                         <span className="absolute inset-0 bg-gradient-to-r from-[#CAA9D3]/0 via-[#828ED6]/20 to-[#B7D6EF]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
                         <span className="relative z-10 text-xs lg:text-sm">PRICING</span>
