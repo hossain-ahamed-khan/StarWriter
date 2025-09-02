@@ -14,7 +14,7 @@ import { useTheme } from "next-themes";
 export const Hero = () => {
     const { theme } = useTheme();
     return (
-        <div className={`relative h-[840px] flex flex-col justify-center items-center overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
+        <div className={`relative h-[640px] lg:h-[840px] flex flex-col justify-center items-center overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
 
             {/* Background Images - Only show in dark mode */}
             <div className={`${theme === 'light' ? 'hidden' : 'block'}`}>
@@ -52,7 +52,7 @@ export const Hero = () => {
                 </p>
 
                 <div className="relative">
-                    <h1 className="text-7xl md:text-8xl font-extrabold">
+                    <h1 className="text-5xl md:text-8xl font-extrabold">
                         The Original{" "}
                         <span className="bg-gradient-to-r from-[#7a6ee6] via-[#6fa8f5] to-[#a6d4fa] bg-clip-text text-transparent">
                             Humanizer
@@ -63,12 +63,12 @@ export const Hero = () => {
                         width={32}
                         height={42}
                         alt="main logo"
-                        className="absolute right-8 top-0 drop-shadow-[0_2px_12px_rgba(202,169,211,0.5)]"
+                        className="hidden lg:block absolute right-8 top-0 drop-shadow-[0_2px_12px_rgba(202,169,211,0.5)]"
                     />
                 </div>
 
                 <div className="flex mt-2 items-center">
-                    <h1 className="text-6xl md:text-7xl font-extrabold">
+                    <h1 className="text-5xl md:text-7xl font-extrabold">
                         That Writes Like You
                     </h1>
                     <Image
@@ -80,7 +80,7 @@ export const Hero = () => {
                     />
                 </div>
 
-                <p className={`mt-8 mb-4 text-lg md:text-xl font-medium ${theme === 'light' ? 'text-black' : 'text-white'}`}>
+                <p className={`mt-8 mb-4 text-md md:text-xl font-medium ${theme === 'light' ? 'text-black' : 'text-white'}`}>
                     Level Up Your Writing with Undetectable AI Text and High-Quality Grammar — Built for High Grades.
                 </p>
 
@@ -92,13 +92,13 @@ export const Hero = () => {
                         alt="green leaf"
                         className="drop-shadow-[0_2px_8px_rgba(34,197,94,0.3)]"
                     />
-                    <p className="text-brand-dark dark:text-brand-light font-semibold tracking-wide">
+                    <p className="text-sm md:text-base font-medium">
                         Cheaper Than Coffee, Smarter Than Your Professor!
                     </p>
                 </div>
 
                 <div>
-                    <button className="flex gap-2 items-center px-12 py-3 rounded-full bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] border-4 border-[#A69CD4] shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-lg font-bold text-white tracking-wide mt-32">
+                    <button className="flex gap-2 items-center px-6 lg:px-12 py-2 lg:py-3 rounded-full bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] border-4 border-[#A69CD4] shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-md lg:text-lg font-semibold lg:font-bold text-white tracking-wide mt-16 lg:mt-32">
                         <BsStars className="text-white drop-shadow-[0_2px_8px_rgba(202,169,211,0.5)]" />
                         Try Me, I'm Free
                     </button>
