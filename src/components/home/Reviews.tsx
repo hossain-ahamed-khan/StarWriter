@@ -108,7 +108,7 @@ const TestimonialsScroll = () => {
                 <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-2 sm:mb-4">
                     Discover the Power of Starwriter with Real Stories
                 </h2>
-                <p className="text-gray-400 text-center text-sm sm:text-lg max-w-3xl mx-auto">
+                <p className="text-gray-400 text-center text-xs sm:text-sm md:text-lg max-w-3xl mx-auto">
                     Starwriter completely changed how I write my essays. My grades improved, and it saves me so much time!
                 </p>
             </div>

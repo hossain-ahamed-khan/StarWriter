@@ -9,9 +9,12 @@ import Link from 'next/link';
 
 export const Navbar = () => {
     const { theme } = useTheme();
+    const [menuOpen, setMenuOpen] = React.useState(false);
     return (
-        <div className={`py-8 ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>
-            <div className="w-full lg:w-1/2 mx-auto flex items-center justify-between border border-[#3B3131] px-1 lg:px-8 py-2 lg:py-4 rounded-full [&>button]:text-xs z-20">
+        <div className={`flex justify-between items-center px-6 sm:px-10 lg:px-24 py-6 sm:py-8 ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>
+            <h1 className='text-3xl font-bold bg-gradient-to-r from-[#7a6ee6] via-[#6fa8f5] to-[#a6d4fa] bg-clip-text text-transparent'>Star Writer</h1>
+            {/* Desktop Navigation */}
+            <div className="w-full lg:w-1/2 mx-auto items-center justify-between border border-[#3B3131] px-1 md:px-2 lg:px-8 py-2 md:py-4 rounded-full [&>button]:text-xs z-20 hidden lg:flex">
                 <motion.div
                     initial={{ rotate: 0, scale: 1, y: 0, x: 0 }}
                     animate={{
@@ -42,54 +45,90 @@ export const Navbar = () => {
                         className="select-none hidden lg:block"
                     />
                 </motion.div>
+                {/* ...existing navigation links... */}
                 <Link href="/">
-                    <button
-                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer"
-                    >
+                    <button className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer">
                         <span className="absolute inset-0 bg-gradient-to-r from-[#CAA9D3]/0 via-[#828ED6]/20 to-[#B7D6EF]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
-                        <span className="relative z-10 text-xs lg:text-sm">HOME</span>
+                        <span className="relative z-10 text-xs md:text-sm">HOME</span>
                     </button>
                 </Link>
-
                 <Link href="/ai-humanizer">
-                    <button
-                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer"
-                    >
+                    <button className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer">
                         <span className="absolute inset-0 bg-gradient-to-r from-[#B7D6EF]/0 via-[#CAA9D3]/20 to-[#828ED6]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
-                        <span className="relative z-10 text-xs lg:text-sm">AI HUMANIZER</span>
+                        <span className="relative z-10 text-xs md:text-sm">AI HUMANIZER</span>
                     </button>
                 </Link>
-
                 <Link href="/ai-chat">
-                    <button
-                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer"
-                    >
+                    <button className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer">
                         <span className="absolute inset-0 bg-gradient-to-r from-[#828ED6]/0 via-[#B7D6EF]/20 to-[#CAA9D3]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
-                        <span className="relative z-10 text-xs lg:text-sm">AI CHAT</span>
+                        <span className="relative z-10 text-xs md:text-sm">AI CHAT</span>
                     </button>
                 </Link>
-
+                <Link href="/blogs">
+                    <button className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer">
+                        <span className="absolute inset-0 bg-gradient-to-r from-[#828ED6]/0 via-[#B7D6EF]/20 to-[#CAA9D3]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
+                        <span className="relative z-10 text-xs md:text-sm">BLOGS</span>
+                    </button>
+                </Link>
                 <Link href="/pricing">
-                    <button
-                        className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer"
-                    >
+                    <button className="relative px-2 lg:px-5 py-1 lg:py-2 rounded-full transition-all duration-300 overflow-hidden group hover:scale-105 focus:outline-none cursor-pointer">
                         <span className="absolute inset-0 bg-gradient-to-r from-[#CAA9D3]/0 via-[#828ED6]/20 to-[#B7D6EF]/0 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
-                        <span className="relative z-10 text-xs lg:text-sm">PRICING</span>
+                        <span className="relative z-10 text-xs md:text-sm">PRICING</span>
                     </button>
                 </Link>
-
                 <Link href="/signup">
-                    <button
-                        className="relative border border-white bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] rounded-full px-2 lg:px-8 py-1 lg:py-2 transition-all duration-300 overflow-hidden group hover:scale-110 hover:shadow-xl focus:outline-none cursor-pointer"
-                    >
+                    <button className="relative border border-[#7a73e8] rounded-full px-2 lg:px-8 py-1 lg:py-2 transition-all duration-300 overflow-hidden group hover:scale-110 hover:shadow-xl focus:outline-none cursor-pointer">
                         <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 blur-sm"></span>
-                        <span className="relative z-10 text-xs lg:text-sm">JOIN</span>
+                        <span className="relative z-10 text-xs md:text-sm">JOIN</span>
                     </button>
                 </Link>
-                <div className='cursor-pointer pr-2'>
+            </div>
+            <div className='hidden lg:block cursor-pointer pr-2 border border-[#3B3131] rounded-full p-2 ml-2'>
+                <ThemeSwitch />
+            </div>
+            {/* Hamburger Icon for Mobile */}
+            <div className="lg:hidden flex items-center">
+                <button
+                    className="p-2 rounded-md border border-[#3B3131] focus:outline-none"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    aria-label="Toggle menu"
+                >
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-menu">
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <line x1="3" y1="18" x2="21" y2="18" />
+                    </svg>
+                </button>
+                <div className='cursor-pointer pr-2 border border-[#3B3131] rounded-full p-2 ml-2'>
                     <ThemeSwitch />
                 </div>
             </div>
+            {/* Mobile Menu */}
+            {menuOpen && (
+                <div className={`fixed top-0 left-0 w-full h-full bg-black/70 z-50 flex flex-col items-center justify-start pt-24`}>
+                    <div className="bg-white dark:bg-black rounded-xl shadow-lg w-11/12 max-w-xs mx-auto p-6 flex flex-col gap-4">
+                        <Link href="/" onClick={() => setMenuOpen(false)}>
+                            <button className="w-full py-2 rounded text-black dark:text-white font-semibold">HOME</button>
+                        </Link>
+                        <Link href="/ai-humanizer" onClick={() => setMenuOpen(false)}>
+                            <button className="w-full py-2 rounded text-black dark:text-white font-semibold">AI HUMANIZER</button>
+                        </Link>
+                        <Link href="/ai-chat" onClick={() => setMenuOpen(false)}>
+                            <button className="w-full py-2 rounded text-black dark:text-white font-semibold">AI CHAT</button>
+                        </Link>
+                        <Link href="/blogs" onClick={() => setMenuOpen(false)}>
+                            <button className="w-full py-2 rounded text-black dark:text-white font-semibold">BLOGS</button>
+                        </Link>
+                        <Link href="/pricing" onClick={() => setMenuOpen(false)}>
+                            <button className="w-full py-2 rounded text-black dark:text-white font-semibold">PRICING</button>
+                        </Link>
+                        <Link href="/signup" onClick={() => setMenuOpen(false)}>
+                            <button className="w-full py-2 rounded border border-[#7a73e8] text-[#7a73e8] font-semibold">JOIN</button>
+                        </Link>
+                        <button className="mt-4 text-gray-500" onClick={() => setMenuOpen(false)}>Close</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

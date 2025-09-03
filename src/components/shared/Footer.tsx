@@ -1,5 +1,6 @@
 "use client"
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 import React from 'react';
 import {
     FaDiscord,
@@ -28,6 +29,14 @@ const Footer = () => {
                             <div className="hidden sm:block h-6 w-px bg-gray-600"></div>
                             <div className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
                                 Trust Us—Your Brain Will Thank You
+                            </div>
+                        </div>
+
+                        <div className={`text-xs ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
+                            <p>401 Bay Street, Toronto, Ontario, Canada</p>
+                            <div className='flex gap-2'>
+                                <p>support@starwriter.ai</p>
+                                <p><Link href="/terms" className='underline'>Terms and Conditions</Link></p>
                             </div>
                         </div>
 

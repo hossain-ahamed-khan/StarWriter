@@ -5,15 +5,15 @@ export const SingleClick = () => {
     const { theme } = useTheme();
     return (
         <div className="px-4 sm:px-8 mx-auto text-center">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center leading-tight">
+            <h1 className="text-lg sm:text-4xl md:text-5xl font-bold text-center leading-tight">
                 Unlock Humanized Text with a Single Click
             </h1>
             {theme === 'light' ? (
-                <p className="text-base sm:text-lg text-center mt-6 sm:mt-8 text-black">
+                <p className="text-xs sm:text-lg text-center mt-6 sm:mt-8 text-black">
                     Transform robotic or AI-generated content into natural, engaging language — <br className="hidden sm:block" />powered by advanced human-like rewriting intelligence.
                 </p>
             ) : (
-                <p className="text-base sm:text-lg text-center mt-6 sm:mt-8 bg-gradient-to-r from-[#B7D6EF] via-[#CAA9D3] to-[#828ED6] bg-clip-text text-transparent inline-block">
+                <p className="text-xs sm:text-lg text-center mt-6 sm:mt-8 bg-gradient-to-r from-[#B7D6EF] via-[#CAA9D3] to-[#828ED6] bg-clip-text text-transparent inline-block">
                     Transform robotic or AI-generated content into natural, engaging language — <br className="hidden sm:block" />powered by advanced human-like rewriting intelligence.
                 </p>
             )}
