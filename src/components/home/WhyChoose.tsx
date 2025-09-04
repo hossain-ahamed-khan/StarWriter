@@ -20,7 +20,7 @@ export const WhyChoose = () => {
             </div>
             <div className="w-[95%] sm:w-4/5 mx-auto pb-8">
                 <div className="pb-8">
-                    <h1 className="text-3xl sm:text-5xl font-bold pb-4 text-center sm:text-left">Why Choose our Ai Humanizer?</h1>
+                    <h1 className="text-2xl sm:text-5xl font-bold pb-4 text-center sm:text-left">Why Choose our Ai Humanizer?</h1>
                     <p className="text-[#676665] text-sm sm:text-lg text-center sm:text-left">Discover what makes us stand out from robotic rewriters — crafted for clarity, tone, and real human connection.</p>
                 </div>
                 <div className="flex flex-col lg:flex-row gap-4">

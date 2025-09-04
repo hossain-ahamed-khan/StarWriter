@@ -32,36 +32,36 @@ export const Platforms = () => {
                 </div>
 
                 <div className={`w-full relative z-10 ${theme === 'light' ? 'text-black' : 'text-white'}`}>
-                    <p className="text-center font-semibold text-sm tracking-wide py-2">Featured On</p>
-                    <div className={` ${theme === 'light' ? 'bg-gradient-to-r from-[#7a6ee6] via-[#6fa8f5] to-[#a6d4fa] rounded-2xl p-2 shadow-2xl relative overflow-hidden' : ''}`}>
-                        <div className='flex gap-0 lg:gap-8 justify-center py-4'>
+                    <p className="text-center text-sm tracking-wide py-2">Featured On</p>
+                    <div className={` ${theme === 'light' ? 'bg-gradient-to-r from-[#7a6ee6] via-[#6fa8f5] to-[#a6d4fa] rounded-2xl py-2 shadow-2xl relative overflow-hidden' : ''}`}>
+                        <div className='flex gap-4 lg:gap-8 justify-center p-2 md:p-4'>
                             <Image
                                 src={businessInsider}
                                 width={100}
                                 height={80}
                                 alt="business insider logo"
-                                className="hover:scale-110 transition-transform duration-200 w-24 lg:w-auto"
+                                className="hover:scale-110 transition-transform duration-200 w-20 lg:w-auto"
                             />
                             <Image
                                 src={fiverr}
                                 width={100}
                                 height={80}
                                 alt="Fiverr logo"
-                                className="hover:scale-110 transition-transform duration-200 w-24 lg:w-auto"
+                                className="hover:scale-110 transition-transform duration-200 w-20 lg:w-auto"
                             />
                             <Image
                                 src={hubSpot}
                                 width={100}
                                 height={80}
                                 alt="HubSpot logo"
-                                className="hover:scale-110 transition-transform duration-200 w-24 lg:w-auto"
+                                className="hover:scale-110 transition-transform duration-200 w-20 lg:w-auto"
                             />
                             <Image
                                 src={buzzFeed}
                                 width={100}
                                 height={80}
                                 alt="BuzzFeed logo"
-                                className="hover:scale-110 transition-transform duration-200 w-24 lg:w-auto"
+                                className="hover:scale-110 transition-transform duration-200 w-20 lg:w-auto"
                             />
                         </div>
                     </div>
@@ -71,13 +71,13 @@ export const Platforms = () => {
                 <div className="relative z-10 mt-12 overflow-hidden">
                     {/* Title */}
                     <div className="text-center mb-8 relative z-10">
-                        <h3 className="text-center font-semibold text-sm mb-2 drop-shadow-lg">
+                        <h3 className="text-center text-sm mb-2 drop-shadow-lg">
                             Guaranteed To Bypass Every AI Detector
                         </h3>
                     </div>
                     {/* Gradient Background Container */}
-                    <div className="bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
-                        <div className="backdrop-blur-xl bg-white/10 rounded-2xl p-4 shadow-2xl border border-white/20 relative overflow-hidden w-full">
+                    <div className="bg-gradient-to-br from-gray-900 rounded-xl via-black to-gray-800 relative overflow-hidden">
+                        <div className="backdrop-blur-xl bg-white/10 rounded-xl p-2 md:p-4 shadow-2xl border border-white/20 relative overflow-hidden w-full">
                             {/* Decorative Elements */}
                             <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full -translate-x-16 -translate-y-16"></div>
                             <div className="absolute bottom-0 right-0 w-24 h-24 bg-white/10 rounded-full translate-x-12 translate-y-12"></div>
@@ -117,7 +117,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="Winston logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                         <div className="group">
@@ -126,7 +126,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="Originality logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                         <div className="group">
@@ -135,7 +135,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="AISEO logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                         <div className="group">
@@ -144,7 +144,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="ChatGPT Zero logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                         <div className="group">
@@ -153,7 +153,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="Crossplag logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                         <div className="group">
@@ -162,7 +162,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="Turnitin logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                     </div>
@@ -175,7 +175,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="Winston logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                         <div className="group">
@@ -184,7 +184,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="Originality logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                         <div className="group">
@@ -193,7 +193,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="AISEO logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                         <div className="group">
@@ -202,7 +202,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="ChatGPT Zero logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                         <div className="group">
@@ -211,7 +211,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="Crossplag logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                         <div className="group">
@@ -220,7 +220,7 @@ export const Platforms = () => {
                                                 width={140}
                                                 height={70}
                                                 alt="Turnitin logo"
-                                                className="h-12 md:h-16 w-auto object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md"
+                                                className="h-12 md:h-16 object-contain filter brightness-0 invert group-hover:scale-110 transition-all duration-300 drop-shadow-md w-20 lg:w-auto"
                                             />
                                         </div>
                                     </div>

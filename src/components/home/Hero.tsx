@@ -53,7 +53,7 @@ export const Hero = () => {
                     </p>
 
                     <div className="relative">
-                        <h1 className="text-3xl sm:4xl md:text-5xl lg:text-7xl bold font-extrabold">
+                        <h1 className="text-2xl sm:4xl md:text-5xl lg:text-7xl bold font-extrabold">
                             The Original{" "}
                             <span className="bg-gradient-to-r from-[#7a6ee6] via-[#6fa8f5] to-[#a6d4fa] bg-clip-text text-transparent">
                                 Humanizer
@@ -69,7 +69,7 @@ export const Hero = () => {
                     </div>
 
                     <div className="flex mt-2 items-center">
-                        <h1 className="text-3xl sm:4xl md:text-5xl lg:text-7xl bold font-extrabold">
+                        <h1 className="text-2xl sm:4xl md:text-5xl lg:text-7xl bold font-extrabold">
                             That Writes Like You
                         </h1>
                         <Image
@@ -81,12 +81,12 @@ export const Hero = () => {
                         />
                     </div>
 
-                    <p className={`w-3/4 md:w-full mt-8 mb-4 text-[9px] md:text-sm lg:text-md text-center font-medium ${theme === 'light' ? 'text-black' : 'text-white'}`}>
+                    <p className={`w-3/4 md:w-full my-4 md:my-8 text-[8px] md:text-sm lg:text-md text-center font-medium ${theme === 'light' ? 'text-black/70' : 'text-white/70'}`}>
                         Level Up Your Writing with Undetectable AI Text and High-Quality Grammar — Built for High Grades.
                     </p>
 
 
-                    <div className="relative flex gap-2 px-2 md:px-5 py-1 lg:py-3 md:py-4 rounded-full items-center mt-4 overflow-hidden backdrop-blur-md bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-300 group">
+                    <div className="relative flex gap-2 px-2 md:px-5 py-1 lg:py-3 md:py-4 rounded-full items-center overflow-hidden backdrop-blur-md bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 shadow-2xl hover:shadow-3xl transition-all duration-300 group">
 
                         {/* Glass reflection effect */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-50"></div>
@@ -103,7 +103,7 @@ export const Hero = () => {
                                 alt="green leaf"
                                 className="drop-shadow-[0_4px_12px_rgba(34,197,94,0.4)] group-hover:drop-shadow-[0_6px_16px_rgba(34,197,94,0.6)] transition-all duration-300 group-hover:rotate-12"
                             />
-                            <p className="text-[10px] md:text-sm lg:text-md font-medium drop-shadow-sm group-hover:text-brand-dark dark:group-hover:text-brand-light transition-colors duration-300">
+                            <p className={`text-[8px] md:text-sm lg:text-md font-medium drop-shadow-sm group-hover:text-brand-dark dark:group-hover:text-brand-light transition-colors duration-300 ${theme === 'light' ? 'text-black/70' : 'text-white/70'}`}>
                                 Cheaper Than Coffee, Smarter Than Your Professor!
                             </p>
                         </div>
@@ -115,7 +115,7 @@ export const Hero = () => {
                     </div>
 
                     <div>
-                        <button className="flex gap-2 items-center px-3 lg:px-6 py-2 lg:py-2 rounded-full border shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-sm lg:text-lg font-semibold lg:font-bold tracking-wide mt-12 lg:mt-24">
+                        <button className="flex gap-2 items-center px-3 lg:px-6 py-2 lg:py-2 rounded-full border shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-sm lg:text-lg font-medium lg:font-bold tracking-wide mt-12 lg:mt-24">
                             <BsStars className="text-white drop-shadow-[0_2px_8px_rgba(202,169,211,0.5)]" />
                             Try Me, I'm Free
                         </button>

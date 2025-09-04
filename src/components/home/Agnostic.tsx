@@ -12,7 +12,7 @@ export const Agnostic = () => {
         <div className="w-11/12 max-w-5xl mx-auto">
             <div>
                 <div className="relative">
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-2 leading-tight">
+                    <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-2 leading-tight">
                         We are Model Agnostic
                     </h1>
                     <div className="flex justify-center">

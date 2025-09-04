@@ -32,7 +32,7 @@ export const Unique = () => {
             <div className="text-white flex flex-col lg:flex-row justify-between items-center gap-8 sm:gap-0 relative z-10 w-full">
                 <div className="flex-1 w-full flex flex-col items-center lg:items-start relative mb-8 lg:mb-0">
                     <div className="relative w-full flex justify-center lg:justify-start">
-                        <h1 className="text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] bg-clip-text text-transparent text-center lg:text-left leading-tight">WE ARE <br className="hidden xs:block" />UNIQUE</h1>
+                        <h1 className="text-3xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] bg-clip-text text-transparent text-center lg:text-left leading-tight">WE ARE <br className="hidden xs:block" />UNIQUE</h1>
                     </div>
 
                     <div className="absolute -top-12 xs:-top-16 sm:-top-20 left-1/2 lg:left-1/3 -translate-x-1/2 lg:translate-x-0">

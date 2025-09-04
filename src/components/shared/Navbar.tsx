@@ -106,21 +106,21 @@ export const Navbar = () => {
             {/* Mobile Menu */}
             {menuOpen && (
                 <div className={`fixed top-0 left-0 w-full h-full bg-black/70 z-50 flex flex-col items-center justify-start pt-24`}>
-                    <div className="bg-white dark:bg-black rounded-xl shadow-lg w-11/12 max-w-xs mx-auto p-6 flex flex-col gap-4">
+                    <div className={` rounded-xl shadow-lg w-11/12 max-w-xs mx-auto p-6 flex flex-col gap-4 ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>
                         <Link href="/" onClick={() => setMenuOpen(false)}>
-                            <button className="w-full py-2 rounded text-black dark:text-white font-semibold">HOME</button>
+                            <button className="w-full py-2 rounded font-semibold">HOME</button>
                         </Link>
                         <Link href="/ai-humanizer" onClick={() => setMenuOpen(false)}>
-                            <button className="w-full py-2 rounded text-black dark:text-white font-semibold">AI HUMANIZER</button>
+                            <button className="w-full py-2 rounded font-semibold">AI HUMANIZER</button>
                         </Link>
                         <Link href="/ai-chat" onClick={() => setMenuOpen(false)}>
-                            <button className="w-full py-2 rounded text-black dark:text-white font-semibold">AI CHAT</button>
+                            <button className="w-full py-2 rounded font-semibold">AI CHAT</button>
                         </Link>
                         <Link href="/blogs" onClick={() => setMenuOpen(false)}>
-                            <button className="w-full py-2 rounded text-black dark:text-white font-semibold">BLOGS</button>
+                            <button className="w-full py-2 rounded font-semibold">BLOGS</button>
                         </Link>
                         <Link href="/pricing" onClick={() => setMenuOpen(false)}>
-                            <button className="w-full py-2 rounded text-black dark:text-white font-semibold">PRICING</button>
+                            <button className="w-full py-2 rounded font-semibold">PRICING</button>
                         </Link>
                         <Link href="/signup" onClick={() => setMenuOpen(false)}>
                             <button className="w-full py-2 rounded border border-[#7a73e8] text-[#7a73e8] font-semibold">JOIN</button>
