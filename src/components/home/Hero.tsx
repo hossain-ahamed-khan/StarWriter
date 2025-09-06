@@ -15,7 +15,7 @@ export const Hero = () => {
     const { theme } = useTheme();
     return (
         <div data-aos="zoom-out-down">
-            <div className={`relative h-[420px] md:h-[520px] lg:h-[640px] flex flex-col justify-center items-center overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
+            <div className={`relative h-[420px] md:h-[520px] lg:h-[640px] flex flex-col justify-center items-center overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>
 
                 {/* Background Images - Only show in dark mode */}
                 <div className={`${theme === 'light' ? 'hidden' : 'block'}`}>
@@ -116,7 +116,7 @@ export const Hero = () => {
 
                     <div>
                         <button className="flex gap-2 items-center px-3 lg:px-6 py-2 lg:py-2 rounded-full border shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-sm lg:text-lg font-medium lg:font-bold tracking-wide mt-12 lg:mt-24">
-                            <BsStars className="text-white drop-shadow-[0_2px_8px_rgba(202,169,211,0.5)]" />
+                            <BsStars className={`${theme === 'light' ? 'text-black' : 'text-white'}`} />
                             Try Me, I'm Free
                         </button>
                     </div>

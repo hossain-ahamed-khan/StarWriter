@@ -8,25 +8,25 @@ const TestimonialsScroll = () => {
         {
             name: "Emma Roberts",
             university: "University of Toronto, Canada",
-            text: "As a law student, precision matters. Starwriter helps me maintain my voice while staying accurate.",
+            text: "As a law student, precision matters. StarWriter helps me maintain my voice while staying accurate.",
             avatar: "ER"
         },
         {
             name: "Liam Johnson",
             university: "Harvard University, USA",
-            text: "As a graduate student, authenticity matters. Starwriter transforms my work while keeping it genuine.",
+            text: "As a graduate student, authenticity matters. StarWriter transforms my work while keeping it genuine.",
             avatar: "LJ"
         },
         {
             name: "Sophia Patel",
             university: "University of Edinburgh, UK",
-            text: "Starwriter helped me make my research papers sound professional without losing my style.",
+            text: "StarWriter helped me make my research papers sound professional without losing my style.",
             avatar: "SP"
         },
         {
             name: "Ethan Carter",
             university: "Columbia University, USA",
-            text: "Starwriter helped me make my research papers sound professional without losing my style.",
+            text: "StarWriter helped me make my research papers sound professional without losing my style.",
             avatar: "EC"
         }
     ];
@@ -36,31 +36,31 @@ const TestimonialsScroll = () => {
         {
             name: "Maya Singh",
             university: "MIT, USA",
-            text: "Starwriter saved me hours on assignments. The AI-generated text now feels completely mine.",
+            text: "StarWriter saved me hours on assignments. The AI-generated text now feels completely mine.",
             avatar: "MS"
         },
         {
             name: "Isabella Nguyen",
             university: "University of British Columbia, Canada",
-            text: "Even complex reports sound natural with Starwriter. It is a game changer for professionals.",
+            text: "Even complex reports sound natural with StarWriter. It is a game changer for professionals.",
             avatar: "IN"
         },
         {
             name: "Lucas Bennett",
             university: "University of Oxford, UK",
-            text: "Starwriter helped me make my research papers sound professional without losing my style.",
+            text: "StarWriter helped me make my research papers sound professional without losing my style.",
             avatar: "LB"
         },
         {
             name: "Mia Thompson",
             university: "University of California, Berkeley, USA",
-            text: "I was skeptical at first, but Starwriter makes my content sound completely human. It is amazing!",
+            text: "I was skeptical at first, but StarWriter makes my content sound completely human. It is amazing!",
             avatar: "MT"
         },
         {
             name: "Alex Chen",
             university: "Stanford University, USA",
-            text: "As a graduate student, authenticity matters. Starwriter transforms my work while keeping it genuine.",
+            text: "As a graduate student, authenticity matters. StarWriter transforms my work while keeping it genuine.",
             avatar: "AC"
         }
     ];
@@ -106,10 +106,10 @@ const TestimonialsScroll = () => {
         <div className={`py-8 sm:py-10 lg:py-20 my-8 sm:my-16 overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-8 mb-10 sm:mb-16">
                 <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-2 sm:mb-4">
-                    Discover the Power of Starwriter with Real Stories
+                    Discover the Power of StarWriter with Real Stories
                 </h2>
                 <p className="text-gray-400 text-center text-xs sm:text-sm md:text-lg max-w-3xl mx-auto">
-                    Starwriter completely changed how I write my essays. My grades improved, and it saves me so much time!
+                    StarWriter completely changed how I write my essays. My grades improved, and it saves me so much time!
                 </p>
             </div>
 

@@ -12,7 +12,7 @@ export const Agnostic = () => {
         <div className="w-11/12 max-w-5xl mx-auto">
             <div>
                 <div className="relative">
-                    <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold text-center mb-2 leading-tight">
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-2 leading-tight">
                         We are Model Agnostic
                     </h1>
                     <div className="flex justify-center">
@@ -25,8 +25,8 @@ export const Agnostic = () => {
                         />
                     </div>
                 </div>
-                <p className="w-full sm:w-4/5 md:w-1/2 mx-auto text-center mt-6 sm:mt-8 text-sm sm:text-lg">
-                    No matter which AI you use—ChatGPT, Claude, Gemini, or others—Zulio ensures your words sound just like you. We transform AI-generated text into a human like version that feels authentically yours, giving you peace of mind and confidence in every word.
+                <p className="w-full sm:w-4/5 md:w-3/5 mx-auto text-center mt-6 sm:mt-8 text-xs sm:text-sm md:text-base">
+                    No matter which AI you use—ChatGPT, Claude, Gemini, or others—<span className='text-[#c8a9e6]'>StarWriter</span> ensures your words sound just like you. We transform AI-generated text into a human like version that feels authentically yours, giving you peace of mind and confidence in every word.
                 </p>
             </div>
 

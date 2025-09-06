@@ -32,36 +32,36 @@ export const Platforms = () => {
                 </div>
 
                 <div className={`w-full relative z-10 ${theme === 'light' ? 'text-black' : 'text-white'}`}>
-                    <p className="text-center text-sm tracking-wide py-2">Featured On</p>
+                    <p className="text-center text-[8px] md:text-sm tracking-wide py-2">Featured On</p>
                     <div className={` ${theme === 'light' ? 'bg-gradient-to-r from-[#7a6ee6] via-[#6fa8f5] to-[#a6d4fa] rounded-2xl py-2 shadow-2xl relative overflow-hidden' : ''}`}>
-                        <div className='flex gap-4 lg:gap-8 justify-center p-2 md:p-4'>
+                        <div className='flex gap-2 lg:gap-8 justify-center p-2 md:p-4'>
                             <Image
                                 src={businessInsider}
                                 width={100}
                                 height={80}
                                 alt="business insider logo"
-                                className="hover:scale-110 transition-transform duration-200 w-20 lg:w-auto"
+                                className="hover:scale-110 transition-transform duration-200 w-16 lg:w-auto"
                             />
                             <Image
                                 src={fiverr}
                                 width={100}
                                 height={80}
                                 alt="Fiverr logo"
-                                className="hover:scale-110 transition-transform duration-200 w-20 lg:w-auto"
+                                className="hover:scale-110 transition-transform duration-200 w-16 lg:w-auto"
                             />
                             <Image
                                 src={hubSpot}
                                 width={100}
                                 height={80}
                                 alt="HubSpot logo"
-                                className="hover:scale-110 transition-transform duration-200 w-20 lg:w-auto"
+                                className="hover:scale-110 transition-transform duration-200 w-16 lg:w-auto"
                             />
                             <Image
                                 src={buzzFeed}
                                 width={100}
                                 height={80}
                                 alt="BuzzFeed logo"
-                                className="hover:scale-110 transition-transform duration-200 w-20 lg:w-auto"
+                                className="hover:scale-110 transition-transform duration-200 w-16 lg:w-auto"
                             />
                         </div>
                     </div>
@@ -71,7 +71,7 @@ export const Platforms = () => {
                 <div className="relative z-10 mt-12 overflow-hidden">
                     {/* Title */}
                     <div className="text-center mb-8 relative z-10">
-                        <h3 className="text-center text-sm mb-2 drop-shadow-lg">
+                        <h3 className="text-center text-[8px] md:text-sm mb-2 drop-shadow-lg">
                             Guaranteed To Bypass Every AI Detector
                         </h3>
                     </div>

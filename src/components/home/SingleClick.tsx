@@ -6,7 +6,7 @@ export const SingleClick = () => {
     return (
         <div className="px-4 sm:px-8 mx-auto text-center">
             <h1 className="text-lg sm:text-4xl md:text-5xl font-bold text-center leading-tight">
-                Unlock Humanized Text with a Single Click
+                Unlock Undetectable Text with a Single Click
             </h1>
             {theme === 'light' ? (
                 <p className="text-xs sm:text-lg text-center mt-6 sm:mt-8 text-black">
