@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Check } from 'lucide-react';
+import { Check, Sparkles } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { motion } from 'framer-motion';
 
 export const Packages = () => {
     const { theme } = useTheme();
@@ -8,144 +9,254 @@ export const Packages = () => {
 
     const plans = [
         {
-            name: 'Amethyst',
-            regularPrice: billingType === 'Monthly' ? 300 : 3000,
-            offerPrice: billingType === 'Monthly' ? 150 : 1500,
-            color: 'purple',
+            name: 'Free',
+            description: 'Perfect for trying out',
+            regularPrice: billingType === 'Monthly' ? null : null,
+            offerPrice: billingType === 'Monthly' ? 0 : 0,
+            wordsLimit: '1,000',
+            perRequestLimit: '100',
             features: [
-                'Android or iOS app',
-                'Modern UI/UX design',
-                'Essential feature integration',
-                'App Published Play Store/App Store',
-                'Support - 24/7'
+                'AI Humanizer',
+                'Live Chat Support',
+                '1,000 words',
             ],
-            isPopular: false
+            excludedFeatures: [
+                'AI Chat',
+                'Advanced Formula'
+            ],
+            isPopular: false,
+            ctaText: 'GET STARTED FREE'
         },
         {
-            name: 'Sapphire',
-            regularPrice: billingType === 'Monthly' ? 150 : 1500,
-            offerPrice: billingType === 'Monthly' ? 70 : 700,
-            color: 'blue',
+            name: billingType === 'Monthly' ? 'Standard' : 'Standard Annual',
+            description: 'Great for regular users',
+            regularPrice: billingType === 'Monthly' ? null : 59.99,
+            offerPrice: billingType === 'Monthly' ? 4.99 : 49.99,
+            wordsLimit: billingType === 'Monthly' ? '20,000' : '240,000',
+            perRequestLimit: '800',
             features: [
-                'Modern Website Design',
-                'Responsive Web Design',
-                'SEO Optimization',
-                'Custom Features & Design',
-                'Fast, Secure & Reliable',
-                'Support 24/7'
+                'AI Humanizer',
+                'Live Chat Support',
+                `${billingType === 'Monthly' ? '20,000' : '240,000'} words`,
             ],
-            isPopular: true
+            excludedFeatures: [
+                'AI Chat',
+                'Advanced Formula'
+            ],
+            isPopular: false,
+            ctaText: 'GET STARTED'
         },
         {
-            name: 'Emerald',
-            regularPrice: billingType === 'Monthly' ? 200 : 2000,
-            offerPrice: billingType === 'Monthly' ? 100 : 1000,
-            color: 'green',
+            name: billingType === 'Monthly' ? 'Pro' : 'Pro Annual',
+            description: 'Unlimited power for professionals',
+            regularPrice: billingType === 'Monthly' ? null : 119.99,
+            offerPrice: billingType === 'Monthly' ? 9.99 : 99.99,
+            wordsLimit: 'Unlimited',
+            perRequestLimit: '1,200',
             features: [
-                'SEO (On-page & Technical)',
-                'Google Ads Campaign Setup',
-                'Facebook Ads Campaign Setup',
-                'Social Media Setup & Branding',
-                'Email Marketing Campaigns',
-                'Support - 24/7'
+                'AI Humanizer',
+                'AI Chat',
+                'Advanced Formula',
+                'Priority Support',
+                'Unlimited words',
             ],
-            isPopular: false
+            excludedFeatures: [],
+            isPopular: true,
+            ctaText: 'GO PRO'
         }
     ];
 
     return (
         <div className={`p-8 py-24 ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
             <div className="max-w-7xl mx-auto">
+                {/* Section Header */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    className="text-center mb-16"
+                >
+                    <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] bg-clip-text text-transparent">
+                        Choose Your Plan
+                    </h2>
+                    <p className={`text-lg ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
+                        Transform your AI content into naturally human-written text
+                    </p>
+                </motion.div>
+
                 {/* Billing Toggle */}
                 <div className="flex justify-center mb-12">
-                    <div className={`inline-flex rounded-full border   p-1 ${theme === 'light' ? 'bg-white text-black' : 'bg-black/60 text-white border-gray-700'}`}>
+                    <div className={`inline-flex rounded-full border p-1 ${theme === 'light' ? 'bg-gray-100 border-gray-300' : 'bg-black/60 border-gray-700'}`}>
                         {['Monthly', 'Yearly'].map((type) => (
                             <button
                                 key={type}
                                 onClick={() => setBillingType(type)}
-                                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${billingType === type
-                                    ? ` shadow-lg ${theme === 'light' ? 'bg-white text-black' : 'bg-white/20 text-white'}`
-                                    : `text-gray-400 hover:text-gray-200`}`}
+                                className={`px-8 py-3 rounded-full text-sm font-medium transition-all duration-300 relative ${
+                                    billingType === type
+                                        ? `shadow-lg ${theme === 'light' ? 'bg-white text-black' : 'bg-gradient-to-r from-[#7a73e8] to-[#CAA9D3] text-white'}`
+                                        : `${theme === 'light' ? 'text-gray-600' : 'text-gray-400'} hover:text-gray-200`
+                                }`}
                             >
                                 {type}
+                                {type === 'Yearly' && (
+                                    <span className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-2 py-0.5 rounded-full">
+                                        Save 17%
+                                    </span>
+                                )}
                             </button>
                         ))}
                     </div>
                 </div>
 
                 {/* Pricing Cards */}
-                <div data-aos="fade-up"
-                    data-aos-duration="3000">
+                <div data-aos="fade-up" data-aos-duration="1000">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                         {plans.map((plan, index) => (
-                            <div
+                            <motion.div
                                 key={plan.name}
-                                className={`relative border-gray-800/50 hover:border-gray-700/50 rounded-2xl border px-6 py-12 backdrop-blur-sm transition-all duration-300 hover:scale-105 ${theme === 'light' ? 'text-black' : 'text-white'}
-                                group overflow-hidden
-                            `}
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className={`relative rounded-2xl border px-6 py-8 backdrop-blur-sm transition-all duration-300 hover:scale-105 
+                                    ${plan.isPopular 
+                                        ? 'border-purple-500/50 shadow-2xl shadow-purple-500/20' 
+                                        : 'border-gray-800/50 hover:border-gray-700/50'
+                                    } 
+                                    ${theme === 'light' ? 'bg-white/80' : 'bg-black/40'}
+                                    group overflow-hidden
+                                `}
                             >
+                                {/* Popular Badge */}
+                                {plan.isPopular && (
+                                    <div className="absolute top-0 right-0 bg-gradient-to-r from-[#7a73e8] to-[#CAA9D3] text-white px-4 py-1 rounded-bl-lg rounded-tr-lg text-xs font-bold flex items-center gap-1">
+                                        <Sparkles className="w-3 h-3" />
+                                        MOST POPULAR
+                                    </div>
+                                )}
+
                                 {/* Creative Hover Effect */}
-                                <div
-                                    className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                                >
-                                    <div className={`absolute -top-10 -left-10 w-40 h-40 rounded-full blur-2xl ${theme === 'light' ? 'bg-gradient-to-br from-purple-300/40 via-blue-200/40 to-pink-200/40' : 'bg-gradient-to-br from-purple-700/40 via-blue-800/40 to-pink-800/40'}`}></div>
-                                    <div className={`absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-2xl ${theme === 'light' ? 'bg-gradient-to-br from-blue-200/40 via-purple-200/40 to-pink-200/40' : 'bg-gradient-to-br from-blue-900/40 via-purple-900/40 to-pink-900/40'}`}></div>
+                                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                    <div className={`absolute -top-10 -left-10 w-40 h-40 rounded-full blur-3xl ${
+                                        theme === 'light' 
+                                            ? 'bg-gradient-to-br from-purple-300/30 via-blue-200/30 to-pink-200/30' 
+                                            : 'bg-gradient-to-br from-purple-700/30 via-blue-800/30 to-pink-800/30'
+                                    }`}></div>
+                                    <div className={`absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-3xl ${
+                                        theme === 'light' 
+                                            ? 'bg-gradient-to-br from-blue-200/30 via-purple-200/30 to-pink-200/30' 
+                                            : 'bg-gradient-to-br from-blue-900/30 via-purple-900/30 to-pink-900/30'
+                                    }`}></div>
                                 </div>
 
                                 {/* Plan Header */}
-                                <div className="mb-6">
-                                    <h3 className="text-2xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+                                <div className="mb-8 relative z-10">
+                                    <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] bg-clip-text text-transparent">
                                         {plan.name}
                                     </h3>
+                                    <p className={`text-sm mb-6 ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
+                                        {plan.description}
+                                    </p>
 
-                                    <div className="mb-4">
-                                        <div className={`text-sm mb-1 ${theme === 'light' ? 'text-black' : 'text-gray-400'}`}>
-                                            Regular Price{' '}
-                                            <span className={`line-through ${theme === 'light' ? 'text-black' : 'text-gray-500'}`}>
-                                                ${plan.regularPrice}
+                                    {/* Pricing - FIXED: Added check for regularPrice > 0 */}
+                                    <div className="mb-6">
+                                        {plan.regularPrice != null && plan.offerPrice != null && (
+    <div className={`text-sm mb-2 ${theme === 'light' ? 'text-gray-500' : 'text-gray-500'}`}>
+        <span className="line-through">${plan.regularPrice.toFixed(2)}</span>
+        <span className="ml-2 text-green-500 font-semibold">
+            {plan.regularPrice > plan.offerPrice
+                ? `Save $${(plan.regularPrice - plan.offerPrice).toFixed(2)}`
+                : 'No savings available'}
+        </span>
+    </div>
+)}
+
+                                        <div className="flex items-baseline gap-2">
+                                            <span className={`text-5xl font-bold ${theme === 'light' ? 'text-black' : 'text-white'}`}>
+                                                ${plan.offerPrice === 0 ? '0' : plan.offerPrice.toFixed(2)}
+                                            </span>
+                                            <span className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
+                                                /{billingType === 'Monthly' ? 'mo' : 'yr'}
                                             </span>
                                         </div>
-                                        <div className="flex items-baseline">
-                                            <span className={`text-4xl font-bold ${theme === 'light' ? 'text-black' : 'text-white'}`}>
-                                                ${plan.offerPrice}
-                                            </span>
-                                            <span className={`ml-2 ${theme === 'light' ? 'text-black' : 'text-gray-400'}`}>Offer Price</span>
+                                        <div className="mt-2 text-sm font-semibold bg-gradient-to-r from-[#7a73e8] to-[#CAA9D3] bg-clip-text text-transparent">
+                                            {plan.wordsLimit} words
                                         </div>
                                     </div>
 
-                                    <button className={`w-full py-2 rounded-lg bg-transparent border border-gray-600 font-semibold hover:bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] hover:border-gray-500 transition-all duration-300 ${theme === 'light' ? 'text-black' : 'text-white'}`}>
-                                        GET STARTED
+                                    {/* CTA Button */}
+                                    <button className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+                                        plan.isPopular
+                                            ? 'bg-gradient-to-r from-[#7a73e8] via-[#CAA9D3] to-[#B7D6EF] text-white shadow-lg shadow-purple-500/50'
+                                            : `bg-transparent border-2 ${theme === 'light' ? 'border-gray-300 hover:border-purple-500' : 'border-gray-600 hover:border-purple-500'} hover:bg-gradient-to-r from-[#7a73e8]/10 to-[#CAA9D3]/10`
+                                    }`}>
+                                        {plan.ctaText}
                                     </button>
                                 </div>
 
                                 {/* Features List */}
-                                <div className="space-y-3">
+                                <div className="space-y-4 relative z-10">
+                                    <div className={`text-xs font-semibold uppercase tracking-wider mb-3 ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
+                                        What's Included:
+                                    </div>
                                     {plan.features.map((feature, featureIndex) => (
-                                        <div key={featureIndex} className="flex items-start space-x-3">
+                                        <div key={featureIndex} className="flex items-start gap-3">
                                             <div className="flex-shrink-0 mt-0.5">
-                                                <div className="w-5 h-5 rounded-full flex items-center justify-center bg-gradient-to-r from-purple-400 to-blue-400">
-                                                    <Check className="w-3 h-3 text-white" />
+                                                <div className="w-5 h-5 rounded-full flex items-center justify-center bg-gradient-to-r from-[#7a73e8] to-[#CAA9D3]">
+                                                    <Check className="w-3 h-3 text-white" strokeWidth={3} />
                                                 </div>
                                             </div>
-                                            <span className={`text-sm leading-relaxed ${theme === 'light' ? 'text-black' : 'text-white'}`}>
+                                            <span className={`text-sm leading-relaxed ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'}`}>
                                                 {feature}
                                             </span>
                                         </div>
                                     ))}
+                                    
+                                    {/* Excluded Features */}
+                                    {plan.excludedFeatures.length > 0 && (
+                                        <>
+                                            <div className={`text-xs font-semibold uppercase tracking-wider mt-6 mb-3 ${theme === 'light' ? 'text-gray-500' : 'text-gray-500'}`}>
+                                                Not Included:
+                                            </div>
+                                            {plan.excludedFeatures.map((feature, featureIndex) => (
+                                                <div key={featureIndex} className="flex items-start gap-3 opacity-50">
+                                                    <div className="flex-shrink-0 mt-0.5">
+                                                        <div className={`w-5 h-5 rounded-full flex items-center justify-center ${theme === 'light' ? 'bg-gray-300' : 'bg-gray-700'}`}>
+                                                            <span className="text-white text-xs">✕</span>
+                                                        </div>
+                                                    </div>
+                                                    <span className={`text-sm leading-relaxed ${theme === 'light' ? 'text-gray-500' : 'text-gray-500'}`}>
+                                                        {feature}
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </>
+                                    )}
                                 </div>
 
                                 {/* Decorative Elements */}
-                                <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 blur-xl"></div>
-                                <div className="absolute bottom-4 left-4 w-8 h-8 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 blur-lg"></div>
-                            </div>
+                                <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500/10 to-blue-500/10 blur-xl"></div>
+                                <div className="absolute bottom-4 left-4 w-8 h-8 rounded-full bg-gradient-to-br from-blue-500/10 to-purple-500/10 blur-lg"></div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
 
+                {/* Bottom CTA */}
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="text-center mt-16"
+                >
+                    <p className={`text-sm ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
+                        All plans include a 7-day money-back guarantee • Cancel anytime • No hidden fees
+                    </p>
+                </motion.div>
+
                 {/* Background Decorative Elements */}
                 <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
                     <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-purple-500/5 blur-3xl animate-pulse"></div>
-                    <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-blue-500/5 blur-3xl animate-pulse delay-1000"></div>
+                    <div className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full bg-blue-500/5 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
                 </div>
             </div>
         </div>

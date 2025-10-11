@@ -6,10 +6,48 @@ import mainLogo from '../../../public/resources/images/main-logo.png';
 import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { LogOut, User } from 'lucide-react';
 
 export const Navbar = () => {
     const { theme } = useTheme();
+    const router = useRouter();
     const [menuOpen, setMenuOpen] = React.useState(false);
+    const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+    const [fullName, setFullName] = React.useState('');
+    const [showDropdown, setShowDropdown] = React.useState(false);
+
+    // Check authentication status on mount and when localStorage changes
+    React.useEffect(() => {
+        const checkAuth = () => {
+            const token = localStorage.getItem('access_token');
+            const name = localStorage.getItem('full_name');
+            setIsAuthenticated(!!token);
+            setFullName(name || 'User');
+        };
+
+        checkAuth();
+
+        // Listen for storage changes (for multi-tab support)
+        window.addEventListener('storage', checkAuth);
+        return () => window.removeEventListener('storage', checkAuth);
+    }, []);
+
+    // Logout handler
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('user_role');
+        localStorage.removeItem('full_name');
+        
+        setIsAuthenticated(false);
+        setShowDropdown(false);
+        setMenuOpen(false);
+        
+        toast.success('Logged out successfully');
+        router.push('/login');
+    };
 
     // Close mobile menu when clicking outside
     React.useEffect(() => {
@@ -50,8 +88,7 @@ export const Navbar = () => {
                     {/* Logo */}
                     <div className="flex-shrink-0">
                         <Link href="/">
-                            <h1 className={`text-lg sm:text-2xl lg:text-3xl font-bold font-sf-pro cursor-pointer transition-all duration-300 hover:scale-105 ${theme === 'light' ? 'text-[#c8a9e6]' : 'bg-gradient-to-r from-[#c8a9e6] to-white bg-clip-text text-transparent'}`}
-                            >
+                            <h1 className={`text-lg sm:text-2xl lg:text-3xl font-bold font-sf-pro cursor-pointer transition-all duration-300 hover:scale-105 ${theme === 'light' ? 'text-[#c8a9e6]' : 'bg-gradient-to-r from-[#c8a9e6] to-white bg-clip-text text-transparent'}`}>
                                 StarWriter
                             </h1>
                         </Link>
@@ -113,17 +150,69 @@ export const Navbar = () => {
                                 ))}
                             </div>
 
-                            {/* Join Button */}
-                            <Link href="/signup">
-                                <motion.button
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="relative border border-[#7a73e8] rounded-full px-4 xl:px-8 py-2 transition-all duration-300 overflow-hidden group focus:outline-none cursor-pointer flex-shrink-0"
-                                >
-                                    <span className="absolute inset-0 bg-gradient-to-r from-[#7a73e8]/0 via-[#7a73e8]/20 to-[#7a73e8]/0 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
-                                    <span className="relative z-10 text-xs xl:text-sm font-sm">JOIN</span>
-                                </motion.button>
-                            </Link>
+                            {/* Auth Section - Desktop */}
+                            {isAuthenticated ? (
+                                <div className="relative flex-shrink-0">
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={() => setShowDropdown(!showDropdown)}
+                                        className="relative border border-[#7a73e8] rounded-full px-4 xl:px-6 py-2 transition-all duration-300 overflow-hidden group focus:outline-none cursor-pointer flex items-center gap-2"
+                                    >
+                                        <span className="absolute inset-0 bg-gradient-to-r from-[#7a73e8]/0 via-[#7a73e8]/20 to-[#7a73e8]/0 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
+                                        <User size={16} className="relative z-10" />
+                                        <span className="relative z-10 text-xs xl:text-sm font-medium max-w-[120px] truncate">
+                                            {fullName}
+                                        </span>
+                                    </motion.button>
+
+                                    {/* Desktop Dropdown */}
+                                    <AnimatePresence>
+                                        {showDropdown && (
+                                            <>
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: -10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: -10 }}
+                                                    className={`absolute right-0 mt-2 w-56 rounded-xl shadow-2xl overflow-hidden border ${theme === 'light' ? 'bg-white/95 border-gray-200/50' : 'bg-black/95 border-[#7a73e8]/30'} backdrop-blur-lg`}
+                                                >
+                                                    <div className={`px-4 py-3 border-b ${theme === 'light' ? 'border-gray-200/50' : 'border-[#7a73e8]/20'}`}>
+                                                        <p className="text-sm font-semibold">{fullName}</p>
+                                                        <p className="text-xs opacity-70 mt-1">
+                                                            {localStorage.getItem('user_role') || 'User'}
+                                                        </p>
+                                                    </div>
+                                                    
+                                                    <button
+                                                        onClick={handleLogout}
+                                                        className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center gap-2 ${theme === 'light' ? 'hover:bg-gray-100' : 'hover:bg-[#7a73e8]/20'}`}
+                                                    >
+                                                        <LogOut size={16} />
+                                                        Logout
+                                                    </button>
+                                                </motion.div>
+
+                                                {/* Close dropdown overlay */}
+                                                <div 
+                                                    className="fixed inset-0 z-[-1]" 
+                                                    onClick={() => setShowDropdown(false)}
+                                                />
+                                            </>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            ) : (
+                                <Link href="/signup">
+                                    <motion.button
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="relative border border-[#7a73e8] rounded-full px-4 xl:px-8 py-2 transition-all duration-300 overflow-hidden group focus:outline-none cursor-pointer flex-shrink-0"
+                                    >
+                                        <span className="absolute inset-0 bg-gradient-to-r from-[#7a73e8]/0 via-[#7a73e8]/20 to-[#7a73e8]/0 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
+                                        <span className="relative z-10 text-xs xl:text-sm font-sm">JOIN</span>
+                                    </motion.button>
+                                </Link>
+                            )}
                         </div>
                     </div>
 
@@ -215,19 +304,42 @@ export const Navbar = () => {
                                         </Link>
                                     ))}
 
-                                    {/* Mobile Join Button */}
-                                    <Link href="/signup" onClick={() => setMenuOpen(false)}>
-                                        <motion.button
-                                            initial={{ opacity: 0, x: -20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: navLinks.length * 0.1 }}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            className="w-full mt-4 py-3 px-4 rounded-xl border-2 border-[#7a73e8] text-[#7a73e8] font-semibold text-base hover:bg-[#7a73e8]/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#7a73e8]/50"
-                                        >
-                                            JOIN STAR WRITER
-                                        </motion.button>
-                                    </Link>
+                                    {/* Mobile Auth Section */}
+                                    {isAuthenticated ? (
+                                        <>
+                                            <div className={`mt-4 p-4 rounded-xl border ${theme === 'light' ? 'border-gray-200' : 'border-[#7a73e8]/30'} bg-white/5`}>
+                                                <div className="flex items-center gap-3 mb-3">
+                                                    <User size={20} className="text-[#7a73e8]" />
+                                                    <div>
+                                                        <p className="font-semibold text-sm">{fullName}</p>
+                                                        <p className="text-xs opacity-70">{localStorage.getItem('user_role') || 'User'}</p>
+                                                    </div>
+                                                </div>
+                                                <motion.button
+                                                    whileHover={{ scale: 1.02 }}
+                                                    whileTap={{ scale: 0.98 }}
+                                                    onClick={handleLogout}
+                                                    className="w-full py-2 px-4 rounded-lg border-2 border-red-500/50 text-red-500 font-semibold text-sm hover:bg-red-500/10 transition-all duration-300 flex items-center justify-center gap-2"
+                                                >
+                                                    <LogOut size={16} />
+                                                    Logout
+                                                </motion.button>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <Link href="/signup" onClick={() => setMenuOpen(false)}>
+                                            <motion.button
+                                                initial={{ opacity: 0, x: -20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: navLinks.length * 0.1 }}
+                                                whileHover={{ scale: 1.02 }}
+                                                whileTap={{ scale: 0.98 }}
+                                                className="w-full mt-4 py-3 px-4 rounded-xl border-2 border-[#7a73e8] text-[#7a73e8] font-semibold text-base hover:bg-[#7a73e8]/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#7a73e8]/50"
+                                            >
+                                                JOIN STAR WRITER
+                                            </motion.button>
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
 
