@@ -60,7 +60,7 @@ const SetOtpPage = () => {
         setIsLoading(true);
 
         try {
-            const response = await apiClient.post('/user_auth/verify-passwordreset-otp/', {
+            const response = await apiClient.post('user_auth/verify-passwordreset-otp/', {
                 email: email,
                 otp: otp
             });

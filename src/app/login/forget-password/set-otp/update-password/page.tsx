@@ -106,7 +106,7 @@ const NewPasswordComponent = () => {
         setIsLoading(true);
 
         try {
-            const response = await apiClient.post('/user_auth/set-password/', {
+            const response = await apiClient.post('user_auth/set-password/', {
                 reset_token: resetToken,
                 new_password: formData.password,
                 confirm_password: formData.confirm_password

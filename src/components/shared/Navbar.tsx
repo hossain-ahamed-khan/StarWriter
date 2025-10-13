@@ -8,7 +8,21 @@ import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { LogOut, User } from 'lucide-react';
+import { LogOut, User, Crown, AlertCircle, Calendar } from 'lucide-react';
+import { apiClient } from '@/lib/api-client';
+
+// Type definitions
+interface SubscriptionData {
+    has_subscription: boolean;
+    subscription?: {
+        stripe_subscription_id: string | null;
+        tier: string;
+        term: string;
+        status: string;
+        is_active: boolean;
+        current_period_end?: string;
+    };
+}
 
 export const Navbar = () => {
     const { theme } = useTheme();
@@ -17,19 +31,39 @@ export const Navbar = () => {
     const [isAuthenticated, setIsAuthenticated] = React.useState(false);
     const [fullName, setFullName] = React.useState('');
     const [showDropdown, setShowDropdown] = React.useState(false);
+    const [subscriptionData, setSubscriptionData] = React.useState<SubscriptionData | null>(null);
+    const [loadingSubscription, setLoadingSubscription] = React.useState(false);
 
-    // Check authentication status on mount and when localStorage changes
+    // Fetch subscription status
+    const fetchSubscriptionStatus = async () => {
+        try {
+            setLoadingSubscription(true);
+            const data = await apiClient.get('payments/subscription-status/');
+            setSubscriptionData(data);
+        } catch (error) {
+            console.error('Error fetching subscription:', error);
+        } finally {
+            setLoadingSubscription(false);
+        }
+    };
+
+    // Check authentication status on mount
     React.useEffect(() => {
         const checkAuth = () => {
             const token = localStorage.getItem('access_token');
             const name = localStorage.getItem('full_name');
             setIsAuthenticated(!!token);
             setFullName(name || 'User');
+
+            // Fetch subscription if authenticated
+            if (token) {
+                fetchSubscriptionStatus();
+            }
         };
 
         checkAuth();
 
-        // Listen for storage changes (for multi-tab support)
+        // Listen for storage changes
         window.addEventListener('storage', checkAuth);
         return () => window.removeEventListener('storage', checkAuth);
     }, []);
@@ -44,9 +78,52 @@ export const Navbar = () => {
         setIsAuthenticated(false);
         setShowDropdown(false);
         setMenuOpen(false);
+        setSubscriptionData(null);
         
         toast.success('Logged out successfully');
         router.push('/login');
+    };
+
+    // Check if user has a paid subscription
+    const hasPaidSubscription = () => {
+        return subscriptionData?.subscription?.stripe_subscription_id !== null && 
+               subscriptionData?.subscription?.stripe_subscription_id !== undefined;
+    };
+
+    // Format subscription tier
+    const formatTier = (tier?: string) => {
+        if (!tier) return 'Free';
+        return tier.charAt(0).toUpperCase() + tier.slice(1);
+    };
+
+    // Format subscription term
+    const formatTerm = (term?: string) => {
+        if (!term) return '';
+        return term.charAt(0).toUpperCase() + term.slice(1);
+    };
+
+    // Format date
+    const formatDate = (dateString?: string) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    };
+
+    // Format subscription status
+    const formatStatus = (status?: string) => {
+        if (!status) return 'Inactive';
+        return status.charAt(0).toUpperCase() + status.slice(1);
+    };
+
+    // Get subscription badge color
+    const getSubscriptionBadgeColor = () => {
+        if (!hasPaidSubscription()) return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+        if (subscriptionData?.subscription?.is_active) {
+            const tier = subscriptionData.subscription.tier;
+            if (tier === 'pro') return 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30';
+            if (tier === 'standard') return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+        }
+        return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
     };
 
     // Close mobile menu when clicking outside
@@ -81,7 +158,7 @@ export const Navbar = () => {
     ];
 
     return (
-        <nav className={`sticky top-0 w-full z-50 ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'} transition-colors duration-300`}>
+        <nav suppressHydrationWarning className={`sticky top-0 w-full z-50 ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'} transition-colors duration-300`}>
             <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16 sm:h-20 lg:h-24">
 
@@ -174,13 +251,48 @@ export const Navbar = () => {
                                                     initial={{ opacity: 0, y: -10 }}
                                                     animate={{ opacity: 1, y: 0 }}
                                                     exit={{ opacity: 0, y: -10 }}
-                                                    className={`absolute right-0 mt-2 w-56 rounded-xl shadow-2xl overflow-hidden border ${theme === 'light' ? 'bg-white/95 border-gray-200/50' : 'bg-black/95 border-[#7a73e8]/30'} backdrop-blur-lg`}
+                                                    className={`absolute right-0 mt-2 w-72 rounded-xl shadow-2xl overflow-hidden border ${theme === 'light' ? 'bg-white/95 border-gray-200/50' : 'bg-black/95 border-[#7a73e8]/30'} backdrop-blur-lg`}
                                                 >
                                                     <div className={`px-4 py-3 border-b ${theme === 'light' ? 'border-gray-200/50' : 'border-[#7a73e8]/20'}`}>
                                                         <p className="text-sm font-semibold">{fullName}</p>
                                                         <p className="text-xs opacity-70 mt-1">
                                                             {localStorage.getItem('user_role') || 'User'}
                                                         </p>
+                                                    </div>
+
+                                                    {/* Subscription Info */}
+                                                    <div className={`px-4 py-3 border-b ${theme === 'light' ? 'border-gray-200/50' : 'border-[#7a73e8]/20'}`}>
+                                                        {loadingSubscription ? (
+                                                            <p className="text-xs opacity-70">Loading...</p>
+                                                        ) : hasPaidSubscription() ? (
+                                                            <div className="space-y-2">
+                                                                <div className="flex items-center justify-between">
+                                                                    <span className="text-xs opacity-70">Plan</span>
+                                                                    <span className="text-xs font-semibold flex items-center gap-1">
+                                                                        <Crown size={12} className="text-yellow-500" />
+                                                                        {formatTier(subscriptionData?.subscription?.tier)}
+                                                                    </span>
+                                                                </div>
+                                                                <div className="flex items-center justify-between">
+                                                                    <span className="text-xs opacity-70">Billing</span>
+                                                                    <span className="text-xs font-semibold">
+                                                                        {formatTerm(subscriptionData?.subscription?.term)}
+                                                                    </span>
+                                                                </div>
+                                                                <div className="flex items-center justify-between">
+                                                                    <span className="text-xs opacity-70">Renews On</span>
+                                                                    <span className="text-xs font-semibold flex items-center gap-1">
+                                                                        <Calendar size={12} />
+                                                                        {formatDate(subscriptionData?.subscription?.current_period_end)}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        ) : (
+                                                            <p className="text-xs opacity-70 flex items-center gap-2">
+                                                                <AlertCircle size={12} />
+                                                                You have no active subscription
+                                                            </p>
+                                                        )}
                                                     </div>
                                                     
                                                     <button
@@ -284,7 +396,7 @@ export const Navbar = () => {
                             className={`mobile-menu fixed top-20 left-4 right-4 sm:left-6 sm:right-6 md:left-8 md:right-8 rounded-2xl shadow-2xl z-50 lg:hidden ${theme === 'light'
                                 ? 'bg-white/95 text-black border border-gray-200/50'
                                 : 'bg-black/95 text-white border border-gray-700/50'
-                                } backdrop-blur-md overflow-hidden`}
+                                } backdrop-blur-md overflow-hidden max-h-[calc(100vh-6rem)] overflow-y-auto`}
                         >
                             <div className="p-6 sm:p-8">
                                 {/* Mobile Navigation Links */}
@@ -310,16 +422,65 @@ export const Navbar = () => {
                                             <div className={`mt-4 p-4 rounded-xl border ${theme === 'light' ? 'border-gray-200' : 'border-[#7a73e8]/30'} bg-white/5`}>
                                                 <div className="flex items-center gap-3 mb-3">
                                                     <User size={20} className="text-[#7a73e8]" />
-                                                    <div>
+                                                    <div className="flex-1">
                                                         <p className="font-semibold text-sm">{fullName}</p>
                                                         <p className="text-xs opacity-70">{localStorage.getItem('user_role') || 'User'}</p>
                                                     </div>
                                                 </div>
+
+                                                {/* Subscription Status */}
+                                                <div className={`mt-3 p-3 rounded-lg border ${getSubscriptionBadgeColor()}`}>
+                                                    {loadingSubscription ? (
+                                                        <p className="text-xs">Loading subscription...</p>
+                                                    ) : hasPaidSubscription() ? (
+                                                        <div className="space-y-2">
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-xs font-medium opacity-80">Plan</span>
+                                                                <span className="text-xs font-bold flex items-center gap-1">
+                                                                    <Crown size={12} />
+                                                                    {formatTier(subscriptionData?.subscription?.tier)}
+                                                                </span>
+                                                            </div>
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-xs font-medium opacity-80">Billing</span>
+                                                                <span className="text-xs font-bold">
+                                                                    {formatTerm(subscriptionData?.subscription?.term)}
+                                                                </span>
+                                                            </div>
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-xs font-medium opacity-80">Renews On</span>
+                                                                <span className="text-xs font-bold flex items-center gap-1">
+                                                                    <Calendar size={12} />
+                                                                    {formatDate(subscriptionData?.subscription?.current_period_end)}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="flex items-center gap-2">
+                                                            <AlertCircle size={14} />
+                                                            <p className="text-xs font-medium">You have no active subscription</p>
+                                                        </div>
+                                                    )}
+                                                </div>
+
+                                                {/* Upgrade Button (if no subscription) */}
+                                                {!hasPaidSubscription() && (
+                                                    <Link href="/pricing" onClick={() => setMenuOpen(false)}>
+                                                        <motion.button
+                                                            whileHover={{ scale: 1.02 }}
+                                                            whileTap={{ scale: 0.98 }}
+                                                            className="w-full mt-3 py-2 px-4 rounded-lg bg-gradient-to-r from-[#7a73e8] to-[#CAA9D3] text-white font-semibold text-sm transition-all duration-300"
+                                                        >
+                                                            Upgrade Plan
+                                                        </motion.button>
+                                                    </Link>
+                                                )}
+
                                                 <motion.button
                                                     whileHover={{ scale: 1.02 }}
                                                     whileTap={{ scale: 0.98 }}
                                                     onClick={handleLogout}
-                                                    className="w-full py-2 px-4 rounded-lg border-2 border-red-500/50 text-red-500 font-semibold text-sm hover:bg-red-500/10 transition-all duration-300 flex items-center justify-center gap-2"
+                                                    className="w-full mt-3 py-2 px-4 rounded-lg border-2 border-red-500/50 text-red-500 font-semibold text-sm hover:bg-red-500/10 transition-all duration-300 flex items-center justify-center gap-2"
                                                 >
                                                     <LogOut size={16} />
                                                     Logout

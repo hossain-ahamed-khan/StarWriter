@@ -60,7 +60,7 @@ const VerifyCodePage = () => {
         setIsLoading(true);
 
         try {
-            const response = await apiClient.post('/user_auth/verify-registration-otp/', {
+            const response = await apiClient.post('user_auth/verify-registration-otp/', {
                 email: email,
                 otp: otp
             });

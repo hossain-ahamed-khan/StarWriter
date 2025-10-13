@@ -38,7 +38,7 @@ const ForgetPasswordPage = () => {
         setIsLoading(true);
 
         try {
-            const response = await apiClient.post('/user_auth/send-passwordreset-otp/', {
+            const response = await apiClient.post('user_auth/send-passwordreset-otp/', {
                 email: email
             });
 

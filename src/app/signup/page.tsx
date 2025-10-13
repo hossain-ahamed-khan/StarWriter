@@ -102,7 +102,7 @@ const SignUpForm = () => {
         setIsLoading(true);
 
         try {
-            const response = await apiClient.post('/user_auth/send-registration-otp/', {
+            const response = await apiClient.post('user_auth/send-registration-otp/', {
                 email: formData.email,
                 password: formData.password,
                 confirm_password: formData.confirm_password,
@@ -155,7 +155,7 @@ const SignUpForm = () => {
                 const tokens = await tokenResponse.json();
                 
                 if (tokens.id_token) {
-                    const response = await apiClient.post('/user_auth/google-login/', {
+                    const response = await apiClient.post('user_auth/google-login/', {
                         id_token: tokens.id_token
                     });
 

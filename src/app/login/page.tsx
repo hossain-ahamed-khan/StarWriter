@@ -82,7 +82,7 @@ const LoginPage = () => {
         setIsLoading(true);
 
         try {
-            const response = await apiClient.post('/user_auth/login/', {
+            const response = await apiClient.post('user_auth/login/', {
                 email_or_username: formData.email_or_username,
                 password: formData.password,
                 remember_me: formData.remember_me
@@ -144,7 +144,7 @@ const LoginPage = () => {
                 
                 if (tokens.id_token) {
                     // Send id_token to backend
-                    const response = await apiClient.post('/user_auth/google-login/', {
+                    const response = await apiClient.post('user_auth/google-login/', {
                         id_token: tokens.id_token
                     });
 
