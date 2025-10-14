@@ -136,19 +136,20 @@ export const apiClient = {
     return data;
   },
 
-  async delete(endpoint: string) {
-    const url = buildUrl(endpoint);
-    console.log('🔗 DELETE:', url);
+async delete(endpoint: string, body?: any) {
+  const url = buildUrl(endpoint);
+  console.log('🔗 DELETE:', url, 'Body:', body);
 
-    const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
+  const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
 
-    const response = await fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        ...(token && { 'Authorization': `Bearer ${token}` })
-      },
-    });
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token && { 'Authorization': `Bearer ${token}` })
+    },
+    ...(body && { body: JSON.stringify(body) }),
+  });
 
     const data = await readJsonSafe(response);
 
