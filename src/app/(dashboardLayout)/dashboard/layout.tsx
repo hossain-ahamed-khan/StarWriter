@@ -1,20 +1,36 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { AppSidebar } from "@/components/modules/dashboard/sidebar/app-sidebar"
 import {
     SidebarInset,
     SidebarProvider,
     SidebarTrigger,
 } from "@/components/ui/sidebar"
-import Image from "next/image"
 import { IoIosArrowDropdown } from "react-icons/io";
-import profileImage from "../../../../public/resources/images/profile-image.png";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
 import ProfileCard from "@/components/dashboard/profile/ProfileCard";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+    const [adminName, setAdminName] = useState<string>("")
+    const [adminRole, setAdminRole] = useState<string>("")
+
+    useEffect(() => {
+        try {
+            const name = typeof window !== "undefined" ? localStorage.getItem("admin_full_name") : null
+            const role = typeof window !== "undefined" ? localStorage.getItem("admin_user_role") : null
+            if (name) setAdminName(name)
+            if (role) setAdminRole(role)
+        } catch (err) {
+            // no-op: localStorage might be unavailable (e.g., privacy mode)
+        }
+    }, [])
+
     return (
         <SidebarProvider className="bg-white">
             <AppSidebar />
@@ -27,17 +43,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     <Popover>
                         <PopoverTrigger>
                             <div className="w-48 border border-[#E5E5E5] rounded-2xl flex justify-between items-center gap-2 px-4 py-2 mr-8 cursor-pointer transition-transform duration-300 hover:scale-105">
-                                <Image
-                                    src={profileImage}
-                                    // style={{ width: "40px", height: "auto" }}
-                                    width={40}
-                                    height={40}
-                                    alt="admin image"
-                                    className="rounded-full"
-                                />
+                                {/* Initials avatar (first two letters of name) */}
+                                <Avatar className="h-10 w-10">
+                                    <AvatarFallback className="bg-[#E6EBF7] text-black font-semibold">
+                                        {((adminName || "Admin").replace(/[^A-Za-z]/g, "").slice(0, 2) || "AD").toUpperCase()}
+                                    </AvatarFallback>
+                                </Avatar>
                                 <div>
-                                    <h2 className="text-sm font-medium">Moni Roy</h2>
-                                    <p className="text-xs text-muted-foreground">Super Admin</p>
+                                    <h2 className="text-sm font-medium">{adminName || "Admin"}</h2>
+                                    <p className="text-xs text-muted-foreground">{adminRole || "Administrator"}</p>
                                 </div>
                                 <IoIosArrowDropdown className="text-2xl text-muted-foreground" />
                             </div>

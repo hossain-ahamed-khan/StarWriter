@@ -8,48 +8,79 @@ import {
     AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
+    AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
-import { Switch } from "@/components/ui/switch"
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { useState } from "react";
+import { deleteUser } from "@/services/DeleteUser";
+import { toast } from "sonner";
 
-export default function UserTableRow() {
+export interface UserRowData {
+    full_name: string
+    email: string
+    phone_number: string | null
+    location: string | null
+    referralSource: string | null
+    user_id: number
+}
+
+type Props = {
+    index: number
+    user: UserRowData
+    onDeleted?: (user_id: number) => void
+}
+
+export default function UserTableRow({ index ,user, onDeleted }: Props) {
+    const [submitting, setSubmitting] = useState(false);
+    const handleDelete = async () => {
+        try {
+            setSubmitting(true);
+            const res = await deleteUser(user.user_id);
+            if (res.success) {
+                toast.success(`Deleted ${user.full_name || 'user'} (#${user.user_id})`);
+                onDeleted?.(user.user_id);
+            } else {
+                console.error(res.error);
+                toast.error(res.error || 'Failed to delete user');
+            }
+        } finally {
+            setSubmitting(false);
+        }
+    };
     return (
-        <TableRow>
-            <TableCell className="font-medium">#1233</TableCell>
-            <TableCell>Kathryn Murp</TableCell>
-            <TableCell>bockely@att.com</TableCell>
-            <TableCell>(201) 555-0124</TableCell>
-            <TableCell>New York, USA</TableCell>
-            <TableCell>Facebook</TableCell>
+        <TableRow key={user.user_id}>
+            <TableCell className="font-medium">{index}</TableCell>
+            <TableCell>{user.full_name || "-"}</TableCell>
+            <TableCell>{user.email || "-"}</TableCell>
+            <TableCell>{user.phone_number || "-"}</TableCell>
+            <TableCell>{user.location || "-"}</TableCell>
+            <TableCell>{user.referralSource || "-"}</TableCell>
             <TableCell className="text-right">
-                <AlertDialog >
-                    <AlertDialogTrigger className="p-2 bg-[#D9D9D9] rounded-sm"><BsThreeDotsVertical /></AlertDialogTrigger>
+                <AlertDialog>
+                    <AlertDialogTrigger className="inline-flex items-center gap-2 p-2 bg-red-600 text-white rounded-sm disabled:opacity-60" disabled={submitting}>
+                        <RiDeleteBin6Line />
+                    </AlertDialogTrigger>
                     <AlertDialogContent className="bg-white text-black">
                         <AlertDialogHeader>
-                            <div className="w-full flex justify-between">
+                            <div className="w-full flex justify-between items-center">
                                 <div></div>
-                                <AlertDialogTitle className="text-center text-[#0030A8] text-2xl font-bold">Action</AlertDialogTitle>
+                                <AlertDialogTitle className="text-center text-[#0030A8] text-2xl font-bold">Delete user</AlertDialogTitle>
                                 <AlertDialogCancel className="text-right"><ImCross /></AlertDialogCancel>
                             </div>
-
-                            <div>
-                                <div className="flex justify-between mt-8">
-                                    <span className="text-[#1A1A1A] text-lg font-semibold text-left">Disable User Access</span>
-                                    <Switch />
-                                </div>
-                                <div className="flex justify-between mt-4">
-                                    <span className="text-[#1A1A1A] text-lg font-semibold text-left">Delete User Account
-                                    </span>
-                                    <button className="flex items-center gap-2 bg-[#0030A8] px-4 text-white py-1.5 rounded-lg"><RiDeleteBin6Line /> Delete</button>
-                                </div>
-                            </div>
-                            <AlertDialogDescription></AlertDialogDescription>
                         </AlertDialogHeader>
+                        <AlertDialogDescription>
+                            Are you sure you want to delete "{user.full_name}" (#{user.user_id})? This action cannot be undone.
+                        </AlertDialogDescription>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel disabled={submitting} className="mt-2 sm:mt-0">Cancel</AlertDialogCancel>
+                            <button onClick={handleDelete} disabled={submitting} className="inline-flex items-center gap-2 bg-red-600 px-4 text-white py-1.5 rounded-lg">
+                                <RiDeleteBin6Line /> {submitting ? 'Deleting...' : 'Delete'}
+                            </button>
+                        </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>
             </TableCell>

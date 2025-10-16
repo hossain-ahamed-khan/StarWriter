@@ -13,22 +13,50 @@ import {
 import EditProfile from "./EditProfile";
 import PasswordChange from "./PasswordChange";
 import { ImCross } from "react-icons/im";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { Router } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function ProfileCard() {
+    const router = useRouter();
+    const [adminName, setAdminName] = useState<string>("")
+    const [adminRole, setAdminRole] = useState<string>("")
+
+    useEffect(() => {
+        try {
+            const name = typeof window !== "undefined" ? localStorage.getItem("admin_full_name") : null
+            const role = typeof window !== "undefined" ? localStorage.getItem("admin_user_role") : null
+            if (name) setAdminName(name)
+            if (role) setAdminRole(role)
+        } catch (err) {
+            // no-op: localStorage might be unavailable (e.g., privacy mode)
+        }
+    }, [])
+
+    // Logout handler
+    const handleLogout = () => {
+        localStorage.removeItem('admin_access_token');
+        localStorage.removeItem('admin_refresh_token');
+        localStorage.removeItem('admin_user_role');
+        localStorage.removeItem('admin_full_name');
+
+        toast.success('Logged out successfully');
+        router.push('/admin-login');
+    };
+
     return (
         <div>
             <div className="flex gap-4 mt-4 mb-8">
-                <Image
-                    src={profileImage}
-                    // style={{ width: "40px", height: "auto" }}
-                    width={60}
-                    height={60}
-                    alt="admin image"
-                    className="rounded-full"
-                />
-                <div className="space-y-2">
-                    <h1 className="text-[#1A1A1A] font-semibold">Ovie Rahaman </h1>
-                    <p className="bg-[#006699] text-xs text-white px-4 py-1 rounded-3xl text-center">Super Admin</p>
+                <Avatar className="h-10 w-10">
+                    <AvatarFallback className="bg-[#E6EBF7] text-black font-semibold">
+                        {((adminName || "Admin").replace(/[^A-Za-z]/g, "").slice(0, 2) || "AD").toUpperCase()}
+                    </AvatarFallback>
+                </Avatar>
+                <div>
+                    <h2 className="text-sm font-medium">{adminName || "Admin"}</h2>
+                    <p className="text-xs text-muted-foreground">{adminRole || "Administrator"}</p>
                 </div>
             </div>
             <hr />
@@ -75,7 +103,7 @@ export default function ProfileCard() {
                 </AlertDialogContent>
             </AlertDialog>
 
-            <button className="bg-[#006699] text-white w-full rounded-4xl py-2 mt-4">
+            <button onClick={handleLogout} className="bg-[#006699] text-white w-full rounded-4xl py-2 mt-4 hover:bg-[#005580] transition-colors duration-300">
                 Logout
             </button>
         </div>

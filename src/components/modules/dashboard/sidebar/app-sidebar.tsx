@@ -1,11 +1,9 @@
 "use client"
 import mainLogo from "../../../../../public/resources/images/main-logo.png"
 import { FaUsers } from "react-icons/fa6";
-import { IoChatboxOutline } from "react-icons/io5";
 import { RiDashboard3Line } from "react-icons/ri";
-import { IoListOutline } from "react-icons/io5";
-import { CiBellOn } from "react-icons/ci";
 import { RiShieldUserLine } from "react-icons/ri";
+import { RiWallet3Line, RiArticleLine } from "react-icons/ri";
 import * as React from "react"
 import { usePathname } from "next/navigation"
 
@@ -35,6 +33,16 @@ const data = [
         url: "/dashboard/administrators",
         icon: RiShieldUserLine,
     },
+    {
+        title: "Payments",
+        url: "/dashboard/payments",
+        icon: RiWallet3Line,
+    },
+    {
+        title: "Blog Posts",
+        url: "/dashboard/blog-posts",
+        icon: RiArticleLine,
+    }
 ]
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

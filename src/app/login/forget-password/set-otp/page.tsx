@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import mainLogo from '../../../../../public/resources/images/main-logo.png';
 import circleBg from "../../../../../public/resources/images/circle-bg.png";
 import { useTheme } from 'next-themes';
@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 import { apiClient } from '@/lib/api-client';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-const SetOtpPage = () => {
+function SetOtpInner() {
     const { theme } = useTheme();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -176,4 +176,11 @@ const SetOtpPage = () => {
     );
 };
 
-export default SetOtpPage;
+export default function SetOtpPage() {
+    // Wrap the component that uses useSearchParams in a Suspense boundary per Next.js requirements
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+            <SetOtpInner />
+        </Suspense>
+    );
+}

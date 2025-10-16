@@ -1,13 +1,10 @@
 import {
     Table,
-    TableBody,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-
-import DashboardPagination from "@/components/dashboard/userManagement/DashboardPagination"
-import UserTableRow from "@/components/dashboard/userManagement/UserTableRow"
+import UserTableBody from "@/components/dashboard/userManagement/UserTableBody"
 
 export default function UserManagementPage() {
     return (
@@ -24,20 +21,10 @@ export default function UserManagementPage() {
                         <TableHead className="text-right">Action</TableHead>
                     </TableRow>
                 </TableHeader>
-                <TableBody>
-                    <UserTableRow />
-                    <UserTableRow />
-                    <UserTableRow />
-                    <UserTableRow />
-                    <UserTableRow />
-                    <UserTableRow />
-                    <UserTableRow />
-                    <UserTableRow />
-                    <UserTableRow />
-                </TableBody>
-            </Table>
 
-            <DashboardPagination />
+                <UserTableBody />
+                
+            </Table>
         </div>
     )
 }

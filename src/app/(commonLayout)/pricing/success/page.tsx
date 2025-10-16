@@ -1,10 +1,10 @@
 "use client";
 import { useTheme } from 'next-themes';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
 
-export default function PricingSuccess() {
+function PricingSuccessInner() {
   const { theme } = useTheme();
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
@@ -83,5 +83,13 @@ export default function PricingSuccess() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function PricingSuccess() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+      <PricingSuccessInner />
+    </Suspense>
   );
 }
