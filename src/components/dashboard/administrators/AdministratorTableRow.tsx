@@ -86,7 +86,7 @@ export default function AdministratorTableRow ({ index, admin, onDeleted }: Prop
             <TableCell>{phone}</TableCell>
             <TableCell className="capitalize">{role}</TableCell>
             <TableCell className="text-right space-x-2">
-                <AlertDialog>
+                {/* <AlertDialog>
                     <AlertDialogTrigger className="bg-[#006699] p-3 rounded-lg text-white text-xl">
                         <MdOutlineEdit />
                     </AlertDialogTrigger>
@@ -105,7 +105,7 @@ export default function AdministratorTableRow ({ index, admin, onDeleted }: Prop
                             <AlertDialogDescription></AlertDialogDescription>
                         </AlertDialogHeader>
                     </AlertDialogContent>
-                </AlertDialog>
+                </AlertDialog> */}
 
                 <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
                     <AlertDialogTrigger className="inline-flex items-center gap-2 p-2 bg-red-600 text-white rounded-sm disabled:opacity-60" disabled={submitting}>
