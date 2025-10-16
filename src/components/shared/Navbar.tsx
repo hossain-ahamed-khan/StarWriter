@@ -6,10 +6,125 @@ import mainLogo from '../../../public/resources/images/main-logo.png';
 import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { LogOut, User, Crown, AlertCircle, Calendar } from 'lucide-react';
+import { apiClient } from '@/lib/api-client';
+
+// Type definitions
+interface SubscriptionData {
+    has_subscription: boolean;
+    subscription?: {
+        stripe_subscription_id: string | null;
+        tier: string;
+        term: string;
+        status: string;
+        is_active: boolean;
+        current_period_end?: string;
+    };
+}
 
 export const Navbar = () => {
     const { theme } = useTheme();
+    const router = useRouter();
     const [menuOpen, setMenuOpen] = React.useState(false);
+    const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+    const [fullName, setFullName] = React.useState('');
+    const [showDropdown, setShowDropdown] = React.useState(false);
+    const [subscriptionData, setSubscriptionData] = React.useState<SubscriptionData | null>(null);
+    const [loadingSubscription, setLoadingSubscription] = React.useState(false);
+
+    // Fetch subscription status
+    const fetchSubscriptionStatus = async () => {
+        try {
+            setLoadingSubscription(true);
+            const data = await apiClient.get('payments/subscription-status/');
+            setSubscriptionData(data);
+        } catch (error) {
+            console.error('Error fetching subscription:', error);
+        } finally {
+            setLoadingSubscription(false);
+        }
+    };
+
+    // Check authentication status on mount
+    React.useEffect(() => {
+        const checkAuth = () => {
+            const token = localStorage.getItem('access_token');
+            const name = localStorage.getItem('full_name');
+            setIsAuthenticated(!!token);
+            setFullName(name || 'User');
+
+            // Fetch subscription if authenticated
+            if (token) {
+                fetchSubscriptionStatus();
+            }
+        };
+
+        checkAuth();
+
+        // Listen for storage changes
+        window.addEventListener('storage', checkAuth);
+        return () => window.removeEventListener('storage', checkAuth);
+    }, []);
+
+    // Logout handler
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('user_role');
+        localStorage.removeItem('full_name');
+        
+        setIsAuthenticated(false);
+        setShowDropdown(false);
+        setMenuOpen(false);
+        setSubscriptionData(null);
+        
+        toast.success('Logged out successfully');
+        router.push('/login');
+    };
+
+    // Check if user has a paid subscription
+    const hasPaidSubscription = () => {
+        return subscriptionData?.subscription?.stripe_subscription_id !== null && 
+               subscriptionData?.subscription?.stripe_subscription_id !== undefined;
+    };
+
+    // Format subscription tier
+    const formatTier = (tier?: string) => {
+        if (!tier) return 'Free';
+        return tier.charAt(0).toUpperCase() + tier.slice(1);
+    };
+
+    // Format subscription term
+    const formatTerm = (term?: string) => {
+        if (!term) return '';
+        return term.charAt(0).toUpperCase() + term.slice(1);
+    };
+
+    // Format date
+    const formatDate = (dateString?: string) => {
+        if (!dateString) return '';
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    };
+
+    // Format subscription status
+    const formatStatus = (status?: string) => {
+        if (!status) return 'Inactive';
+        return status.charAt(0).toUpperCase() + status.slice(1);
+    };
+
+    // Get subscription badge color
+    const getSubscriptionBadgeColor = () => {
+        if (!hasPaidSubscription()) return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+        if (subscriptionData?.subscription?.is_active) {
+            const tier = subscriptionData.subscription.tier;
+            if (tier === 'pro') return 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30';
+            if (tier === 'standard') return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+        }
+        return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+    };
 
     // Close mobile menu when clicking outside
     React.useEffect(() => {
@@ -43,15 +158,14 @@ export const Navbar = () => {
     ];
 
     return (
-        <nav className={`sticky top-0 w-full z-50 ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'} transition-colors duration-300`}>
+        <nav suppressHydrationWarning className={`sticky top-0 w-full z-50 ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'} transition-colors duration-300`}>
             <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16 sm:h-20 lg:h-24">
 
                     {/* Logo */}
                     <div className="flex-shrink-0">
                         <Link href="/">
-                            <h1 className={`text-lg sm:text-2xl lg:text-3xl font-bold font-sf-pro cursor-pointer transition-all duration-300 hover:scale-105 ${theme === 'light' ? 'text-[#c8a9e6]' : 'bg-gradient-to-r from-[#c8a9e6] to-white bg-clip-text text-transparent'}`}
-                            >
+                            <h1 className={`text-lg sm:text-2xl lg:text-3xl font-bold font-sf-pro cursor-pointer transition-all duration-300 hover:scale-105 ${theme === 'light' ? 'text-[#c8a9e6]' : 'bg-gradient-to-r from-[#c8a9e6] to-white bg-clip-text text-transparent'}`}>
                                 StarWriter
                             </h1>
                         </Link>
@@ -113,17 +227,104 @@ export const Navbar = () => {
                                 ))}
                             </div>
 
-                            {/* Join Button */}
-                            <Link href="/signup">
-                                <motion.button
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.95 }}
-                                    className="relative border border-[#7a73e8] rounded-full px-4 xl:px-8 py-2 transition-all duration-300 overflow-hidden group focus:outline-none cursor-pointer flex-shrink-0"
-                                >
-                                    <span className="absolute inset-0 bg-gradient-to-r from-[#7a73e8]/0 via-[#7a73e8]/20 to-[#7a73e8]/0 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
-                                    <span className="relative z-10 text-xs xl:text-sm font-sm">JOIN</span>
-                                </motion.button>
-                            </Link>
+                            {/* Auth Section - Desktop */}
+                            {isAuthenticated ? (
+                                <div className="relative flex-shrink-0">
+                                    <motion.button
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        onClick={() => setShowDropdown(!showDropdown)}
+                                        className="relative border border-[#7a73e8] rounded-full px-4 xl:px-6 py-2 transition-all duration-300 overflow-hidden group focus:outline-none cursor-pointer flex items-center gap-2"
+                                    >
+                                        <span className="absolute inset-0 bg-gradient-to-r from-[#7a73e8]/0 via-[#7a73e8]/20 to-[#7a73e8]/0 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
+                                        <User size={16} className="relative z-10" />
+                                        <span className="relative z-10 text-xs xl:text-sm font-medium max-w-[120px] truncate">
+                                            {fullName}
+                                        </span>
+                                    </motion.button>
+
+                                    {/* Desktop Dropdown */}
+                                    <AnimatePresence>
+                                        {showDropdown && (
+                                            <>
+                                                <motion.div
+                                                    initial={{ opacity: 0, y: -10 }}
+                                                    animate={{ opacity: 1, y: 0 }}
+                                                    exit={{ opacity: 0, y: -10 }}
+                                                    className={`absolute right-0 mt-2 w-72 rounded-xl shadow-2xl overflow-hidden border ${theme === 'light' ? 'bg-white/95 border-gray-200/50' : 'bg-black/95 border-[#7a73e8]/30'} backdrop-blur-lg`}
+                                                >
+                                                    <div className={`px-4 py-3 border-b ${theme === 'light' ? 'border-gray-200/50' : 'border-[#7a73e8]/20'}`}>
+                                                        <p className="text-sm font-semibold">{fullName}</p>
+                                                        <p className="text-xs opacity-70 mt-1">
+                                                            {localStorage.getItem('user_role') || 'User'}
+                                                        </p>
+                                                    </div>
+
+                                                    {/* Subscription Info */}
+                                                    <div className={`px-4 py-3 border-b ${theme === 'light' ? 'border-gray-200/50' : 'border-[#7a73e8]/20'}`}>
+                                                        {loadingSubscription ? (
+                                                            <p className="text-xs opacity-70">Loading...</p>
+                                                        ) : hasPaidSubscription() ? (
+                                                            <div className="space-y-2">
+                                                                <div className="flex items-center justify-between">
+                                                                    <span className="text-xs opacity-70">Plan</span>
+                                                                    <span className="text-xs font-semibold flex items-center gap-1">
+                                                                        <Crown size={12} className="text-yellow-500" />
+                                                                        {formatTier(subscriptionData?.subscription?.tier)}
+                                                                    </span>
+                                                                </div>
+                                                                <div className="flex items-center justify-between">
+                                                                    <span className="text-xs opacity-70">Billing</span>
+                                                                    <span className="text-xs font-semibold">
+                                                                        {formatTerm(subscriptionData?.subscription?.term)}
+                                                                    </span>
+                                                                </div>
+                                                                <div className="flex items-center justify-between">
+                                                                    <span className="text-xs opacity-70">Renews On</span>
+                                                                    <span className="text-xs font-semibold flex items-center gap-1">
+                                                                        <Calendar size={12} />
+                                                                        {formatDate(subscriptionData?.subscription?.current_period_end)}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        ) : (
+                                                            <p className="text-xs opacity-70 flex items-center gap-2">
+                                                                <AlertCircle size={12} />
+                                                                You have no active subscription
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                    
+                                                    <button
+                                                        onClick={handleLogout}
+                                                        className={`w-full px-4 py-3 text-left text-sm transition-colors flex items-center gap-2 ${theme === 'light' ? 'hover:bg-gray-100' : 'hover:bg-[#7a73e8]/20'}`}
+                                                    >
+                                                        <LogOut size={16} />
+                                                        Logout
+                                                    </button>
+                                                </motion.div>
+
+                                                {/* Close dropdown overlay */}
+                                                <div 
+                                                    className="fixed inset-0 z-[-1]" 
+                                                    onClick={() => setShowDropdown(false)}
+                                                />
+                                            </>
+                                        )}
+                                    </AnimatePresence>
+                                </div>
+                            ) : (
+                                <Link href="/signup">
+                                    <motion.button
+                                        whileHover={{ scale: 1.1 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="relative border border-[#7a73e8] rounded-full px-4 xl:px-8 py-2 transition-all duration-300 overflow-hidden group focus:outline-none cursor-pointer flex-shrink-0"
+                                    >
+                                        <span className="absolute inset-0 bg-gradient-to-r from-[#7a73e8]/0 via-[#7a73e8]/20 to-[#7a73e8]/0 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
+                                        <span className="relative z-10 text-xs xl:text-sm font-sm">JOIN</span>
+                                    </motion.button>
+                                </Link>
+                            )}
                         </div>
                     </div>
 
@@ -195,7 +396,7 @@ export const Navbar = () => {
                             className={`mobile-menu fixed top-20 left-4 right-4 sm:left-6 sm:right-6 md:left-8 md:right-8 rounded-2xl shadow-2xl z-50 lg:hidden ${theme === 'light'
                                 ? 'bg-white/95 text-black border border-gray-200/50'
                                 : 'bg-black/95 text-white border border-gray-700/50'
-                                } backdrop-blur-md overflow-hidden`}
+                                } backdrop-blur-md overflow-hidden max-h-[calc(100vh-6rem)] overflow-y-auto`}
                         >
                             <div className="p-6 sm:p-8">
                                 {/* Mobile Navigation Links */}
@@ -215,19 +416,91 @@ export const Navbar = () => {
                                         </Link>
                                     ))}
 
-                                    {/* Mobile Join Button */}
-                                    <Link href="/signup" onClick={() => setMenuOpen(false)}>
-                                        <motion.button
-                                            initial={{ opacity: 0, x: -20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ delay: navLinks.length * 0.1 }}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            className="w-full mt-4 py-3 px-4 rounded-xl border-2 border-[#7a73e8] text-[#7a73e8] font-semibold text-base hover:bg-[#7a73e8]/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#7a73e8]/50"
-                                        >
-                                            JOIN STAR WRITER
-                                        </motion.button>
-                                    </Link>
+                                    {/* Mobile Auth Section */}
+                                    {isAuthenticated ? (
+                                        <>
+                                            <div className={`mt-4 p-4 rounded-xl border ${theme === 'light' ? 'border-gray-200' : 'border-[#7a73e8]/30'} bg-white/5`}>
+                                                <div className="flex items-center gap-3 mb-3">
+                                                    <User size={20} className="text-[#7a73e8]" />
+                                                    <div className="flex-1">
+                                                        <p className="font-semibold text-sm">{fullName}</p>
+                                                        <p className="text-xs opacity-70">{localStorage.getItem('user_role') || 'User'}</p>
+                                                    </div>
+                                                </div>
+
+                                                {/* Subscription Status */}
+                                                <div className={`mt-3 p-3 rounded-lg border ${getSubscriptionBadgeColor()}`}>
+                                                    {loadingSubscription ? (
+                                                        <p className="text-xs">Loading subscription...</p>
+                                                    ) : hasPaidSubscription() ? (
+                                                        <div className="space-y-2">
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-xs font-medium opacity-80">Plan</span>
+                                                                <span className="text-xs font-bold flex items-center gap-1">
+                                                                    <Crown size={12} />
+                                                                    {formatTier(subscriptionData?.subscription?.tier)}
+                                                                </span>
+                                                            </div>
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-xs font-medium opacity-80">Billing</span>
+                                                                <span className="text-xs font-bold">
+                                                                    {formatTerm(subscriptionData?.subscription?.term)}
+                                                                </span>
+                                                            </div>
+                                                            <div className="flex items-center justify-between">
+                                                                <span className="text-xs font-medium opacity-80">Renews On</span>
+                                                                <span className="text-xs font-bold flex items-center gap-1">
+                                                                    <Calendar size={12} />
+                                                                    {formatDate(subscriptionData?.subscription?.current_period_end)}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="flex items-center gap-2">
+                                                            <AlertCircle size={14} />
+                                                            <p className="text-xs font-medium">You have no active subscription</p>
+                                                        </div>
+                                                    )}
+                                                </div>
+
+                                                {/* Upgrade Button (if no subscription) */}
+                                                {!hasPaidSubscription() && (
+                                                    <Link href="/pricing" onClick={() => setMenuOpen(false)}>
+                                                        <motion.button
+                                                            whileHover={{ scale: 1.02 }}
+                                                            whileTap={{ scale: 0.98 }}
+                                                            className="w-full mt-3 py-2 px-4 rounded-lg bg-gradient-to-r from-[#7a73e8] to-[#CAA9D3] text-white font-semibold text-sm transition-all duration-300"
+                                                        >
+                                                            Upgrade Plan
+                                                        </motion.button>
+                                                    </Link>
+                                                )}
+
+                                                <motion.button
+                                                    whileHover={{ scale: 1.02 }}
+                                                    whileTap={{ scale: 0.98 }}
+                                                    onClick={handleLogout}
+                                                    className="w-full mt-3 py-2 px-4 rounded-lg border-2 border-red-500/50 text-red-500 font-semibold text-sm hover:bg-red-500/10 transition-all duration-300 flex items-center justify-center gap-2"
+                                                >
+                                                    <LogOut size={16} />
+                                                    Logout
+                                                </motion.button>
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <Link href="/signup" onClick={() => setMenuOpen(false)}>
+                                            <motion.button
+                                                initial={{ opacity: 0, x: -20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: navLinks.length * 0.1 }}
+                                                whileHover={{ scale: 1.02 }}
+                                                whileTap={{ scale: 0.98 }}
+                                                className="w-full mt-4 py-3 px-4 rounded-xl border-2 border-[#7a73e8] text-[#7a73e8] font-semibold text-base hover:bg-[#7a73e8]/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#7a73e8]/50"
+                                            >
+                                                JOIN STAR WRITER
+                                            </motion.button>
+                                        </Link>
+                                    )}
                                 </div>
                             </div>
 

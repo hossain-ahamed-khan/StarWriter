@@ -3,7 +3,6 @@ import { Hero } from "@/components/home/Hero";
 import { TextCompare } from "@/components/home/TextCompare";
 import { Unique } from "@/components/home/Unique";
 import { WhyChoose } from "@/components/home/WhyChoose";
-
 import { useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import { motion, useMotionValue, useSpring } from "framer-motion";
@@ -13,10 +12,9 @@ import { Packages } from "@/components/home/Packages";
 import TestimonialsScroll from "@/components/home/Reviews";
 import { SingleClick } from "@/components/home/SingleClick";
 import { Platforms } from "@/components/home/Platforms";
-
+import { apiClient } from "@/lib/api-client";
 
 const App = () => {
-
   const [isHovering, setIsHovering] = useState(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -32,8 +30,32 @@ const App = () => {
   };
   const handleMouseLeave = () => setIsHovering(false);
 
+  // Checkout handler for Packages component
+  const handleCheckout = async (planKey: string, term: 'monthly' | 'annual') => {
+    const successUrl = window.location.origin + '/pricing/success';
+    const cancelUrl = window.location.origin + '/pricing/cancel';
+
+    try {
+      const data = await apiClient.post('payments/create-checkout-session/', {
+        plan_key: planKey,
+        term,
+        success_url: successUrl,
+        cancel_url: cancelUrl,
+      });
+
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        console.error('Checkout URL not returned', data);
+      }
+    } catch (err: any) {
+      console.error('Error launching checkout', err.message || err);
+    }
+  };
+
   return (
     <div
+      suppressHydrationWarning  // ← Added to fix hydration error
       className={`relative overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -85,13 +107,14 @@ const App = () => {
           <BsStars size={7} color="#A69CD4" style={{ filter: 'drop-shadow(0 0 2px #A69CD488)' }} />
         </motion.span>
       </motion.div>
+      
       <Hero />
       <Platforms />
       <TextCompare />
       <WhyChoose />
       <Unique />
       <Agnostic />
-      <Packages />
+      <Packages onCheckout={handleCheckout} />
       <TestimonialsScroll />
       <SingleClick />
     </div>
