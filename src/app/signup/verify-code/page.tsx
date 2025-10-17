@@ -1,6 +1,6 @@
 "use client"
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import mainLogo from '../../../../public/resources/images/main-logo.png';
 import circleBg from "../../../../public/resources/images/circle-bg.png";
 import { useTheme } from 'next-themes';
@@ -8,7 +8,7 @@ import { toast } from 'sonner';
 import { apiClient } from '@/lib/api-client';
 import { useRouter, useSearchParams } from 'next/navigation';
 
-const VerifyCodePage = () => {
+function VerifyCodeInner() {
     const { theme } = useTheme();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -188,4 +188,10 @@ const VerifyCodePage = () => {
     );
 };
 
-export default VerifyCodePage;
+export default function VerifyCodePage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+            <VerifyCodeInner />
+        </Suspense>
+    );
+}

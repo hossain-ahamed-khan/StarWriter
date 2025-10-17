@@ -4,7 +4,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import UserTableBody from "@/components/dashboard/userManagement/UserTableBody"
+import PaymentTableBody from "@/components/dashboard/payments/PaymentTableBody"
 
 export default function UserManagementPage() {
     return (
@@ -13,16 +13,14 @@ export default function UserManagementPage() {
                 <TableHeader>
                     <TableRow>
                         <TableHead className="w-[100px]">SL no.</TableHead>
-                        <TableHead>Full Name</TableHead>
+                        <TableHead>User Name</TableHead>
+                        <TableHead>User ID</TableHead>
                         <TableHead>Email</TableHead>
-                        <TableHead>Phone Number</TableHead>
-                        <TableHead>Location</TableHead>
-                        <TableHead>Hear about us!</TableHead>
-                        <TableHead className="text-right">Action</TableHead>
+                        <TableHead>Amount</TableHead>
                     </TableRow>
                 </TableHeader>
 
-                <UserTableBody />
+                <PaymentTableBody />
                 
             </Table>
         </div>
