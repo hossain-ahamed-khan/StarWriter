@@ -11,16 +11,22 @@ const nextConfig: NextConfig = {
   // Image optimization for remote patterns
   images: {
     remotePatterns: [
-      // Backend API on port 10005 (missing in your config!)
+      // Backend API on port 10005
       {
         protocol: 'http',
         hostname: '10.10.7.85',
         port: '10005',  // ← You had 9005, but image is from 10005
         pathname: '/media/**',
       },
-      // Production
+      // Production (HTTPS)
       {
         protocol: 'https',
+        hostname: 'starapi.dsrt321.online',
+        pathname: '/media/**',
+      },
+      // Production (HTTP) - needed if some images load over http
+      {
+        protocol: 'http',
         hostname: 'starapi.dsrt321.online',
         pathname: '/media/**',
       },

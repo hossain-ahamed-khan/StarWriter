@@ -30,6 +30,7 @@ function LiveChatModal({ onClose }: LiveChatModalProps) {
   const [hasInteracted, setHasInteracted] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
 
   const welcomeMessage: Message = {
     id: 0,
@@ -47,6 +48,22 @@ function LiveChatModal({ onClose }: LiveChatModalProps) {
   }, [messages]);
 
   useEffect(() => {
+    // Check authentication on mount
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
+      if (!token) {
+        setIsAuthenticated(false);
+        const next = encodeURIComponent(window.location.pathname);
+        window.location.href = `/login?next=${next}`;
+        return;
+      }
+      setIsAuthenticated(true);
+    } catch {
+      setIsAuthenticated(false);
+      window.location.href = '/login';
+      return;
+    }
+
     if (!hasInteracted) {
       setMessages([welcomeMessage]);
     }
@@ -61,6 +78,19 @@ function LiveChatModal({ onClose }: LiveChatModalProps) {
 
   const handleSendMessage = async () => {
     if (!inputText.trim()) return;
+
+    // Safety check: block sending if unauthenticated
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
+      if (!token) {
+        const next = encodeURIComponent(window.location.pathname);
+        window.location.href = `/login?next=${next}`;
+        return;
+      }
+    } catch {
+      window.location.href = '/login';
+      return;
+    }
 
     if (!hasInteracted) {
       setHasInteracted(true);

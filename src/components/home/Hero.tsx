@@ -25,6 +25,7 @@ export const Hero = () => {
                             fill
                             alt="grid background"
                             className="object-contain opacity-30 hidden lg:block"
+                            sizes="(max-width: 1024px) 100vw, 100vw"
                         />
                     </div>
                     <div className='absolute inset-0 z-0'>
@@ -33,6 +34,7 @@ export const Hero = () => {
                             fill
                             alt="dotted background"
                             className="object-contain hidden lg:block"
+                            sizes="(max-width: 1024px) 100vw, 100vw"
                         />
                     </div>
                     <div className='absolute inset-0 z-0'>
@@ -41,6 +43,7 @@ export const Hero = () => {
                             fill
                             alt="circle background"
                             className="object-center opacity-40 hidden lg:block"
+                            sizes="(max-width: 1024px) 100vw, 100vw"
                         />
                     </div>
                 </div>
@@ -64,7 +67,8 @@ export const Hero = () => {
                             width={32}
                             height={42}
                             alt="main logo"
-                            className="hidden lg:block absolute right-1.5 -top-5 drop-shadow-[0_2px_12px_rgba(202,169,211,0.5)]"
+                            className="hidden lg:block absolute right-1.5 -top-5 w-auto h-auto drop-shadow-[0_2px_12px_rgba(202,169,211,0.5)]"
+                            style={{ width: 'auto', height: 'auto' }}
                         />
                     </div>
 
@@ -77,7 +81,7 @@ export const Hero = () => {
                             width={54}
                             height={54}
                             alt="thunder image"
-                            className="ml-2 animate-pulse drop-shadow-[0_2px_12px_rgba(199,210,254,0.5)] hidden lg:block"
+                            className="ml-2 animate-pulse drop-shadow-[0_2px_12px_rgba(199,210,254,0.5)] hidden lg:block w-auto h-auto"
                         />
                     </div>
 
@@ -101,7 +105,7 @@ export const Hero = () => {
                                 width={20}
                                 height={20}
                                 alt="green leaf"
-                                className="drop-shadow-[0_4px_12px_rgba(34,197,94,0.4)] group-hover:drop-shadow-[0_6px_16px_rgba(34,197,94,0.6)] transition-all duration-300 group-hover:rotate-12"
+                                className="w-auto h-auto drop-shadow-[0_4px_12px_rgba(34,197,94,0.4)] group-hover:drop-shadow-[0_6px_16px_rgba(34,197,94,0.6)] transition-all duration-300 group-hover:rotate-12"
                             />
                             <p className={`text-[8px] md:text-sm lg:text-md font-medium drop-shadow-sm group-hover:text-brand-dark dark:group-hover:text-brand-light transition-colors duration-300 ${theme === 'light' ? 'text-black/70' : 'text-white/70'}`}>
                                 Cheaper Than Coffee, Smarter Than Your Professor!

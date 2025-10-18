@@ -15,6 +15,7 @@ export const TextCompare = () => {
                     fill
                     alt="circle background"
                     className="object-center"
+                    sizes="(max-width: 1024px) 100vw, 100vw"
                 />
             </div>
             <div className="relative z-10 w-full flex flex-col gap-12">

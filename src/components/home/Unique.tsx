@@ -15,6 +15,7 @@ export const Unique = () => {
                     fill
                     alt="dotted background"
                     className="object-contain"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1024px"
                     style={{ zIndex: 2 }}
                 />
             </div>
@@ -24,6 +25,7 @@ export const Unique = () => {
                     fill
                     alt="AI Website"
                     className="object-center"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1024px"
                     style={{ zIndex: 3 }}
                 />
             </div>
@@ -44,7 +46,7 @@ export const Unique = () => {
                                 width={300}
                                 height={80}
                                 alt="colorful ring"
-                                className="hidden xs:block lg:block"
+                                className="hidden xs:block lg:block h-auto"
                             />
                         </div>
                     </div>

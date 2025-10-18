@@ -12,6 +12,7 @@ export default function PasswordUpdateSuccessPage() {
                         width={50}
                         height={50}
                         alt="main logo"
+                        className="w-auto h-auto"
                     />
                 </div>
                 <h1 className="text-3xl font-semibold text-center">Password Updated Successfully!</h1>

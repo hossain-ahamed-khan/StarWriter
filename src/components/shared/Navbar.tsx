@@ -204,7 +204,8 @@ export const Navbar = () => {
                                     width={24}
                                     height={32}
                                     alt="main Logo"
-                                    className="select-none"
+                                    className="w-auto h-auto select-none"
+                                    style={{ width: 'auto', height: 'auto' }}
                                 />
                             </motion.div>
 

@@ -21,7 +21,7 @@ export const Agnostic = () => {
                             width={220}
                             height={60}
                             alt="grid background"
-                            className="object-contain absolute left-1/2 -bottom-4 sm:-bottom-6 transform -translate-x-1/2 w-40 sm:w-[350px]"
+                            className="object-contain absolute left-1/2 -bottom-4 sm:-bottom-6 transform -translate-x-1/2 w-40 sm:w-[350px] h-auto"
                         />
                     </div>
                 </div>
@@ -43,6 +43,7 @@ export const Agnostic = () => {
                             fill
                             alt="floating ball"
                             className="object-contain"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1024px"
                             priority
                         />
                     </div>
@@ -53,6 +54,7 @@ export const Agnostic = () => {
                             fill
                             alt="zooming background"
                             className="object-cover"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1024px"
                             priority
                         />
                     </div>
