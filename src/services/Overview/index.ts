@@ -29,7 +29,7 @@ export const OverView = async (): Promise<OverviewSuccess | OverviewError> => {
             throw new Error("API URL is not configured in environment variables");
         }
 
-        const res = await fetch(`${apiUrl}admin_dashboard/dashboard-overview/`, {
+        const res = await fetch(`${apiUrl}/admin_dashboard/dashboard-overview/`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${accessToken}`,

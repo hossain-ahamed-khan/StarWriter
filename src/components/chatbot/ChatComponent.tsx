@@ -5,6 +5,7 @@ import { Send, User, Bot, Plus, Menu, X, Trash2, Edit2, Paperclip, File, Image a
 import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { apiClient } from '@/lib/api-client';
+import chatBot from "../../../public/resources/images/main-logo.png";
 
 interface FileAttachment {
   id: string;

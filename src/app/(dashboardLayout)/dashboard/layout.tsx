@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/popover"
 import ProfileCard from "@/components/dashboard/profile/ProfileCard";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import RequireAuth from "@/components/auth/RequireAuth";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     const [adminName, setAdminName] = useState<string>("")
@@ -32,9 +33,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     }, [])
 
     return (
-        <SidebarProvider className="bg-white">
-            <AppSidebar />
-            <SidebarInset>
+        <RequireAuth tokenKey="admin_access_token" redirectTo="/admin-login">
+            <SidebarProvider className="bg-white">
+                <AppSidebar />
+                <SidebarInset>
                 <header className="bg-white  text-black flex justify-between h-20 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
                     <div className="flex items-center gap-2 px-4">
                         <SidebarTrigger className="-ml-1" />
@@ -62,10 +64,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     </Popover>
 
                 </header>
-                <div className="flex flex-1 flex-col gap-4 p-4 pt-0 bg-[#E6EBF7] rounded-tl-3xl overflow-y-auto">
-                    {children}
-                </div>
-            </SidebarInset>
-        </SidebarProvider>
+                    <div className="flex flex-1 flex-col gap-4 p-4 pt-0 bg-[#E6EBF7] rounded-tl-3xl overflow-y-auto">
+                        {children}
+                    </div>
+                </SidebarInset>
+            </SidebarProvider>
+        </RequireAuth>
     )
 }

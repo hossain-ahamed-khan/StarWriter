@@ -76,7 +76,6 @@ function PricingSuccessInner() {
         <div className={`mt-12 p-6 rounded-xl border ${isLight ? 'bg-gray-50 border-gray-200' : 'bg-gray-900/50 border-gray-700'}`}>
           <h2 className="text-lg font-semibold mb-3">What's Next?</h2>
           <ul className={`text-sm space-y-2 ${isLight ? 'text-gray-600' : 'text-gray-400'}`}>
-            <li>✓ Access your dashboard to manage your subscription</li>
             <li>✓ Explore all premium features</li>
             <li>✓ Check your email for a receipt</li>
           </ul>

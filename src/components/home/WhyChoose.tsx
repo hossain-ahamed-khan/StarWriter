@@ -16,6 +16,7 @@ export const WhyChoose = () => {
                     fill
                     alt="circle background"
                     className="object-center opacity-40"
+                    sizes="(max-width: 1024px) 100vw, 100vw"
                 />
             </div>
             <div className="w-[95%] sm:w-4/5 mx-auto pb-8">

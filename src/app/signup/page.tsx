@@ -202,6 +202,7 @@ const SignUpForm = () => {
                         fill
                         alt="circle background"
                         className="object-cover opacity-40"
+                        sizes="100vw"
                     />
                 </div>
 
@@ -212,6 +213,7 @@ const SignUpForm = () => {
                             width={50}
                             height={50}
                             alt="main logo"
+                            className="w-auto h-auto"
                         />
                     </div>
                     

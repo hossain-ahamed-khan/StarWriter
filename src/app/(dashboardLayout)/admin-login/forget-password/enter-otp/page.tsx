@@ -19,6 +19,7 @@ export default function EnterOtpPage() {
                         width={50}
                         height={50}
                         alt="main logo"
+                        className="w-auto h-auto"
                     />
                 </div>
                 <h1 className="text-3xl font-semibold text-center">Check your email</h1>

@@ -28,6 +28,7 @@ export const Platforms = () => {
                         fill
                         alt="circle background"
                         className="object-center opacity-40"
+                        sizes="(max-width: 1024px) 100vw, 100vw"
                     />
                 </div>
 

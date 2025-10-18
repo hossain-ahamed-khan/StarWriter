@@ -74,6 +74,20 @@ export const Packages = ({ onCheckout }: PackagesProps) => {
     const planKey = getPlanKey(planName, billingType);
     if (!planKey) return;
     const term = billingType === 'Monthly' ? 'monthly' : 'annual';
+    // Check if user is logged in; if not, redirect to login
+    try {
+      const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
+      if (!token) {
+        // Preserve intent via query param
+        const redirect = `/login?next=${encodeURIComponent('/pricing')}`;
+        window.location.href = redirect;
+        return;
+      }
+    } catch {
+      // If localStorage isn't accessible, be safe and send to login
+      window.location.href = '/login';
+      return;
+    }
     onCheckout(planKey, term);
   };
 

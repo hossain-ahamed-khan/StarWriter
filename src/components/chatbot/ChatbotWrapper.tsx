@@ -39,7 +39,7 @@ const ChatbotWrapper: React.FC = () => {
   };
 
   const handleUpgrade = () => {
-    router.push('/pricing'); // Adjust to your pricing page route
+    router.push('/pricing'); 
   };
 
   if (isLoading) {
@@ -123,7 +123,7 @@ const ChatbotWrapper: React.FC = () => {
           <p className={`mt-6 text-sm ${
             theme === 'light' ? 'text-gray-500' : 'text-gray-500'
           }`}>
-            Starting from $9.99/month · Cancel anytime
+            Starting from $9.99/month 
           </p>
         </div>
       </div>

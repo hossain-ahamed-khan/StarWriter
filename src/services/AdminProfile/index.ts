@@ -93,7 +93,7 @@ export async function updateAdminProfile(payload: UpdateAdminProfilePayload, use
 
 		// NOTE: Endpoint inferred from backend conventions used elsewhere in the app.
 		// Adjust the path if your backend differs.
-		const res = await fetch(`${apiUrl}admin_dashboard/admins-update/${userId}/`, {
+		const res = await fetch(`${apiUrl}/admin_dashboard/admins-update/${userId}/`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
