@@ -50,7 +50,7 @@ export const Blogs = async (): Promise<BlogApiResponse | BlogError> => {
             throw new Error("API URL is not configured in environment variables");
         }
 
-        const res = await fetch(`${apiUrl}admin_dashboard/list-blogs/`, {
+        const res = await fetch(`${apiUrl}/admin_dashboard/list-blogs/`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -92,7 +92,7 @@ export const deleteBlog = async (id: number): Promise<{ success: boolean; messag
 
         // The backend for similar destructive actions uses POST with JSON body (see DeleteUser service)
         // If your backend expects a DELETE with body instead, switch method back to 'DELETE'.
-        const res = await fetch(`${apiUrl}admin_dashboard/modify-blogs/`, {
+        const res = await fetch(`${apiUrl}/admin_dashboard/modify-blogs/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ export const createBlog = async (blogData: CreateBlogInput): Promise<{ success: 
             formData.append('image', blogData.image, blogData.image.name);
         }
 
-        const res = await fetch(`${apiUrl}admin_dashboard/create-blogs/`, {
+        const res = await fetch(`${apiUrl}/admin_dashboard/create-blogs/`, {
             method: 'POST',
             headers: {
                 // Let the browser set the correct Content-Type with boundary
