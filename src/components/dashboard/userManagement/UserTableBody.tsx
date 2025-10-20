@@ -84,12 +84,12 @@ export default function UserTableBody() {
     <TableBody>
       {users.map((user) => (
         <UserTableRow
-        key={user.user_id}
-        index = {users.indexOf(user) + 1}
-        user = {user}
-        onDeleted={(user_id) => {
-          setUsers((prev) => prev?.filter((user) => user.user_id !== user_id) || null);
-        }}
+          key={user.user_id}
+          index={users.indexOf(user) + 1}
+          user={user}
+          onDeleted={(user_id) => {
+            setUsers((prev) => prev?.filter((user) => user.user_id !== user_id) || null);
+          }}
         />
       ))}
     </TableBody>
