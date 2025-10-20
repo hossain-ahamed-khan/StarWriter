@@ -8,7 +8,7 @@ import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { LogOut, User, Crown, AlertCircle, Calendar } from 'lucide-react';
+import { LogOut, User, Crown, AlertCircle, Calendar, Sparkles } from 'lucide-react';
 import { apiClient } from '@/lib/api-client';
 
 // Type definitions
@@ -20,6 +20,9 @@ interface SubscriptionData {
         term: string;
         status: string;
         is_active: boolean;
+        is_manual: boolean;
+        manual_notes?: string;
+        price_id?: string | null;
         current_period_end?: string;
     };
 }
@@ -34,18 +37,35 @@ export const Navbar = () => {
     const [subscriptionData, setSubscriptionData] = React.useState<SubscriptionData | null>(null);
     const [loadingSubscription, setLoadingSubscription] = React.useState(false);
 
-    // Fetch subscription status
+    // ✅ Fetch subscription status with cache busting
     const fetchSubscriptionStatus = async () => {
         try {
             setLoadingSubscription(true);
-            const data = await apiClient.get('payments/subscription-status/');
+            const timestamp = new Date().getTime();
+            const data = await apiClient.get(`payments/subscription-status/?t=${timestamp}`);
+            console.log('Subscription status fetched:', data);
             setSubscriptionData(data);
         } catch (error) {
             console.error('Error fetching subscription:', error);
+            setSubscriptionData(null);
         } finally {
             setLoadingSubscription(false);
         }
     };
+
+    // ✅ Listen for subscription changes
+    React.useEffect(() => {
+        const handleSubscriptionChange = () => {
+            console.log('🔄 Subscription changed event received, refreshing...');
+            fetchSubscriptionStatus();
+        };
+
+        window.addEventListener('subscriptionChanged', handleSubscriptionChange);
+        
+        return () => {
+            window.removeEventListener('subscriptionChanged', handleSubscriptionChange);
+        };
+    }, []);
 
     // Check authentication status on mount
     React.useEffect(() => {
@@ -55,7 +75,6 @@ export const Navbar = () => {
             setIsAuthenticated(!!token);
             setFullName(name || 'User');
 
-            // Fetch subscription if authenticated
             if (token) {
                 fetchSubscriptionStatus();
             }
@@ -63,10 +82,17 @@ export const Navbar = () => {
 
         checkAuth();
 
-        // Listen for storage changes
         window.addEventListener('storage', checkAuth);
         return () => window.removeEventListener('storage', checkAuth);
     }, []);
+
+    // ✅ Refresh subscription when dropdown opens
+    const handleDropdownToggle = () => {
+        if (!showDropdown) {
+            fetchSubscriptionStatus();
+        }
+        setShowDropdown(!showDropdown);
+    };
 
     // Logout handler
     const handleLogout = () => {
@@ -84,10 +110,43 @@ export const Navbar = () => {
         router.push('/login');
     };
 
-    // Check if user has a paid subscription
-    const hasPaidSubscription = () => {
-        return subscriptionData?.subscription?.stripe_subscription_id !== null && 
-               subscriptionData?.subscription?.stripe_subscription_id !== undefined;
+    // ✅ Updated: Check if user has valid paid subscription
+    const hasActiveSubscription = () => {
+        const sub = subscriptionData?.subscription;
+        if (!sub) return false;
+
+        // ✅ If it's a manual subscription, check tier/term
+        if (sub.is_manual) {
+            const validTiers = ['standard', 'pro'];
+            const validTerms = ['monthly', 'annual'];
+
+            return (
+                sub.is_active === true &&
+                sub.status === 'active' &&
+                validTiers.includes(sub.tier?.toLowerCase() || '') &&
+                validTerms.includes(sub.term?.toLowerCase() || '')
+            );
+        }
+
+        // ✅ For Stripe subscriptions, check price_id is NOT free
+        const priceId = sub.price_id?.toLowerCase() || '';
+        const isFreePrice = priceId.includes('free') || priceId === '';
+
+        const validTiers = ['standard', 'pro'];
+        const validTerms = ['monthly', 'annual'];
+
+        return (
+            sub.is_active === true &&
+            sub.status === 'active' &&
+            !isFreePrice &&  // ✅ Exclude free price IDs
+            validTiers.includes(sub.tier?.toLowerCase() || '') &&
+            validTerms.includes(sub.term?.toLowerCase() || '')
+        );
+    };
+
+    // ✅ Check if subscription is manual
+    const isManualSubscription = () => {
+        return subscriptionData?.subscription?.is_manual === true;
     };
 
     // Format subscription tier
@@ -109,20 +168,19 @@ export const Navbar = () => {
         return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     };
 
-    // Format subscription status
-    const formatStatus = (status?: string) => {
-        if (!status) return 'Inactive';
-        return status.charAt(0).toUpperCase() + status.slice(1);
-    };
-
-    // Get subscription badge color
+    // ✅ Get subscription badge color
     const getSubscriptionBadgeColor = () => {
-        if (!hasPaidSubscription()) return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
-        if (subscriptionData?.subscription?.is_active) {
-            const tier = subscriptionData.subscription.tier;
-            if (tier === 'pro') return 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30';
-            if (tier === 'standard') return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+        if (!hasActiveSubscription()) return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+        
+        const tier = subscriptionData?.subscription?.tier?.toLowerCase();
+        
+        if (tier === 'pro') {
+            return 'bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30';
         }
+        if (tier === 'standard') {
+            return 'bg-blue-500/20 text-blue-300 border-blue-500/30';
+        }
+        
         return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
     };
 
@@ -234,7 +292,7 @@ export const Navbar = () => {
                                     <motion.button
                                         whileHover={{ scale: 1.05 }}
                                         whileTap={{ scale: 0.95 }}
-                                        onClick={() => setShowDropdown(!showDropdown)}
+                                        onClick={handleDropdownToggle}
                                         className="relative border border-[#7a73e8] rounded-full px-4 xl:px-6 py-2 transition-all duration-300 overflow-hidden group focus:outline-none cursor-pointer flex items-center gap-2"
                                     >
                                         <span className="absolute inset-0 bg-gradient-to-r from-[#7a73e8]/0 via-[#7a73e8]/20 to-[#7a73e8]/0 opacity-0 group-hover:opacity-100 transition-all duration-300"></span>
@@ -265,8 +323,18 @@ export const Navbar = () => {
                                                     <div className={`px-4 py-3 border-b ${theme === 'light' ? 'border-gray-200/50' : 'border-[#7a73e8]/20'}`}>
                                                         {loadingSubscription ? (
                                                             <p className="text-xs opacity-70">Loading...</p>
-                                                        ) : hasPaidSubscription() ? (
+                                                        ) : hasActiveSubscription() ? (
                                                             <div className="space-y-2">
+                                                                {/* Manual Badge */}
+                                                                {isManualSubscription() && (
+                                                                    <div className="flex items-center gap-1 mb-2">
+                                                                        <Sparkles size={12} className="text-purple-400" />
+                                                                        <span className="text-xs font-semibold text-purple-400">
+                                                                            Manually Assigned
+                                                                        </span>
+                                                                    </div>
+                                                                )}
+                                                                
                                                                 <div className="flex items-center justify-between">
                                                                     <span className="text-xs opacity-70">Plan</span>
                                                                     <span className="text-xs font-semibold flex items-center gap-1">
@@ -281,17 +349,28 @@ export const Navbar = () => {
                                                                     </span>
                                                                 </div>
                                                                 <div className="flex items-center justify-between">
-                                                                    <span className="text-xs opacity-70">Renews On</span>
+                                                                    <span className="text-xs opacity-70">
+                                                                        {isManualSubscription() ? 'Valid Until' : 'Renews On'}
+                                                                    </span>
                                                                     <span className="text-xs font-semibold flex items-center gap-1">
                                                                         <Calendar size={12} />
                                                                         {formatDate(subscriptionData?.subscription?.current_period_end)}
                                                                     </span>
                                                                 </div>
+                                                                
+                                                                {/* Manual Notes */}
+                                                                {isManualSubscription() && subscriptionData?.subscription?.manual_notes && (
+                                                                    <div className="mt-2 pt-2 border-t border-gray-200/20">
+                                                                        <p className="text-xs opacity-70 italic">
+                                                                            {subscriptionData.subscription.manual_notes}
+                                                                        </p>
+                                                                    </div>
+                                                                )}
                                                             </div>
                                                         ) : (
                                                             <p className="text-xs opacity-70 flex items-center gap-2">
                                                                 <AlertCircle size={12} />
-                                                                You have no active subscription
+                                                                No active subscription
                                                             </p>
                                                         )}
                                                     </div>
@@ -338,17 +417,20 @@ export const Navbar = () => {
 
                     {/* Mobile Menu Button & Theme Switch */}
                     <div className="lg:hidden flex items-center space-x-2">
-                        {/* Mobile Theme Switch */}
                         <div className='cursor-pointer border border-[#3B3131]/30 rounded-full p-1.5 sm:p-2 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300'>
                             <ThemeSwitch />
                         </div>
 
-                        {/* Hamburger Menu Button */}
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="mobile-menu p-2 rounded-full border border-[#3B3131]/30 focus:outline-none bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
-                            onClick={() => setMenuOpen(!menuOpen)}
+                            onClick={() => {
+                                setMenuOpen(!menuOpen);
+                                if (!menuOpen) {
+                                    fetchSubscriptionStatus();
+                                }
+                            }}
                             aria-label="Toggle menu"
                             aria-expanded={menuOpen}
                         >
@@ -374,11 +456,10 @@ export const Navbar = () => {
                 </div>
             </div>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu - Same logic as desktop */}
             <AnimatePresence>
                 {menuOpen && (
                     <>
-                        {/* Backdrop */}
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -388,7 +469,6 @@ export const Navbar = () => {
                             onClick={() => setMenuOpen(false)}
                         />
 
-                        {/* Mobile Menu Panel */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95, y: -20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -400,7 +480,6 @@ export const Navbar = () => {
                                 } backdrop-blur-md overflow-hidden max-h-[calc(100vh-6rem)] overflow-y-auto`}
                         >
                             <div className="p-6 sm:p-8">
-                                {/* Mobile Navigation Links */}
                                 <div className="flex flex-col space-y-4">
                                     {navLinks.map((link, index) => (
                                         <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>
@@ -417,7 +496,7 @@ export const Navbar = () => {
                                         </Link>
                                     ))}
 
-                                    {/* Mobile Auth Section */}
+                                    {/* Mobile Auth Section - Same logic */}
                                     {isAuthenticated ? (
                                         <>
                                             <div className={`mt-4 p-4 rounded-xl border ${theme === 'light' ? 'border-gray-200' : 'border-[#7a73e8]/30'} bg-white/5`}>
@@ -429,12 +508,18 @@ export const Navbar = () => {
                                                     </div>
                                                 </div>
 
-                                                {/* Subscription Status */}
                                                 <div className={`mt-3 p-3 rounded-lg border ${getSubscriptionBadgeColor()}`}>
                                                     {loadingSubscription ? (
                                                         <p className="text-xs">Loading subscription...</p>
-                                                    ) : hasPaidSubscription() ? (
+                                                    ) : hasActiveSubscription() ? (
                                                         <div className="space-y-2">
+                                                            {isManualSubscription() && (
+                                                                <div className="flex items-center gap-1 mb-2">
+                                                                    <Sparkles size={12} />
+                                                                    <span className="text-xs font-bold">Manually Assigned</span>
+                                                                </div>
+                                                            )}
+                                                            
                                                             <div className="flex items-center justify-between">
                                                                 <span className="text-xs font-medium opacity-80">Plan</span>
                                                                 <span className="text-xs font-bold flex items-center gap-1">
@@ -449,23 +534,32 @@ export const Navbar = () => {
                                                                 </span>
                                                             </div>
                                                             <div className="flex items-center justify-between">
-                                                                <span className="text-xs font-medium opacity-80">Renews On</span>
+                                                                <span className="text-xs font-medium opacity-80">
+                                                                    {isManualSubscription() ? 'Valid Until' : 'Renews On'}
+                                                                </span>
                                                                 <span className="text-xs font-bold flex items-center gap-1">
                                                                     <Calendar size={12} />
                                                                     {formatDate(subscriptionData?.subscription?.current_period_end)}
                                                                 </span>
                                                             </div>
+                                                            
+                                                            {isManualSubscription() && subscriptionData?.subscription?.manual_notes && (
+                                                                <div className="mt-2 pt-2 border-t border-white/10">
+                                                                    <p className="text-xs opacity-70 italic line-clamp-2">
+                                                                        {subscriptionData.subscription.manual_notes}
+                                                                    </p>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     ) : (
                                                         <div className="flex items-center gap-2">
                                                             <AlertCircle size={14} />
-                                                            <p className="text-xs font-medium">You have no active subscription</p>
+                                                            <p className="text-xs font-medium">No active subscription</p>
                                                         </div>
                                                     )}
                                                 </div>
 
-                                                {/* Upgrade Button (if no subscription) */}
-                                                {!hasPaidSubscription() && (
+                                                {!hasActiveSubscription() && (
                                                     <Link href="/pricing" onClick={() => setMenuOpen(false)}>
                                                         <motion.button
                                                             whileHover={{ scale: 1.02 }}
@@ -505,7 +599,6 @@ export const Navbar = () => {
                                 </div>
                             </div>
 
-                            {/* Mobile Menu Footer */}
                             <div className={`px-6 py-4 border-t ${theme === 'light' ? 'border-gray-200/50' : 'border-gray-700/50'}`}>
                                 <motion.button
                                     initial={{ opacity: 0 }}
