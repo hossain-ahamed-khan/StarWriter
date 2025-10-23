@@ -37,7 +37,7 @@ const BlogPage = () => {
         const fetchBlogs = async () => {
             // ✅ Check authentication FIRST before making API call
             const token = localStorage.getItem('access_token');
-            
+
             if (!token) {
                 setIsAuthenticated(false);
                 setError('authentication_required'); // Special error code
@@ -56,7 +56,7 @@ const BlogPage = () => {
                 }
             } catch (err: any) {
                 console.error('Error fetching blogs:', err);
-                
+
                 // Handle 401 specifically (in case token expired)
                 if (err.response?.status === 401) {
                     setIsAuthenticated(false);
@@ -123,14 +123,13 @@ const BlogPage = () => {
                 {/* Authentication Required Error - Beautiful Sign In/Sign Up Prompt */}
                 {!loading && isAuthError && (
                     <div className="max-w-4xl mx-auto px-6 py-16">
-                        <div className={`relative rounded-3xl p-8 md:p-12 border overflow-hidden ${
-                            theme === 'light' 
-                                ? 'bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200' 
+                        <div className={`relative rounded-3xl p-8 md:p-12 border overflow-hidden ${theme === 'light'
+                                ? 'bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200'
                                 : 'bg-gradient-to-br from-gray-900/50 to-purple-900/20 border-purple-500/30'
-                        }`}>
+                            }`}>
                             {/* Animated background gradient */}
                             <div className="absolute inset-0 bg-gradient-to-br from-[#CAA9D3]/10 via-[#828ED6]/10 to-[#B7D6EF]/10 animate-pulse"></div>
-                            
+
                             <div className="relative z-10 text-center">
                                 {/* Icon */}
                                 <div className="flex justify-center mb-6">
@@ -145,10 +144,9 @@ const BlogPage = () => {
                                 </h2>
 
                                 {/* Description */}
-                                <p className={`text-base md:text-lg mb-8 max-w-2xl mx-auto ${
-                                    theme === 'light' ? 'text-gray-700' : 'text-gray-300'
-                                }`}>
-                                    Unlock access to exclusive articles, expert insights, and AI-powered content. 
+                                <p className={`text-base md:text-lg mb-8 max-w-2xl mx-auto ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'
+                                    }`}>
+                                    Unlock access to exclusive articles, expert insights, and AI-powered content.
                                     Join our community to stay updated with the latest in AI and technology.
                                 </p>
 
@@ -164,11 +162,10 @@ const BlogPage = () => {
 
                                     <button
                                         onClick={() => router.push('/signup')}
-                                        className={`px-8 py-4 rounded-xl border-2 font-bold text-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-3 ${
-                                            theme === 'light'
+                                        className={`px-8 py-4 rounded-xl border-2 font-bold text-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-3 ${theme === 'light'
                                                 ? 'border-purple-600 text-purple-600 hover:bg-purple-50'
                                                 : 'border-purple-400 text-purple-400 hover:bg-purple-900/20'
-                                        }`}
+                                            }`}
                                     >
                                         <UserPlus size={24} />
                                         Create Account
@@ -226,10 +223,12 @@ const BlogPage = () => {
                                                     {post.image ? (
                                                         <Image
                                                             src={post.image}
+                                                            width={400}
+                                                            height={200}
                                                             alt={post.title}
-                                                            fill
+                                                            // fill
                                                             className="object-cover"
-                                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                        // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                         />
                                                     ) : (
                                                         <div className={`w-full h-full bg-gradient-to-br ${getGradient(index)} flex items-center justify-center`}>

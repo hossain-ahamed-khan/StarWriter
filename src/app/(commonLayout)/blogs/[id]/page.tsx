@@ -59,10 +59,10 @@ const BlogDetailPage = () => {
     // Format date
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
-        return date.toLocaleDateString('en-US', { 
-            month: 'long', 
-            day: 'numeric', 
-            year: 'numeric' 
+        return date.toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
         });
     };
 
@@ -180,10 +180,11 @@ const BlogDetailPage = () => {
                             >
                                 <Image
                                     src={blog.image}
+                                    width={900}
+                                    height={400}
                                     alt={blog.title}
-                                    fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                    sizes="(max-width: 768px) 100vw, 896px"
+                                    // fill
+                                    className="object-cover"
                                     priority
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
