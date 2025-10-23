@@ -17,7 +17,7 @@ export async function getAdministrators(params?: { page?: number; pageSize?: num
 
         const page = params?.page ?? 1
         const pageSize = params?.pageSize ?? 10
-        const url = new URL(`${apiUrl}/admin_dashboard/admin_list/`)
+        const url = new URL(`${apiUrl}admin_dashboard/admin_list/`)
         url.searchParams.set('page', String(page))
         url.searchParams.set('page_size', String(pageSize))
 
@@ -80,7 +80,7 @@ export async function createAdministrator(payload: CreateAdminPayload) {
                         password: payload.password ?? '',
                 }
 
-        const response = await fetch(`${apiUrl}/admin_dashboard/create-admins/`, {
+        const response = await fetch(`${apiUrl}admin_dashboard/create-admins/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -35,7 +35,7 @@ export const Payment = async (): Promise<PaymentResponse | PaymentError> => {
             throw new Error("API URL is not configured in environment variables");
         }
 
-        const res = await fetch(`${apiUrl}/admin_dashboard/user-payments-list/`, {
+        const res = await fetch(`${apiUrl}admin_dashboard/user-payments-list/`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${accessToken}`,

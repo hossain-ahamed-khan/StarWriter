@@ -42,8 +42,7 @@ export async function getAdminProfile(): Promise<GetAdminProfileResponse> {
 		throw new Error('API URL is not configured in environment variables');
 	}
 
-	const base = apiUrl.endsWith('/') ? apiUrl : apiUrl + '/';
-	const res = await fetch(`${base}admin_dashboard/admin-profile/`, {
+	const res = await fetch(`${apiUrl}admin_dashboard/admin-profile/`, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
@@ -93,7 +92,7 @@ export async function updateAdminProfile(payload: UpdateAdminProfilePayload, use
 
 		// NOTE: Endpoint inferred from backend conventions used elsewhere in the app.
 		// Adjust the path if your backend differs.
-		const res = await fetch(`${apiUrl}/admin_dashboard/admins-update/${userId}/`, {
+		const res = await fetch(`${apiUrl}admin_dashboard/admins-update/${userId}/`, {
 			method: 'PATCH',
 			headers: {
 				'Content-Type': 'application/json',
