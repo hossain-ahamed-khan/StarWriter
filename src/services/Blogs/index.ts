@@ -50,7 +50,7 @@ export const Blogs = async (): Promise<BlogApiResponse | BlogError> => {
             throw new Error("API URL is not configured in environment variables");
         }
 
-        const res = await fetch(`${apiUrl}/admin_dashboard/list-blogs/`, {
+        const res = await fetch(`${apiUrl}admin_dashboard/list-blogs/`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${accessToken}`,

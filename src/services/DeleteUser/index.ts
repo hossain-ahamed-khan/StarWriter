@@ -17,7 +17,7 @@ export async function deleteUser(user_id: number): Promise<{ success: true } | {
 
     // Assumption: The DELETE endpoint follows the pattern of the list endpoint with an ID segment
     // e.g., `${apiUrl}admin_dashboard/user-list/{serialNumber}/`
-    const url = `${apiUrl}/admin_dashboard/delete-user/`;
+    const url = `${apiUrl}admin_dashboard/delete-user/`;
 
     const res = await fetch(url, {
       method: 'POST',

@@ -147,7 +147,7 @@ const SignUpForm = () => {
                         code: codeResponse.code,
                         client_id: '973505798665-0omke783ll45bu98ip4lp2o2pb4evktb.apps.googleusercontent.com',
                         client_secret: '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', 
-                        redirect_uri: 'http://localhost:3000',
+                        redirect_uri: 'https://star.dsrt321.online',
                         grant_type: 'authorization_code',
                     }),
                 });

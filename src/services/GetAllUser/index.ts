@@ -15,7 +15,7 @@ export async function getAllUser() {
             throw new Error("API URL is not configured in environment variables");
         }
 
-        const response = await fetch(`${apiUrl}/admin_dashboard/user-list/`, {
+        const response = await fetch(`${apiUrl}admin_dashboard/user-list/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
