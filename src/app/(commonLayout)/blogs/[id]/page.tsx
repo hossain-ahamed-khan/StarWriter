@@ -44,7 +44,6 @@ const BlogDetailPage = () => {
                     setBlog(response.data);
                 }
             } catch (err: any) {
-                console.error('Error fetching blog detail:', err);
                 setError('Failed to load blog post');
             } finally {
                 setLoading(false);

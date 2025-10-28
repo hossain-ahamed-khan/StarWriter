@@ -44,7 +44,6 @@ export const Payment = async (): Promise<PaymentResponse | PaymentError> => {
 
         if (!res.ok) {
             const errorText = await res.text();
-            console.error('Error response:', errorText);
             throw new Error(`HTTP error! status: ${res.status}, message: ${errorText}`);
         }
 
@@ -52,7 +51,6 @@ export const Payment = async (): Promise<PaymentResponse | PaymentError> => {
         return result as PaymentResponse;
     }
     catch (error: any) {
-        console.error('Error in Payment:', error);
         return {
             success: false,
             error: error?.message || 'Failed to fetch user payments'

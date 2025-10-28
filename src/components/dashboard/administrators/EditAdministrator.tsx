@@ -22,7 +22,6 @@ export default function EditAdministrator() {
     });
 
     const onSubmit = (data: any) => {
-        console.log(data);
         // Call API or mutate state
     };
 

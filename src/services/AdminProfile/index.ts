@@ -113,7 +113,6 @@ export async function updateAdminProfile(payload: UpdateAdminProfilePayload, use
 		// Expect: { status: 'success', message: 'Admin user updated successfully', data: { ... } }
 		return json as UpdateAdminProfileResponse;
 	} catch (error: any) {
-		console.error('Error updating admin profile:', error);
 		return {
 			status: 'error',
 			message: error?.message || 'Failed to update admin profile',

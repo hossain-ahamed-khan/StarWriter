@@ -37,8 +37,6 @@ export const changePassword = async (data: FormData) => {
 
     }
     catch (error: any) {
-        console.error('Error in changePassword:', error);
-        // Return a structured error object instead of throwing
         return {
             success: false,
             error: error.message || 'Failed to change password'

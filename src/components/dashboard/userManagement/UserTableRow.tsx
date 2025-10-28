@@ -37,7 +37,6 @@ export default function UserTableRow({ index, user, onDeleted }: Props) {
     const [submitting, setSubmitting] = useState(false);
 
     if (!user) {
-        console.error('UserTableRow: user is undefined');
         return null;
     }
 
@@ -50,11 +49,9 @@ export default function UserTableRow({ index, user, onDeleted }: Props) {
                 onDeleted?.(user.user_id);
                 setDeleteModalOpen(false);
             } else {
-                console.error(res.error);
                 toast.error(res.error || 'Failed to delete user');
             }
         } catch (error) {
-            console.error('Error deleting user:', error);
             toast.error('Failed to delete user');
         } finally {
             setSubmitting(false);

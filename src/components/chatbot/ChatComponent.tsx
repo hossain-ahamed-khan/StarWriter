@@ -66,13 +66,11 @@ const ChatComponent: React.FC = () => {
   const fetchThreads = async (): Promise<void> => {
     try {
       setIsLoadingThreads(true);
-      console.log('Fetching threads...');
       
       const data = await apiClient.get('/chatbot/threads/');
-      console.log('Threads data:', data);
       setThreads(data);
     } catch (error) {
-      console.error('Error fetching threads:', error);
+      console.error('Error fetching threads');
     } finally {
       setIsLoadingThreads(false);
     }
@@ -84,7 +82,7 @@ const ChatComponent: React.FC = () => {
       const threadDetail = await apiClient.post('/chatbot/threads-detail/', { thread_id: threadId });
       setMessages(threadDetail.messages || []);
     } catch (error) {
-      console.error('Error fetching messages:', error);
+      console.error('Error fetching messages');
     } finally {
       setIsLoadingMessages(false);
     }
@@ -164,7 +162,7 @@ const ChatComponent: React.FC = () => {
         setIsSidebarOpen(false);
       }
     } catch (error) {
-      console.error('Error creating thread:', error);
+      console.error('Error creating thread');
     }
   };
 
@@ -179,7 +177,7 @@ const ChatComponent: React.FC = () => {
         setMessages([]);
       }
     } catch (error) {
-      console.error('Error deleting thread:', error);
+      console.error('Error deleting thread');
     }
   };
 
@@ -199,7 +197,7 @@ const ChatComponent: React.FC = () => {
       await apiClient.patch('/chatbot/threads-rename/', { title: editingTitle.trim(), thread_id: threadId });
       setThreads(prev => prev.map(t => (t.id === threadId ? { ...t, title: editingTitle.trim() } : t)));
     } catch (error) {
-      console.error('Error updating thread title:', error);
+      console.error('Error updating thread title');
     } finally {
       setEditingThreadId(null);
       setEditingTitle('');
@@ -299,8 +297,6 @@ const ChatComponent: React.FC = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log('Send response:', result);
-        
         const { thread_id, saved_files, message: assistantMessage, context_info } = result.data;
         
         if (!activeThreadId && thread_id) {
@@ -338,13 +334,9 @@ const ChatComponent: React.FC = () => {
         fetchThreads();
       } else {
         const errorData = await response.json();
-        console.error('Failed to send message:', errorData);
-        
         setMessages(prev => prev.filter(msg => msg.id !== userMessage.id));
       }
     } catch (error) {
-      console.error('Error sending message:', error);
-      
       setMessages(prev => prev.filter(msg => msg.id !== userMessage.id));
     } finally {
       setIsTyping(false);

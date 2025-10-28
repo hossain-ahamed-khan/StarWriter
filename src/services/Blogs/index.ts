@@ -59,7 +59,6 @@ export const Blogs = async (): Promise<BlogApiResponse | BlogError> => {
 
         if (!res.ok) {
             const errorText = await res.text();
-            console.error('Error response:', errorText);
             throw new Error(`HTTP error! status: ${res.status}, message: ${errorText}`);
         }
 
@@ -67,7 +66,6 @@ export const Blogs = async (): Promise<BlogApiResponse | BlogError> => {
         return result as BlogApiResponse;
     }
     catch (error: any) {
-        console.error('Error in Blogs:', error);
         return {
             success: false,
             error: error?.message || 'Failed to fetch blogs'

@@ -38,7 +38,6 @@ export const OverView = async (): Promise<OverviewSuccess | OverviewError> => {
 
         if (!res.ok) {
             const errorText = await res.text();
-            console.error('Error response:', errorText);
             throw new Error(`HTTP error! status: ${res.status}, message: ${errorText}`);
         }
 
@@ -46,7 +45,6 @@ export const OverView = async (): Promise<OverviewSuccess | OverviewError> => {
         return { ...result, success: true } as OverviewSuccess;
     }
     catch (error: any) {
-        console.error('Error in OverView:', error);
         return {
             success: false,
             error: error?.message || 'Failed to fetch dashboard overview'

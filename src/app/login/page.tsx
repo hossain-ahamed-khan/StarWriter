@@ -148,11 +148,8 @@ const LoginPage = () => {
                         id_token: tokens.id_token
                     });
 
-                    console.log('✅ Backend response:', response);
-
                     // ✅ FIX: apiClient returns data directly, not response.data
                     if (response?.access_token) {
-                        console.log('✅ Storing tokens...');
                         localStorage.setItem('access_token', response.access_token);
                         localStorage.setItem('refresh_token', response.refresh_token);
                         localStorage.setItem('user_role', response.role);
@@ -160,11 +157,7 @@ const LoginPage = () => {
                         
                         // Dispatch event to update navbar
                         window.dispatchEvent(new Event('auth-change'));
-                        
-                        console.log('✅ Tokens stored:', {
-                            access_token: localStorage.getItem('access_token'),
-                            full_name: localStorage.getItem('full_name')
-                        });
+
                     }
 
                     toast.success(response?.message || 'Google login successful! Welcome.');
@@ -176,7 +169,6 @@ const LoginPage = () => {
                     toast.error('Failed to get ID token from Google.');
                 }
             } catch (error: any) {
-                console.error('🔴 Google login error:', error);
                 const errorMessage = error.response?.data?.error || error.message || 'Google login failed. Please try again.';
                 toast.error(errorMessage);
             } finally {
@@ -184,7 +176,6 @@ const LoginPage = () => {
             }
         },
         onError: (error) => {
-            console.error('🔴 Google OAuth error:', error);
             toast.error('Google login failed. Please try again.');
         },
         flow: 'auth-code',

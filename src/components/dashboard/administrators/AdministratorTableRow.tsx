@@ -60,7 +60,6 @@ export default function AdministratorTableRow ({ index, admin, onDeleted }: Prop
                 // Refresh route (for any server components that depend on this data)
                 try { router.refresh(); } catch {}
             } else {
-                console.error(res.error);
                 toast.error(res.error || 'Failed to delete administrator');
             }
         } finally {

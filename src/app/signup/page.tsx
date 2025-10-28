@@ -179,7 +179,6 @@ const SignUpForm = () => {
                     toast.error('Failed to get ID token from Google.');
                 }
             } catch (error: any) {
-                console.error('Google signup error:', error);
                 const errorMessage = error.response?.data?.error || error.message || 'Google signup failed. Please try again.';
                 toast.error(errorMessage);
             } finally {
@@ -187,7 +186,6 @@ const SignUpForm = () => {
             }
         },
         onError: (error) => {
-            console.error('Google OAuth error:', error);
             toast.error('Google signup failed. Please try again.');
         },
         flow: 'auth-code',

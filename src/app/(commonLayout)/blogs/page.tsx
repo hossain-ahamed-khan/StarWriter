@@ -55,9 +55,6 @@ const BlogPage = () => {
                     setError(null); // Clear any previous errors
                 }
             } catch (err: any) {
-                console.error('Error fetching blogs:', err);
-
-                // Handle 401 specifically (in case token expired)
                 if (err.response?.status === 401) {
                     setIsAuthenticated(false);
                     setError('authentication_required');

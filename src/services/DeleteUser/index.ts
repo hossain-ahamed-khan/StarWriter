@@ -35,7 +35,6 @@ export async function deleteUser(user_id: number): Promise<{ success: true } | {
 
     return { success: true };
   } catch (error: any) {
-    console.error('Error deleting user:', error);
     return { success: false, error: error?.message || 'Unknown error' };
   }
 }

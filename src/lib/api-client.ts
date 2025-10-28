@@ -48,8 +48,6 @@ export const apiClient = {
 
   async get(endpoint: string) {
     const url = buildUrl(endpoint);
-    console.log('🔗 GET:', url);
-
     const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
     
     const response = await fetch(url, {
@@ -63,7 +61,6 @@ export const apiClient = {
     const data = await readJsonSafe(response);
 
     if (!response.ok) {
-      console.error('❌ GET Error:', { status: response.status, data });
       const error = new APIError(
         data.message || data.user_message || `Request failed with status ${response.status}`,
         response.status,
@@ -77,8 +74,6 @@ export const apiClient = {
 
   async post(endpoint: string, body: any) {
     const url = buildUrl(endpoint);
-    console.log('🔗 POST:', url, 'Body:', body);
-
     const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
 
     const response = await fetch(url, {
@@ -91,10 +86,8 @@ export const apiClient = {
     });
 
     const data = await readJsonSafe(response);
-    console.log('📦 POST Response:', { status: response.status, data });
 
     if (!response.ok) {
-      console.error('❌ POST Error:', { status: response.status, data });
       const error = new APIError(
         data.message || data.user_message || `Request failed with status ${response.status}`,
         response.status,
@@ -108,8 +101,6 @@ export const apiClient = {
 
   async put(endpoint: string, body: any) {
     const url = buildUrl(endpoint);
-    console.log('🔗 PUT:', url, 'Body:', body);
-
     const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
 
     const response = await fetch(url, {
@@ -124,7 +115,6 @@ export const apiClient = {
     const data = await readJsonSafe(response);
 
     if (!response.ok) {
-      console.error('❌ PUT Error:', { status: response.status, data });
       const error = new APIError(
         data.message || data.user_message || `Request failed with status ${response.status}`,
         response.status,
@@ -138,8 +128,6 @@ export const apiClient = {
 
 async delete(endpoint: string, body?: any) {
   const url = buildUrl(endpoint);
-  console.log('🔗 DELETE:', url, 'Body:', body);
-
   const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
 
   const response = await fetch(url, {
@@ -154,7 +142,6 @@ async delete(endpoint: string, body?: any) {
     const data = await readJsonSafe(response);
 
     if (!response.ok) {
-      console.error('❌ DELETE Error:', { status: response.status, data });
       const error = new APIError(
         data.message || data.user_message || `Request failed with status ${response.status}`,
         response.status,
@@ -168,8 +155,6 @@ async delete(endpoint: string, body?: any) {
 
   async patch(endpoint: string, body: any) {
     const url = buildUrl(endpoint);
-    console.log('🔗 PATCH:', url, 'Body:', body);
-
     const token = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null;
 
     const response = await fetch(url, {
@@ -184,7 +169,6 @@ async delete(endpoint: string, body?: any) {
     const data = await readJsonSafe(response);
 
     if (!response.ok) {
-      console.error('❌ PATCH Error:', { status: response.status, data });
       const error = new APIError(
         data.message || data.user_message || `Request failed with status ${response.status}`,
         response.status,

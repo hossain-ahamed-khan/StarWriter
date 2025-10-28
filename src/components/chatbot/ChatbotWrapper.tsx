@@ -27,11 +27,9 @@ const ChatbotWrapper: React.FC = () => {
     try {
       setIsLoading(true);
       const data = await apiClient.get('/payments/subscription-status/');
-      console.log('Subscription status:', data);
       
       setAllowAiChat(data.usage_window?.allow_ai_chat || false);
     } catch (error) {
-      console.error('Error fetching subscription status:', error);
       setAllowAiChat(false);
     } finally {
       setIsLoading(false);

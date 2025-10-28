@@ -13,6 +13,7 @@ import TestimonialsScroll from "@/components/home/Reviews";
 import { SingleClick } from "@/components/home/SingleClick";
 import { Platforms } from "@/components/home/Platforms";
 import { apiClient } from "@/lib/api-client";
+import { th } from "date-fns/locale";
 
 const App = () => {
   const [isHovering, setIsHovering] = useState(false);
@@ -45,11 +46,9 @@ const App = () => {
 
       if (data?.url) {
         window.location.href = data.url;
-      } else {
-        console.error('Checkout URL not returned', data);
-      }
+      } 
     } catch (err: any) {
-      console.error('Error launching checkout', err.message || err);
+      console.error('Error creating checkout session');
     }
   };
 

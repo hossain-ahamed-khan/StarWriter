@@ -1,5 +1,7 @@
 "use client";
 
+import { c } from "node_modules/framer-motion/dist/types.d-Cjd591yU";
+
 export async function getAllUser() {
     try {
         const accessToken = typeof window !== 'undefined'
@@ -32,6 +34,6 @@ export async function getAllUser() {
         return data;
 
     } catch (error) {
-        console.error('Error fetching all users:', error);
+        console.error('Error fetching all users');
     }
 }

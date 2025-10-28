@@ -38,8 +38,7 @@ export async function getAdministrators(params?: { page?: number; pageSize?: num
         const result = await response.json();
         return result;
     } catch (error) {
-        console.error("Error fetching administrators:", error);
-        throw error;
+        console.error("Error fetching administrators");
     }
 }
 
@@ -103,7 +102,6 @@ export async function createAdministrator(payload: CreateAdminPayload) {
             raw: result,
         }
     } catch (error) {
-        console.error('Error creating administrator:', error)
         return {
             success: false,
             message: error instanceof Error ? error.message : 'Failed to create administrator'

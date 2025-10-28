@@ -88,7 +88,6 @@ const ManageSubscription: React.FC<ManageSubscriptionProps> = ({ userEmail, onSu
                 setSubscriptionInfo({ has_subscription: false });
             }
         } catch (error: any) {
-            console.error('Error fetching subscription info:', error);
             setSubscriptionInfo({ has_subscription: false });
         } finally {
             setLoading(false);
@@ -145,8 +144,6 @@ const ManageSubscription: React.FC<ManageSubscriptionProps> = ({ userEmail, onSu
             await fetchSubscriptionInfo();
             onSuccess?.();
         } catch (error: any) {
-            console.error('Error assigning subscription:', error);
-            
             if (error.message.includes('403')) {
                 toast.error('Permission denied. Please check your admin credentials.');
             } else {
@@ -207,8 +204,6 @@ const ManageSubscription: React.FC<ManageSubscriptionProps> = ({ userEmail, onSu
             await fetchSubscriptionInfo();
             onSuccess?.();
         } catch (error: any) {
-            console.error('Error canceling subscription:', error);
-            
             if (error.message.includes('403')) {
                 toast.error('Permission denied. Please check your admin credentials.');
             } else {

@@ -43,10 +43,8 @@ export const Navbar = () => {
             setLoadingSubscription(true);
             const timestamp = new Date().getTime();
             const data = await apiClient.get(`payments/subscription-status/?t=${timestamp}`);
-            console.log('Subscription status fetched:', data);
             setSubscriptionData(data);
         } catch (error) {
-            console.error('Error fetching subscription:', error);
             setSubscriptionData(null);
         } finally {
             setLoadingSubscription(false);
@@ -56,7 +54,6 @@ export const Navbar = () => {
     // ✅ Listen for subscription changes
     React.useEffect(() => {
         const handleSubscriptionChange = () => {
-            console.log('🔄 Subscription changed event received, refreshing...');
             fetchSubscriptionStatus();
         };
 

@@ -21,10 +21,10 @@ async function launchCheckoutForPlan(planKey: string, term: 'monthly' | 'annual'
     if (data?.url) {
       window.location.href = data.url;  // Redirect to Stripe
     } else {
-      console.error('Checkout URL not returned', data);
+      console.error('Checkout URL not returned');
     }
   } catch (err: any) {
-    console.error('Error launching checkout', err.message || err);
+    console.error('Error launching checkout');
   }
 }
 

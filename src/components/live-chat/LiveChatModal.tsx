@@ -139,7 +139,6 @@ function LiveChatModal({ onClose }: LiveChatModalProps) {
 
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
-      console.error('Error sending live chat message:', error);
       setMessages((prev) => prev.filter((msg) => msg.id !== userMessage.id));
 
       const errorMessage: Message = {
