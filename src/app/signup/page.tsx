@@ -145,9 +145,9 @@ const SignUpForm = () => {
                     },
                     body: new URLSearchParams({
                         code: codeResponse.code,
-                        client_id: '973505798665-0omke783ll45bu98ip4lp2o2pb4evktb.apps.googleusercontent.com',
-                        client_secret: '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', 
-                        redirect_uri: 'https://star.dsrt321.online',
+                        client_id: '725626674717-5t3j9uonbeue1jqhijdhuo0gv21ul4d7.apps.googleusercontent.com',
+                        client_secret: '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', 
+                        redirect_uri: 'https://starwriter.ai',
                         grant_type: 'authorization_code',
                     }),
                 });
