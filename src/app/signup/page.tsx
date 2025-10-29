@@ -170,7 +170,6 @@ const SignUpForm = () => {
             console.error('Google signup error:', error);
             toast.error('Google signup failed. Please try again.');
         },
-        ux_mode: 'popup',
         // ✅ No flow parameter - defaults to implicit flow
         // ✅ No client_secret needed - secure by design
     });
