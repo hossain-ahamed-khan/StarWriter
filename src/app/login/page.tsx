@@ -119,55 +119,34 @@ const LoginPage = () => {
         }
     };
 
-    // Handle Google Login with authorization code flow
-    // Handle Google Login with authorization code flow
+    // ✅ Handle Google Login - FIXED VERSION
     const googleLogin = useGoogleLogin({
-        onSuccess: async (codeResponse) => {
+        onSuccess: async (tokenResponse) => {  // ✅ Changed from codeResponse to tokenResponse
             setIsLoading(true);
             
             try {
-                const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        code: codeResponse.code,
-                        client_id: '725626674717-5t3j9uonbeue1jqhijdhuo0gv21ul4d7.apps.googleusercontent.com',
-                        client_secret: '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', 
-                        redirect_uri: 'https://starwriter.ai',
-                        grant_type: 'authorization_code',
-                    }),
+                // ✅ Send access_token directly to backend (no token exchange needed)
+                const response = await apiClient.post('user_auth/google-login/', {
+                    access_token: tokenResponse.access_token  // ✅ Use access_token from implicit flow
                 });
 
-                const tokens = await tokenResponse.json();
-                
-                if (tokens.id_token) {
-                    // Send id_token to backend
-                    const response = await apiClient.post('user_auth/google-login/', {
-                        id_token: tokens.id_token
-                    });
-
-                    // ✅ FIX: apiClient returns data directly, not response.data
-                    if (response?.access_token) {
-                        localStorage.setItem('access_token', response.access_token);
-                        localStorage.setItem('refresh_token', response.refresh_token);
-                        localStorage.setItem('user_role', response.role);
-                        localStorage.setItem('full_name', response.full_name || '');
-                        
-                        // Dispatch event to update navbar
-                        window.dispatchEvent(new Event('auth-change'));
-
-                    }
-
-                    toast.success(response?.message || 'Google login successful! Welcome.');
+                // ✅ Store tokens and user info
+                if (response?.access_token) {
+                    localStorage.setItem('access_token', response.access_token);
+                    localStorage.setItem('refresh_token', response.refresh_token);
+                    localStorage.setItem('user_role', response.role);
+                    localStorage.setItem('full_name', response.full_name || '');
                     
-                    setTimeout(() => {
-                        router.push('/');
-                    }, 1000);
-                } else {
-                    toast.error('Failed to get ID token from Google.');
+                    // Dispatch event to update navbar
+                    window.dispatchEvent(new Event('auth-change'));
                 }
+
+                toast.success(response?.message || 'Google login successful! Welcome.');
+                
+                setTimeout(() => {
+                    router.push('/');
+                }, 1000);
+                
             } catch (error: any) {
                 const errorMessage = error.response?.data?.error || error.message || 'Google login failed. Please try again.';
                 toast.error(errorMessage);
@@ -176,11 +155,12 @@ const LoginPage = () => {
             }
         },
         onError: (error) => {
+            console.error('Google login error:', error);
             toast.error('Google login failed. Please try again.');
         },
-        flow: 'auth-code',
+        // ✅ No flow parameter - defaults to implicit flow
+        // ✅ No client_secret needed - secure by design
     });
-
 
     return (
         <div className={`min-h-screen flex items-center justify-center p-4 relative overflow-hidden ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
@@ -306,7 +286,7 @@ const LoginPage = () => {
                         </Link>
                     </div>
 
-                    {/* Google Sign In */}
+                    {/* Google Sign In - FIXED */}
                     <motion.button
                         type="button"
                         onClick={() => googleLogin()}
