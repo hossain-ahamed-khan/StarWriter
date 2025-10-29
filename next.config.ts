@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
 
   // Image optimization for remote patterns
   images: {
+    unoptimized: true,
     remotePatterns: [
       // Backend API on port 10005
       {
