@@ -4,6 +4,7 @@ import { BsStars } from 'react-icons/bs';
 import Image from 'next/image';
 import circleBg from "../../../public/resources/images/circle-bg.png";
 import { useTheme } from 'next-themes';
+import Link from "next/link";
 
 export const TextCompare = () => {
     const { theme } = useTheme();
@@ -67,10 +68,12 @@ export const TextCompare = () => {
                     </div>
                 </div>
                 <div className="flex justify-center">
-                    <button className="flex gap-2 items-center px-6 py-2 rounded-full bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] border-4 border-[#A69CD4] shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-lg font-bold text-white tracking-wide">
-                        <BsStars className="text-[#f9fafb] drop-shadow-[0_2px_8px_rgba(202,169,211,0.5)]" />
-                        Humanize
-                    </button>
+                    <Link href="/ai-humanizer">
+                        <button className="flex gap-2 items-center px-6 py-2 rounded-full bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] border-4 border-[#A69CD4] shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-lg font-bold text-white tracking-wide">
+                            <BsStars className="text-[#f9fafb] drop-shadow-[0_2px_8px_rgba(202,169,211,0.5)]" />
+                            Humanize
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

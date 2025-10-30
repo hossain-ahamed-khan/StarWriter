@@ -1,4 +1,5 @@
 import { useTheme } from 'next-themes';
+import Link from 'next/link';
 import React from 'react'
 
 export const SingleClick = () => {
@@ -18,9 +19,11 @@ export const SingleClick = () => {
                 </p>
             )}
             <div className="text-center mt-8 sm:mt-12">
+                <Link href="/ai-humanizer">
                 <button className="bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] px-5 sm:px-8 py-2 sm:py-3 text-sm sm:text-base text-white text-center rounded-md font-semibold transition duration-200 hover:scale-105 hover:shadow-lg hover:from-[#B7D6EF] hover:to-[#CAA9D3] w-full sm:w-auto">
                     TRY IT FREE
                 </button>
+                </Link>
             </div>
         </div>
     )

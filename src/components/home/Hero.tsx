@@ -9,6 +9,7 @@ import circleBg from "../../../public/resources/images/circle-bg.png";
 import thunder from "../../../public/resources/images/thunder.png";
 import greenLeaf from "../../../public/resources/images/green-leaf.png";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 
 export const Hero = () => {
@@ -119,10 +120,12 @@ export const Hero = () => {
                     </div>
 
                     <div>
+                        <Link href="/ai-humanizer">
                         <button className="flex gap-2 items-center px-3 lg:px-6 py-2 lg:py-2 rounded-full border shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-sm lg:text-lg font-medium lg:font-bold tracking-wide mt-12 lg:mt-24">
                             <BsStars className={`${theme === 'light' ? 'text-black' : 'text-white'}`} />
                             Try Me, I'm Free
                         </button>
+                        </Link>
                     </div>
                 </div>
             </div>

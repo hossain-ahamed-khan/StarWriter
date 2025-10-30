@@ -3,6 +3,7 @@ import bgDotedImage from '../../../public/resources/images/doted-bg.png';
 import aiWebsite from "../../../public/resources/images/AI Website For Student.png"
 import colorfulRing from '../../../public/resources/images/color-ring.png';
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 export const Unique = () => {
     const { theme } = useTheme();
@@ -55,7 +56,7 @@ export const Unique = () => {
                     <div data-aos="fade-left">
                         <div className={`w-full sm:w-4/5 p-4 sm:p-8 border border-[#343434] rounded-xl transition-all duration-200 hover:border-[#B7D6EF] group ${theme === 'light' ? 'bg-white text-black' : 'bg-black text-white'}`}>
                             <p className="text-xs sm:text-base md:text-lg text-center lg:text-left">Unlike simple paraphrasers or tone changers, our Humanizer goes deeper. It understands the emotion, intent, and natural flow of human language — transforming robotic or AI-generated text into something that sounds like it was written by a real person. Whether it's for emails, blogs, or social media captions, we make sure your words feel authentic, relatable, and truly human.</p>
-                            <button className="w-full mt-6 sm:mt-8 py-2 text-white bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] rounded-lg transition-all duration-200 hover:from-[#828ED6] hover:to-[#B7D6EF] hover:brightness-105 hover:scale-105 text-base sm:text-lg">Unlock The Magic!</button>
+                            <Link href="/ai-chat"><button className="w-full mt-6 sm:mt-8 py-2 text-white bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] rounded-lg transition-all duration-200 hover:from-[#828ED6] hover:to-[#B7D6EF] hover:brightness-105 hover:scale-105 text-base sm:text-lg">Unlock The Magic!</button></Link>
                         </div>
                     </div>
                 </div>
