@@ -1,5 +1,4 @@
 "use client"
-
 import { useEffect, useState } from "react"
 import { AppSidebar } from "@/components/modules/dashboard/sidebar/app-sidebar"
 import {
@@ -37,33 +36,33 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <SidebarProvider className="bg-white">
                 <AppSidebar />
                 <SidebarInset>
-                <header className="bg-white  text-black flex justify-between h-20 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
-                    <div className="flex items-center gap-2 px-4">
-                        <SidebarTrigger className="-ml-1" />
-                    </div>
+                    <header className="bg-white text-black flex justify-between h-20 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
+                        <div className="flex items-center gap-2 px-4">
+                            <SidebarTrigger className="-ml-1" />
+                        </div>
 
-                    <Popover>
-                        <PopoverTrigger>
-                            <div className="w-48 border border-[#E5E5E5] rounded-2xl flex justify-between items-center gap-2 px-4 py-2 mr-8 cursor-pointer transition-transform duration-300 hover:scale-105">
-                                {/* Initials avatar (first two letters of name) */}
-                                <Avatar className="h-10 w-10">
-                                    <AvatarFallback className="bg-[#E6EBF7] text-black font-semibold">
-                                        {((adminName || "Admin").replace(/[^A-Za-z]/g, "").slice(0, 2) || "AD").toUpperCase()}
-                                    </AvatarFallback>
-                                </Avatar>
-                                <div>
-                                    <h2 className="text-sm font-medium">{adminName || "Admin"}</h2>
-                                    <p className="text-xs text-muted-foreground">{adminRole || "Administrator"}</p>
+                        <Popover>
+                            <PopoverTrigger>
+                                <div className="w-48 border border-[#E5E5E5] rounded-2xl flex justify-between items-center gap-2 px-4 py-2 mr-8 cursor-pointer transition-transform duration-300 hover:scale-105">
+                                    {/* Initials avatar (first two letters of name) */}
+                                    <Avatar className="h-10 w-10">
+                                        <AvatarFallback className="bg-[#E6EBF7] text-black font-semibold">
+                                            {((adminName || "Admin").replace(/[^A-Za-z]/g, "").slice(0, 2) || "AD").toUpperCase()}
+                                        </AvatarFallback>
+                                    </Avatar>
+                                    <div>
+                                        <h2 className="text-sm font-medium">{adminName || "Admin"}</h2>
+                                        <p className="text-xs text-muted-foreground">{adminRole || "Administrator"}</p>
+                                    </div>
+                                    <IoIosArrowDropdown className="text-2xl text-muted-foreground" />
                                 </div>
-                                <IoIosArrowDropdown className="text-2xl text-muted-foreground" />
-                            </div>
-                        </PopoverTrigger>
-                        <PopoverContent className="bg-white text-black border-0">
-                            <ProfileCard />
-                        </PopoverContent>
-                    </Popover>
+                            </PopoverTrigger>
+                            <PopoverContent className="bg-white text-black border-0">
+                                <ProfileCard />
+                            </PopoverContent>
+                        </Popover>
 
-                </header>
+                    </header>
                     <div className="flex flex-1 flex-col gap-4 p-4 pt-0 bg-[#E6EBF7] rounded-tl-3xl overflow-y-auto">
                         {children}
                     </div>

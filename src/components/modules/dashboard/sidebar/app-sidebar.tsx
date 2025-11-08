@@ -52,7 +52,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         isActive: pathname === item.url,
     }))
     return (
-        <Sidebar collapsible="icon" {...props} className="border-none bg-[#FFFFFF] text-black pt-8">
+        <Sidebar collapsible="icon" {...props} className="border-none  pt-8">
             <SidebarHeader className="flex items-center justify-center h-16 shrink-10 bg-[#FFFFFF]">
                 <Image
                     src={mainLogo}
@@ -63,7 +63,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     priority
                 />
             </SidebarHeader>
-            <SidebarContent className="bg-[#FFFFFF] pt-4">
+            <SidebarContent className="bg-[#FFFFFF] text-black pt-4">
                 <NavMain items={navItems} />
             </SidebarContent>
         </Sidebar>
