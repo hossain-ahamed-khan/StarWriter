@@ -11,7 +11,9 @@ import {
     FaLinkedin,
     FaYoutube,
     FaFacebook,
-    FaDribbble
+    FaDribbble,
+    FaInstagram,
+    FaTiktok
 } from 'react-icons/fa';
 
 const Footer = () => {
@@ -40,7 +42,7 @@ const Footer = () => {
                         {/* Middle section - Contact info */}
                         <div className={`text-xs sm:text-sm md:text-base lg:text-sm xl:text-base ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'} text-center lg:text-left order-3 lg:order-2`}>
                             <p className="mb-1 sm:mb-2">401 Bay Street, Toronto, Ontario, Canada</p>
-                            <div className='flex gap-1 flex-col sm:flex-row items-center justify-center lg:justify-start'>
+                            <div className='flex gap-2 flex-col sm:flex-row items-center justify-center lg:justify-start'>
                                 <p>support@starwriter.ai</p>
                                 <div className="hidden sm:block w-px h-4 bg-gray-400"></div>
                                 <p>
@@ -57,35 +59,31 @@ const Footer = () => {
                         {/* Right side - Social icons + Live Chat */}
                         <div className="flex flex-wrap justify-center lg:justify-end items-center w-full sm:w-auto lg:w-auto order-2 lg:order-3 gap-1">
                             <a
-                                href="#"
+                                href="https://www.instagram.com/starwriterai?igsh=amNwd3N5dzVhNmwz"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className={`transition-colors duration-200 p-1.5 sm:p-2 md:p-2.5 lg:p-2 rounded-lg ${theme === 'light'
                                     ? 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
                                     : 'text-gray-400 hover:text-white hover:bg-gray-700'
                                     }`}
-                                aria-label="Discord"
+                                aria-label="Instagram"
                             >
-                                <FaDiscord className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-4 lg:h-4" />
+                                <FaInstagram className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-4 lg:h-4" />
                             </a>
+
                             <a
-                                href="#"
+                                href="https://www.tiktok.com/@starwriterai?_r=1&_t=ZN-91MTQwax0vW"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className={`transition-colors duration-200 p-1.5 sm:p-2 md:p-2.5 lg:p-2 rounded-lg ${theme === 'light'
                                     ? 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
                                     : 'text-gray-400 hover:text-white hover:bg-gray-700'
                                     }`}
-                                aria-label="GitHub"
+                                aria-label="TikTok"
                             >
-                                <FaGithub className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-4 lg:h-4" />
+                                <FaTiktok className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-4 lg:h-4" />
                             </a>
-                            <a
-                                href="#"
-                                className={`transition-colors duration-200 p-1.5 sm:p-2 md:p-2.5 lg:p-2 rounded-lg ${theme === 'light'
-                                    ? 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
-                                    : 'text-gray-400 hover:text-white hover:bg-gray-700'
-                                    }`}
-                                aria-label="Twitter"
-                            >
-                                <FaTwitter className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-4 lg:h-4" />
-                            </a>
+
                             <a
                                 href="#"
                                 className={`transition-colors duration-200 p-1.5 sm:p-2 md:p-2.5 lg:p-2 rounded-lg ${theme === 'light'
@@ -96,16 +94,7 @@ const Footer = () => {
                             >
                                 <FaLinkedin className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-4 lg:h-4" />
                             </a>
-                            <a
-                                href="#"
-                                className={`transition-colors duration-200 p-1.5 sm:p-2 md:p-2.5 lg:p-2 rounded-lg ${theme === 'light'
-                                    ? 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
-                                    : 'text-gray-400 hover:text-white hover:bg-gray-700'
-                                    }`}
-                                aria-label="YouTube"
-                            >
-                                <FaYoutube className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-4 lg:h-4" />
-                            </a>
+
                             <a
                                 href="#"
                                 className={`transition-colors duration-200 p-1.5 sm:p-2 md:p-2.5 lg:p-2 rounded-lg ${theme === 'light'
@@ -116,21 +105,9 @@ const Footer = () => {
                             >
                                 <FaFacebook className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-4 lg:h-4" />
                             </a>
-                            <a
-                                href="#"
-                                className={`transition-colors duration-200 p-1.5 sm:p-2 md:p-2.5 lg:p-2 rounded-lg ${theme === 'light'
-                                    ? 'text-gray-500 hover:text-gray-800 hover:bg-gray-100'
-                                    : 'text-gray-400 hover:text-white hover:bg-gray-700'
-                                    }`}
-                                aria-label="Dribbble"
-                            >
-                                <FaDribbble className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-4 lg:h-4" />
-                            </a>
 
                             {/* Divider */}
-                            <div className="hidden sm:block w-px h-6 bg-gray-400 mx-2"></div>
-
-                            {/* Live Chat Button */}
+                            <div className="hidden sm:block w-px h-6 bg-gray-400 mx-2"></div>                            {/* Live Chat Button */}
                             <button
                                 onClick={() => setIsChatOpen(true)}
                                 className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg ${
