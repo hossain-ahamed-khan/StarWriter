@@ -40,7 +40,7 @@ const SAMPLE_TEXT = "Artificial intelligence is revolutionizing the modern world
 const AiHumanizer = () => {
     const { theme } = useTheme();
     const router = useRouter();
-    
+
     const [originalText, setOriginalText] = useState('');
     const [humanizedText, setHumanizedText] = useState('');
     const [aiScore, setAiScore] = useState<number | null>(null);
@@ -49,11 +49,11 @@ const AiHumanizer = () => {
     const [copied, setCopied] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [wordLimit, setWordLimit] = useState<number | null>(null);
-    
+
     const [tone, setTone] = useState('professional');
     const [purpose, setPurpose] = useState('essay');
     const [language, setLanguage] = useState('english');
-    
+
     const [error, setError] = useState<{ message: string; type: string } | null>(null);
     const autoSaveTimer = useRef<NodeJS.Timeout | null>(null);
     const progressInterval = useRef<NodeJS.Timeout | null>(null);
@@ -61,12 +61,12 @@ const AiHumanizer = () => {
     useEffect(() => {
         const token = localStorage.getItem('access_token');
         setIsAuthenticated(!!token);
-        
+
         const savedText = localStorage.getItem('ai_humanizer_draft');
         if (savedText) {
             setOriginalText(savedText);
         }
-        
+
         setWordLimit(5000);
     }, []);
 
@@ -96,7 +96,7 @@ const AiHumanizer = () => {
                     handleHumanize();
                 }
             }
-            
+
             if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
                 e.preventDefault();
                 handleClear();
@@ -182,11 +182,11 @@ const AiHumanizer = () => {
                 clearInterval(progressInterval.current);
             }
             setProgress(0);
-            
+
             const status = err.response?.status;
             const errorData = err.response?.data;
             const userMessage = errorData?.user_message || errorData?.message;
-            
+
             if (status === 400) {
                 setError({
                     message: userMessage || 'Please provide the text you want to humanize.',
@@ -298,7 +298,7 @@ const AiHumanizer = () => {
         if (!wordLimit) return '';
         const count = getWordCount(originalText);
         const percentage = (count / wordLimit) * 100;
-        
+
         if (percentage >= 100) return 'text-red-500';
         if (percentage >= 80) return 'text-yellow-500';
         return theme === 'light' ? 'text-gray-600' : 'text-gray-400';
@@ -332,7 +332,7 @@ const AiHumanizer = () => {
 
     const getErrorColor = (type: string) => {
         if (type === 'auth') {
-            return theme === 'light' 
+            return theme === 'light'
                 ? { bg: 'bg-blue-50', border: 'border-blue-300', text: 'text-blue-800', subtext: 'text-blue-700', icon: 'text-blue-600' }
                 : { bg: 'bg-blue-900/20', border: 'border-blue-500/30', text: 'text-blue-200', subtext: 'text-blue-300', icon: 'text-blue-400' };
         }
@@ -368,7 +368,7 @@ const AiHumanizer = () => {
                     animation: shimmer 2s infinite;
                 }
             `}</style>
-            
+
             <div suppressHydrationWarning className={`py-8 ${theme === 'light' ? 'bg-white text-black' : 'bg-[#010006] text-white'}`}>
                 <div className="w-full lg:w-3/5 mx-auto text-center px-4">
                     <h1 className='text-2xl md:text-4xl font-bold bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] bg-clip-text text-transparent'>
@@ -420,11 +420,10 @@ const AiHumanizer = () => {
                             <button
                                 onClick={handleTrySample}
                                 disabled={loading}
-                                className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 text-sm font-semibold transition-all ${
-                                    theme === 'light'
+                                className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 text-sm font-semibold transition-all ${theme === 'light'
                                         ? 'border-purple-600 text-purple-600 hover:bg-purple-50'
                                         : 'border-purple-400 text-purple-400 hover:bg-purple-900/20'
-                                } disabled:opacity-50`}
+                                    } disabled:opacity-50`}
                             >
                                 <Sparkles size={16} />
                                 Try Sample
@@ -434,11 +433,10 @@ const AiHumanizer = () => {
                                 <button
                                     onClick={handleClear}
                                     disabled={loading}
-                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 text-sm font-semibold transition-all ${
-                                        theme === 'light'
+                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 text-sm font-semibold transition-all ${theme === 'light'
                                             ? 'border-red-600 text-red-600 hover:bg-red-50'
                                             : 'border-red-400 text-red-400 hover:bg-red-900/20'
-                                    } disabled:opacity-50`}
+                                        } disabled:opacity-50`}
                                 >
                                     <Trash2 size={16} />
                                     Clear All
@@ -464,41 +462,50 @@ const AiHumanizer = () => {
                                     </p>
                                 </div>
                             </div>
-                            
+
                             {error.type === 'auth' && (
                                 <div className="flex flex-wrap gap-3">
                                     <button
                                         onClick={() => router.push('/login')}
-                                        className={`flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${
-                                            theme === 'light' 
-                                                ? 'bg-blue-600 text-white hover:bg-blue-700' 
+                                        className={`flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${theme === 'light'
+                                                ? 'bg-blue-600 text-white hover:bg-blue-700'
                                                 : 'bg-blue-500 text-white hover:bg-blue-600'
-                                        }`}
+                                            }`}
                                     >
                                         <LogIn size={18} />
                                         Sign In
                                     </button>
                                     <button
                                         onClick={() => router.push('/signup')}
-                                        className={`px-6 py-2.5 rounded-lg font-semibold text-sm border-2 transition-all ${
-                                            theme === 'light'
+                                        className={`px-6 py-2.5 rounded-lg font-semibold text-sm border-2 transition-all ${theme === 'light'
                                                 ? 'border-blue-600 text-blue-600 hover:bg-blue-50'
                                                 : 'border-blue-400 text-blue-400 hover:bg-blue-900/20'
-                                        }`}
+                                            }`}
                                     >
                                         Create Free Account
                                     </button>
                                 </div>
                             )}
-                            
+
                             {error.type === 'payment' && (
                                 <button
                                     onClick={() => router.push('/pricing')}
-                                    className={`px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${
-                                        theme === 'light'
+                                    className={`px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${theme === 'light'
                                             ? 'bg-purple-600 text-white hover:bg-purple-700'
                                             : 'bg-purple-500 text-white hover:bg-purple-600'
-                                    }`}
+                                        }`}
+                                >
+                                    Upgrade Plan
+                                </button>
+                            )}
+
+                            {error.type === 'forbidden' && (
+                                <button
+                                    onClick={() => router.push('/pricing')}
+                                    className={`px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${theme === 'light'
+                                            ? 'bg-purple-600 text-white hover:bg-purple-700'
+                                            : 'bg-purple-500 text-white hover:bg-purple-600'
+                                        }`}
                                 >
                                     Upgrade Plan
                                 </button>
@@ -517,7 +524,7 @@ const AiHumanizer = () => {
                             sizes="(max-width: 1024px) 100vw, 100vw"
                         />
                     </div>
-                    
+
                     {isAuthenticated ? (
                         <div className="relative z-10 w-full flex flex-col gap-8">
                             <div className="flex flex-col lg:flex-row gap-8 w-full">
@@ -532,7 +539,7 @@ const AiHumanizer = () => {
                                                 {getWordCount(originalText)} Words
                                             </span>
                                         </div>
-                                        
+
                                         <textarea
                                             value={originalText}
                                             onChange={(e) => setOriginalText(e.target.value)}
@@ -578,15 +585,15 @@ const AiHumanizer = () => {
                                                 )}
                                             </div>
                                         </div>
-                                        
+
                                         <div className="flex-1 overflow-y-auto">
                                             {loading ? (
                                                 <div className="flex flex-col items-center justify-center h-full px-6">
                                                     <div className="w-full max-w-md space-y-4">
                                                         <div className="flex justify-center mb-6">
                                                             <div className="relative">
-                                                                <BsStars 
-                                                                    size={48} 
+                                                                <BsStars
+                                                                    size={48}
                                                                     className="text-transparent bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] bg-clip-text animate-pulse"
                                                                 />
                                                                 <div className="absolute inset-0 bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] blur-xl opacity-50 animate-pulse"></div>
@@ -594,10 +601,9 @@ const AiHumanizer = () => {
                                                         </div>
 
                                                         <div className="space-y-3">
-                                                            <div className={`h-2 rounded-full overflow-hidden ${
-                                                                theme === 'light' ? 'bg-gray-200' : 'bg-gray-800'
-                                                            }`}>
-                                                                <div 
+                                                            <div className={`h-2 rounded-full overflow-hidden ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-800'
+                                                                }`}>
+                                                                <div
                                                                     className="h-full bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] transition-all duration-300 ease-out relative overflow-hidden"
                                                                     style={{ width: `${progress}%` }}
                                                                 >
@@ -606,9 +612,8 @@ const AiHumanizer = () => {
                                                             </div>
 
                                                             <div className="flex items-center justify-between text-sm">
-                                                                <span className={`font-medium ${
-                                                                    theme === 'light' ? 'text-gray-700' : 'text-gray-300'
-                                                                }`}>
+                                                                <span className={`font-medium ${theme === 'light' ? 'text-gray-700' : 'text-gray-300'
+                                                                    }`}>
                                                                     {getProgressMessage()}
                                                                 </span>
                                                                 <span className="font-bold bg-gradient-to-r from-[#CAA9D3] via-[#828ED6] to-[#B7D6EF] bg-clip-text text-transparent">
@@ -617,9 +622,8 @@ const AiHumanizer = () => {
                                                             </div>
                                                         </div>
 
-                                                        <p className={`text-xs text-center mt-4 ${
-                                                            theme === 'light' ? 'text-gray-500' : 'text-gray-400'
-                                                        }`}>
+                                                        <p className={`text-xs text-center mt-4 ${theme === 'light' ? 'text-gray-500' : 'text-gray-400'
+                                                            }`}>
                                                             Making your text sound naturally human...
                                                         </p>
                                                     </div>
@@ -658,7 +662,7 @@ const AiHumanizer = () => {
                                         </>
                                     )}
                                 </button>
-                                
+
                                 {!loading && originalText && (
                                     <p className={`text-xs ${theme === 'light' ? 'text-gray-500' : 'text-gray-500'}`}>
                                         Press <kbd className="px-2 py-1 rounded bg-gray-700 text-white text-xs">Ctrl</kbd> + <kbd className="px-2 py-1 rounded bg-gray-700 text-white text-xs">Enter</kbd> to humanize
