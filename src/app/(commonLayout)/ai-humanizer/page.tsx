@@ -212,7 +212,7 @@ const AiHumanizer = () => {
             }
             else if (status === 403) {
                 setError({
-                    message: userMessage || 'You have exceeded your word limit or this feature is not available in your plan.',
+                    message: 'upgrade to generate more then 250 words at once.',
                     type: 'forbidden'
                 });
                 toast.error('Access denied');
@@ -421,8 +421,8 @@ const AiHumanizer = () => {
                                 onClick={handleTrySample}
                                 disabled={loading}
                                 className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 text-sm font-semibold transition-all ${theme === 'light'
-                                        ? 'border-purple-600 text-purple-600 hover:bg-purple-50'
-                                        : 'border-purple-400 text-purple-400 hover:bg-purple-900/20'
+                                    ? 'border-purple-600 text-purple-600 hover:bg-purple-50'
+                                    : 'border-purple-400 text-purple-400 hover:bg-purple-900/20'
                                     } disabled:opacity-50`}
                             >
                                 <Sparkles size={16} />
@@ -434,8 +434,8 @@ const AiHumanizer = () => {
                                     onClick={handleClear}
                                     disabled={loading}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg border-2 text-sm font-semibold transition-all ${theme === 'light'
-                                            ? 'border-red-600 text-red-600 hover:bg-red-50'
-                                            : 'border-red-400 text-red-400 hover:bg-red-900/20'
+                                        ? 'border-red-600 text-red-600 hover:bg-red-50'
+                                        : 'border-red-400 text-red-400 hover:bg-red-900/20'
                                         } disabled:opacity-50`}
                                 >
                                     <Trash2 size={16} />
@@ -468,8 +468,8 @@ const AiHumanizer = () => {
                                     <button
                                         onClick={() => router.push('/login')}
                                         className={`flex items-center gap-2 px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${theme === 'light'
-                                                ? 'bg-blue-600 text-white hover:bg-blue-700'
-                                                : 'bg-blue-500 text-white hover:bg-blue-600'
+                                            ? 'bg-blue-600 text-white hover:bg-blue-700'
+                                            : 'bg-blue-500 text-white hover:bg-blue-600'
                                             }`}
                                     >
                                         <LogIn size={18} />
@@ -478,8 +478,8 @@ const AiHumanizer = () => {
                                     <button
                                         onClick={() => router.push('/signup')}
                                         className={`px-6 py-2.5 rounded-lg font-semibold text-sm border-2 transition-all ${theme === 'light'
-                                                ? 'border-blue-600 text-blue-600 hover:bg-blue-50'
-                                                : 'border-blue-400 text-blue-400 hover:bg-blue-900/20'
+                                            ? 'border-blue-600 text-blue-600 hover:bg-blue-50'
+                                            : 'border-blue-400 text-blue-400 hover:bg-blue-900/20'
                                             }`}
                                     >
                                         Create Free Account
@@ -491,8 +491,8 @@ const AiHumanizer = () => {
                                 <button
                                     onClick={() => router.push('/pricing')}
                                     className={`px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${theme === 'light'
-                                            ? 'bg-purple-600 text-white hover:bg-purple-700'
-                                            : 'bg-purple-500 text-white hover:bg-purple-600'
+                                        ? 'bg-purple-600 text-white hover:bg-purple-700'
+                                        : 'bg-purple-500 text-white hover:bg-purple-600'
                                         }`}
                                 >
                                     Upgrade Plan
@@ -503,8 +503,8 @@ const AiHumanizer = () => {
                                 <button
                                     onClick={() => router.push('/pricing')}
                                     className={`px-6 py-2.5 rounded-lg font-semibold text-sm transition-all ${theme === 'light'
-                                            ? 'bg-purple-600 text-white hover:bg-purple-700'
-                                            : 'bg-purple-500 text-white hover:bg-purple-600'
+                                        ? 'bg-purple-600 text-white hover:bg-purple-700'
+                                        : 'bg-purple-500 text-white hover:bg-purple-600'
                                         }`}
                                 >
                                     Upgrade Plan
